@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Darslar — Maktab Portali</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="static/css/student.css">
+</head>
+<body>
+<div class="sp-loading" id="sp-loading">
+  <div class="ll-logo"><img src="static/img/logo-brand.png" alt=""><span>Katta Tanaffus</span></div>
+  <div class="ll-dots"><div class="ll-dot"></div><div class="ll-dot"></div><div class="ll-dot"></div></div>
+</div>
+
+<div class="sp-wrap">
+<aside class="sp-sidebar">
+  <div class="sb-logo"><img src="static/img/logo-brand.png" alt=""><div class="sb-logo-text"><strong>Katta Tanaffus</strong><span>Maktab portali</span></div></div>
+  <nav class="sb-nav">
+    <a href="dashboard.html"><span class="sb-icon">🏠</span> Bosh sahifa</a>
+    <a href="lessons.html" class="active"><span class="sb-icon">📚</span> Darslar</a>
+    <a href="marks.html"><span class="sb-icon">📊</span> Baholar</a>
+    <a href="shop.html"><span class="sb-icon">🛍️</span> Do'kon</a>
+    <a href="profile.html"><span class="sb-icon">👤</span> Profil</a>
+  </nav>
+  <div class="sb-logout"><a href="javascript:void(0)" onclick="KTAuth.logout()"><span>🚪</span> Chiqish</a></div>
+</aside>
+<div class="sp-menu-backdrop" onclick="closeStudentMenu()"></div>
+
+<div class="sp-main">
+<header class="sp-topbar">
+  <button class="sp-menu-toggle" type="button" onclick="toggleStudentMenu()" aria-label="Menyuni ochish"><span></span><span></span><span></span></button>
+  <h1>Darslar</h1>
+  <div class="tb-right">
+    <button class="tb-icon-btn">🔔</button>
+    <div class="tb-user" onclick="location.href='profile.html'">
+      <img src="https://i.pravatar.cc/80?img=12" alt="">
+      <div><div class="tb-name">Toxir Toirov</div><div class="tb-level">5-sinf</div></div>
+    </div>
+  </div>
+</header>
+
+<div class="sp-content">
+
+  <!-- Hero stats -->
+  <div class="lessons-hero ani-1">
+    <div class="lh-top">
+      <img src="https://i.pravatar.cc/80?img=12" class="lh-avatar" alt="">
+      <div class="lh-user">
+        <h3>Toxir Toirov</h3>
+        <p>5-sinf • Xalqlar Dostligi filiali</p>
+        <span class="lh-badge">A'lochi o'quvchi</span>
+      </div>
+    </div>
+    <div class="lh-stats-grid">
+      <div class="lh-stat"><div class="ls-icon">📚</div><div class="ls-val">6</div><div class="ls-sub">Fan</div></div>
+      <div class="lh-stat"><div class="ls-icon">🪙</div><div class="ls-val" data-coin-balance>500</div><div class="ls-sub">Coin</div></div>
+      <div class="lh-stat"><div class="ls-icon">📝</div><div class="ls-val">87%</div><div class="ls-sub">O'rtacha</div></div>
+      <div class="lh-stat"><div class="ls-icon">✅</div><div class="ls-val">34</div><div class="ls-sub">Test</div></div>
+      <div class="lh-stat"><div class="ls-icon">🏅</div><div class="ls-val">4-o'rin</div><div class="ls-sub">Reyting</div></div>
+      <div class="lh-stat"><div class="ls-icon">🔥</div><div class="ls-val">12 kun</div><div class="ls-sub">Streak</div></div>
+    </div>
+    <div class="lh-skills">
+      <div class="lh-skill-item"><div class="sk-label-row"><span>🔢 Matematika</span><span>78%</span></div><div class="sk-bar"><div class="sk-fill" style="width:78%"></div></div></div>
+      <div class="lh-skill-item"><div class="sk-label-row"><span>📖 Ona tili</span><span>92%</span></div><div class="sk-bar"><div class="sk-fill" style="width:92%"></div></div></div>
+      <div class="lh-skill-item"><div class="sk-label-row"><span>🌍 Ingliz tili</span><span>96%</span></div><div class="sk-bar"><div class="sk-fill" style="width:96%"></div></div></div>
+      <div class="lh-skill-item"><div class="sk-label-row"><span>⚛️ Fizika</span><span>72%</span></div><div class="sk-bar"><div class="sk-fill" style="width:72%"></div></div></div>
+    </div>
+  </div>
+
+  <!-- Fan tanlov tabs -->
+  <div style="display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px;" class="ani-2">
+    <button class="sh-tab active" onclick="filterFan(this,'barcha')">Barchasi</button>
+    <button class="sh-tab" onclick="filterFan(this,'matematika')">🔢 Matematika</button>
+    <button class="sh-tab" onclick="filterFan(this,'ona-tili')">📖 Ona tili</button>
+    <button class="sh-tab" onclick="filterFan(this,'ingliz-tili')">🌍 Ingliz tili</button>
+    <button class="sh-tab" onclick="filterFan(this,'fizika')">⚛️ Fizika</button>
+    <button class="sh-tab" onclick="filterFan(this,'tarix')">🏛️ Tarix</button>
+    <button class="sh-tab" onclick="filterFan(this,'kimyo')">🧪 Kimyo</button>
+  </div>
+
+  <!-- MATEMATIKA units -->
+  <div class="fan-block" data-fan="matematika">
+    <div class="sec-title">🔢 Matematika</div>
+    <div class="unit-scroll">
+      <div class="unit-card">
+        <div class="uc-grad" style="background:linear-gradient(160deg,#1d4ed8,#2563eb)"></div>
+        <div class="uc-subj-tag">Matematika</div>
+        <div class="uc-deco">🔢</div>
+        <div class="uc-overlay">
+          <div class="uc-title">10.1 — Algebra</div>
+          <div class="uc-sub">Kvadrat tenglamalar va ularni yechish</div>
+          <div class="uc-pill uc-done">✓ 96%</div>
+          <div class="uc-date">2-may</div>
+        </div>
+      </div>
+      <div class="unit-card">
+        <div class="uc-grad" style="background:linear-gradient(160deg,#2563eb,#1e40af)"></div>
+        <div class="uc-subj-tag">Matematika</div>
+        <div class="uc-deco">➕</div>
+        <div class="uc-overlay">
+          <div class="uc-title">10.2 — Geometriya</div>
+          <div class="uc-sub">Uchburchak va to'g'ri to'rtburchak</div>
+          <div class="uc-pill uc-done">✓ 88%</div>
+          <div class="uc-date">6-may</div>
+        </div>
+      </div>
+      <div class="unit-card uc-active-glow" style="width:210px">
+        <div class="uc-grad" style="background:linear-gradient(160deg,#1e3a8a,#1d4ed8)"></div>
+        <div class="uc-subj-tag">Matematika</div>
+        <div class="uc-deco">📐</div>
+        <div class="uc-overlay">
+          <div class="uc-title">10.3 — Tengsizliklar</div>
+          <div class="uc-sub">Chiziqli va kvadrat tengsizliklar</div>
+          <div class="uc-pill uc-start">▶ Boshlash</div>
+          <div class="uc-date">10-may</div>
+        </div>
+      </div>
+      <div class="unit-card">
+        <div class="uc-grad" style="background:#111827"></div>
+        <div class="uc-overlay">
+          <div class="uc-title">10.4 — Test</div>
+          <div class="uc-sub">Umumiy nazorat ishi</div>
+          <div class="uc-pill uc-locked">🔒 Yopiq</div>
+        </div>
+      </div>
+      <div class="unit-card">
+        <div class="uc-grad" style="background:#111827"></div>
+        <div class="uc-overlay">
+          <div class="uc-title">11.1 — Funksiyalar</div>
+          <div class="uc-sub">Grafik va hisoblash</div>
+          <div class="uc-pill uc-locked">🔒 Yopiq</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ONA TILI units -->
+  <div class="fan-block" data-fan="ona-tili">
+    <div class="sec-title">📖 Ona tili</div>
+    <div class="unit-scroll">
+      <div class="unit-card">
+        <div class="uc-grad" style="background:linear-gradient(160deg,#7c3aed,#6d28d9)"></div>
+        <div class="uc-subj-tag">Ona tili</div>
+        <div class="uc-deco">📖</div>
+        <div class="uc-overlay">
+          <div class="uc-title">7.1 — So'z turkumlari</div>
+          <div class="uc-sub">Ot, sifat, fe'l va boshqalar</div>
+          <div class="uc-pill uc-done">✓ 100%</div>
+          <div class="uc-date">1-may</div>
+        </div>
+      </div>
+      <div class="unit-card">
+        <div class="uc-grad" style="background:linear-gradient(160deg,#6d28d9,#5b21b6)"></div>
+        <div class="uc-subj-tag">Ona tili</div>
+        <div class="uc-deco">✍️</div>
+        <div class="uc-overlay">
+          <div class="uc-title">8.1 — Sintaksis</div>
+          <div class="uc-sub">Gap bo'laklari va turlari</div>
+          <div class="uc-pill uc-done">✓ 94%</div>
+          <div class="uc-date">4-may</div>
+        </div>
+      </div>
+      <div class="unit-card uc-active-glow" style="width:210px">
+        <div class="uc-grad" style="background:linear-gradient(160deg,#4f46e5,#7c3aed)"></div>
+        <div class="uc-subj-tag">Ona tili</div>
+        <div class="uc-deco">🔤</div>
+        <div class="uc-overlay">
+          <div class="uc-title">8.2 — Morfologiya</div>
+          <div class="uc-sub">So'z yasalishi va imlo qoidalari</div>
+          <div class="uc-pill uc-start">▶ Boshlash</div>
+          <div class="uc-date">8-may</div>
+        </div>
+      </div>
+      <div class="unit-card">
+        <div class="uc-grad" style="background:#111827"></div>
+        <div class="uc-overlay">
+          <div class="uc-title">8.3 — Diktant</div>
+          <div class="uc-sub">Yozma nazorat ishi</div>
+          <div class="uc-pill uc-locked">🔒 Yopiq</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INGLIZ TILI units -->
+  <div class="fan-block" data-fan="ingliz-tili">
+    <div class="sec-title">🌍 Ingliz tili</div>
+    <div class="unit-scroll">
+      <div class="unit-card">
+        <div class="uc-grad" style="background:linear-gradient(160deg,#0891b2,#0e7490)"></div>
+        <div class="uc-subj-tag">Ingliz tili</div>
+        <div class="uc-deco">🌍</div>
+        <div class="uc-overlay">
+          <div class="uc-title">Unit 9.1 — Past Simple</div>
+          <div class="uc-sub">O'tgan zamon fe'l shakllari</div>
+          <div class="uc-pill uc-done">✓ 98%</div>
+          <div class="uc-date">1-may</div>
+        </div>
+      </div>
+      <div class="unit-card">
+        <div class="uc-grad" style="background:linear-gradient(160deg,#0e7490,#155e75)"></div>
+        <div class="uc-subj-tag">Ingliz tili</div>
+        <div class="uc-deco">🗣️</div>
+        <div class="uc-overlay">
+          <div class="uc-title">Unit 9.2 — Past Continuous</div>
+          <div class="uc-sub">Davom etayotgan o'tgan zamon</div>
+          <div class="uc-pill uc-done">✓ 100%</div>
+          <div class="uc-date">5-may</div>
+        </div>
+      </div>
+      <div class="unit-card uc-active-glow" style="width:210px">
+        <div class="uc-grad" style="background:linear-gradient(160deg,#0284c7,#0891b2)"></div>
+        <div class="uc-subj-tag">Ingliz tili</div>
+        <div class="uc-deco">✨</div>
+        <div class="uc-overlay">
+          <div class="uc-title">Unit 10.1 — Present Perfect</div>
+          <div class="uc-sub">Have/has + V3 va qo'llanilishi</div>
+          <div class="uc-pill uc-start">▶ Boshlash</div>
+          <div class="uc-date">9-may</div>
+        </div>
+      </div>
+      <div class="unit-card">
+        <div class="uc-grad" style="background:#111827"></div>
+        <div class="uc-overlay">
+          <div class="uc-title">Unit 10.2 — Test</div>
+          <div class="uc-sub">Grammar & Vocabulary</div>
+          <div class="uc-pill uc-locked">🔒 Yopiq</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FIZIKA units -->
+  <div class="fan-block" data-fan="fizika">
+    <div class="sec-title">⚛️ Fizika</div>
+    <div class="unit-scroll">
+      <div class="unit-card">
+        <div class="uc-grad" style="background:linear-gradient(160deg,#f97316,#ea580c)"></div>
+        <div class="uc-subj-tag">Fizika</div>
+        <div class="uc-deco">⚡</div>
+        <div class="uc-overlay">
+          <div class="uc-title">6.1 — Jismlar harakati</div>
+          <div class="uc-sub">Tezlik, tezlanish, masafa</div>
+          <div class="uc-pill uc-done">✓ 82%</div>
+          <div class="uc-date">2-may</div>
+        </div>
+      </div>
+      <div class="unit-card">
+        <div class="uc-grad" style="background:linear-gradient(160deg,#ea580c,#c2410c)"></div>
+        <div class="uc-subj-tag">Fizika</div>
+        <div class="uc-deco">🔭</div>
+        <div class="uc-overlay">
+          <div class="uc-title">6.2 — Kuch va energiya</div>
+          <div class="uc-sub">Newton qonunlari</div>
+          <div class="uc-pill uc-done">✓ 72%</div>
+          <div class="uc-date">6-may</div>
+        </div>
+      </div>
+      <div class="unit-card uc-active-glow" style="width:210px">
+        <div class="uc-grad" style="background:linear-gradient(160deg,#d97706,#f97316)"></div>
+        <div class="uc-subj-tag">Fizika</div>
+        <div class="uc-deco">⚙️</div>
+        <div class="uc-overlay">
+          <div class="uc-title">7.1 — Mexanika</div>
+          <div class="uc-sub">Oddiy mexanizmlar va mashqlar</div>
+          <div class="uc-pill uc-start">▶ Boshlash</div>
+          <div class="uc-date">10-may</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TARIX units -->
+  <div class="fan-block" data-fan="tarix">
+    <div class="sec-title">🏛️ Tarix</div>
+    <div class="unit-scroll">
+      <div class="unit-card">
+        <div class="uc-grad" style="background:linear-gradient(160deg,#10b981,#059669)"></div>
+        <div class="uc-subj-tag">Tarix</div>
+        <div class="uc-deco">🗺️</div>
+        <div class="uc-overlay">
+          <div class="uc-title">5.1 — Qadimgi dunyo</div>
+          <div class="uc-sub">Misр, Yunoniston, Rim</div>
+          <div class="uc-pill uc-done">✓ 100%</div>
+          <div class="uc-date">1-may</div>
+        </div>
+      </div>
+      <div class="unit-card">
+        <div class="uc-grad" style="background:linear-gradient(160deg,#059669,#047857)"></div>
+        <div class="uc-subj-tag">Tarix</div>
+        <div class="uc-deco">⚔️</div>
+        <div class="uc-overlay">
+          <div class="uc-title">6.1 — O'rta asrlar</div>
+          <div class="uc-sub">Feodal jamiyat va madaniyat</div>
+          <div class="uc-pill uc-done">✓ 90%</div>
+          <div class="uc-date">5-may</div>
+        </div>
+      </div>
+      <div class="unit-card uc-active-glow" style="width:210px">
+        <div class="uc-grad" style="background:linear-gradient(160deg,#047857,#10b981)"></div>
+        <div class="uc-subj-tag">Tarix</div>
+        <div class="uc-deco">🏛️</div>
+        <div class="uc-overlay">
+          <div class="uc-title">6.3 — O'zbekiston tarixi</div>
+          <div class="uc-sub">Mustaqillik davri va rivojlanish</div>
+          <div class="uc-pill uc-start">▶ Boshlash</div>
+          <div class="uc-date">8-may</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- KIMYO units -->
+  <div class="fan-block" data-fan="kimyo">
+    <div class="sec-title">🧪 Kimyo</div>
+    <div class="unit-scroll">
+      <div class="unit-card">
+        <div class="uc-grad" style="background:linear-gradient(160deg,#e11d48,#be123c)"></div>
+        <div class="uc-subj-tag">Kimyo</div>
+        <div class="uc-deco">🔬</div>
+        <div class="uc-overlay">
+          <div class="uc-title">4.1 — Moddalar</div>
+          <div class="uc-sub">Oddiy va murakkab moddalar</div>
+          <div class="uc-pill uc-done">✓ 78%</div>
+          <div class="uc-date">3-may</div>
+        </div>
+      </div>
+      <div class="unit-card uc-active-glow" style="width:210px">
+        <div class="uc-grad" style="background:linear-gradient(160deg,#be123c,#e11d48)"></div>
+        <div class="uc-subj-tag">Kimyo</div>
+        <div class="uc-deco">⚗️</div>
+        <div class="uc-overlay">
+          <div class="uc-title">5.2 — Atom tuzilishi</div>
+          <div class="uc-sub">Proton, neytron, elektron</div>
+          <div class="uc-pill uc-start">▶ Boshlash</div>
+          <div class="uc-date">9-may</div>
+        </div>
+      </div>
+      <div class="unit-card">
+        <div class="uc-grad" style="background:#111827"></div>
+        <div class="uc-overlay">
+          <div class="uc-title">5.3 — Davriy jadval</div>
+          <div class="uc-sub">Mendeleev jadvali</div>
+          <div class="uc-pill uc-locked">🔒 Yopiq</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<footer class="sp-footer">
+  <span>© 2026 Katta Tanaffus Maktab Portali</span>
+  <div style="display:flex;gap:16px;"><a href="#">Maxfiylik siyosati</a><a href="#">FAQ</a></div>
+</footer>
+</div>
+</div>
+
+<script>
+window.addEventListener('load',()=>setTimeout(()=>document.getElementById('sp-loading').classList.add('hidden'),900));
+
+function filterFan(btn, fan) {
+  document.querySelectorAll('.sh-tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.fan-block').forEach(b=>{
+    b.style.display = (fan==='barcha' || b.dataset.fan===fan) ? '' : 'none';
+  });
+}
+// check URL param
+const urlFan = new URLSearchParams(location.search).get('fan');
+if(urlFan) {
+  const btn = document.querySelector(`.sh-tab[onclick*="${urlFan}"]`);
+  if(btn) filterFan(btn, urlFan);
+}
+
+// Dars kartasi bosilganda mavzuga mos test ochiladi
+const LESSON_TEST_BANK = {
+  matematika: {
+    default: [
+      {q:'2x + 6 = 14 tenglamada x nechaga teng?', a:['3','4','5','8'], c:1},
+      {q:'5 × 7 nechaga teng?', a:['25','30','35','40'], c:2},
+      {q:'To‘g‘ri to‘rtburchak yuzi qanday topiladi?', a:['a+b','a×b','2(a+b)','a²'], c:1},
+      {q:'10 sonining kvadrati nechaga teng?', a:['20','50','100','1000'], c:2}
+    ],
+    algebra: [
+      {q:'x² − 9 ifoda qanday ajratiladi?', a:['(x−3)(x+3)','(x−9)(x+1)','x(x−9)','(x−3)²'], c:0},
+      {q:'Kvadrat tenglama umumiy ko‘rinishi qaysi?', a:['ax+b=0','ax²+bx+c=0','a/b=c','x+y=0'], c:1},
+      {q:'x²=16 bo‘lsa, x ning qiymatlari qaysi?', a:['faqat 4','faqat −4','−4 va 4','0 va 16'], c:2},
+      {q:'Diskriminant formulasi qaysi?', a:['b²−4ac','a²+b²','2a+b','c²−ab'], c:0}
+    ],
+    geometriya: [
+      {q:'Uchburchak ichki burchaklari yig‘indisi nechaga teng?', a:['90°','120°','180°','360°'], c:2},
+      {q:'To‘g‘ri to‘rtburchak perimetri formulasi qaysi?', a:['a×b','2(a+b)','a+b+c','a²'], c:1},
+      {q:'Kvadratning barcha tomonlari...', a:['har xil','teng','faqat ikki tomoni teng','parallel emas'], c:1},
+      {q:'Aylana radiusi nima?', a:['markazdan aylana nuqtasigacha masofa','aylana uzunligi','diametrning ikki baravari','yuza'], c:0}
+    ],
+    tengsizlik: [
+      {q:'x + 3 > 7 bo‘lsa, x qanday bo‘ladi?', a:['x>4','x<4','x=4','x>10'], c:0},
+      {q:'Tengsizlikda ikkala tomonni manfiy songa ko‘paytirsak belgi...', a:['o‘zgarmaydi','teskarisiga almashadi','yo‘qoladi','har doim = bo‘ladi'], c:1},
+      {q:'2x ≤ 10 yechimi qaysi?', a:['x≤5','x≥5','x<10','x=20'], c:0},
+      {q:'Sonlar o‘qida x>2 qanday belgilanadi?', a:['2 dan chapga','2 dan o‘ngga','faqat 2 nuqta','butun o‘q'], c:1}
+    ],
+    funksiya: [
+      {q:'Funksiya odatda qanday belgilanadi?', a:['f(x)','x+','ab','P'], c:0},
+      {q:'y = 2x da x=3 bo‘lsa y nechaga teng?', a:['2','3','5','6'], c:3},
+      {q:'Grafik nimani ko‘rsatadi?', a:['bog‘lanishni','faqat matnni','faqat jadvalni','rangni'], c:0},
+      {q:'Koordinata tekisligida nuqta nechta koordinata bilan beriladi?', a:['1','2','3','4'], c:1}
+    ]
+  },
+  'ona-tili': {
+    default: [
+      {q:'Ot so‘z turkumi nimani bildiradi?', a:['harakat','belgi','narsa yoki shaxs nomi','son'], c:2},
+      {q:'Fe’l nimani bildiradi?', a:['harakat-holat','rang','miqdor','joy nomi'], c:0},
+      {q:'Gap oxirida odatda qaysi tinish belgisi keladi?', a:['vergul','nuqta','chiziqcha','ikki nuqta'], c:1},
+      {q:'Sifat qanday savollarga javob beradi?', a:['kim? nima?','qanday? qanaqa?','nechta?','qachon?'], c:1}
+    ],
+    sintaksis: [
+      {q:'Sintaksis nimani o‘rganadi?', a:['tovushlarni','gap va so‘z birikmalarini','harflarni','lug‘atni'], c:1},
+      {q:'Ega odatda qaysi savolga javob beradi?', a:['kim? nima?','qayerda?','qanday?','nechta?'], c:0},
+      {q:'Kesim gapda nimani bildiradi?', a:['harakat yoki holatni','faqat rangni','faqat sonni','tinish belgisini'], c:0},
+      {q:'Darak gap oxirida ko‘pincha nima qo‘yiladi?', a:['?','!','.',':'], c:2}
+    ],
+    morfologiya: [
+      {q:'Morfologiya nimani o‘rganadi?', a:['so‘z turkumlari va shakllarini','gap ohangini','matn uslubini','faqat tinish belgilarini'], c:0},
+      {q:'“Kitoblar” so‘zida ko‘plik qo‘shimchasi qaysi?', a:['kitob','-lar','-ob','-r'], c:1},
+      {q:'“Yaxshi” qaysi so‘z turkumiga kiradi?', a:['ot','sifat','son','olmosh'], c:1},
+      {q:'So‘z yasalishida yangi ma’no ko‘pincha nima bilan hosil bo‘ladi?', a:['qo‘shimcha','nuqta','vergul','katta harf'], c:0}
+    ]
+  },
+  'ingliz-tili': {
+    default: [
+      {q:'“I am” qisqartmasi qaysi?', a:["I'm",'I is','I are','Am I'], c:0},
+      {q:'“Book” so‘zining ko‘pligi qaysi?', a:['bookes','books','bookies','book'], c:1},
+      {q:'“Yesterday” qaysi zamon belgisi?', a:['Present','Past','Future','Imperative'], c:1},
+      {q:'“She ___ a student.” To‘g‘ri variant?', a:['am','are','is','be'], c:2}
+    ],
+    past: [
+      {q:'Past Simple’da “go” fe’lining shakli qaysi?', a:['goed','went','gone','going'], c:1},
+      {q:'Past Continuous formulasi qaysi?', a:['was/were + V-ing','do/does + V','will + V','have + V3'], c:0},
+      {q:'“I watched TV yesterday.” Qaysi zamon?', a:['Past Simple','Present Simple','Future Simple','Present Perfect'], c:0},
+      {q:'Past Continuous’da “They ___ playing.” To‘g‘ri variant?', a:['was','were','is','am'], c:1}
+    ]
+  },
+  fizika: {
+    default: [
+      {q:'Tezlik formulasi qaysi?', a:['v=s/t','F=ma','p=mv','A=Fs'], c:0},
+      {q:'Kuch birligi nima?', a:['metr','sekund','nyuton','joule'], c:2},
+      {q:'Massa birligi qaysi?', a:['kg','m','s','N'], c:0},
+      {q:'Elektr toki birligi nima?', a:['Volt','Amper','Om','Vatt'], c:1}
+    ],
+    mexanika: [
+      {q:'Mexanika nimani o‘rganadi?', a:['jismlar harakati va kuchlarni','yorug‘lik rangini','kimyoviy reaksiyani','til qoidalarini'], c:0},
+      {q:'Nyutonning ikkinchi qonuni qaysi?', a:['F=ma','v=s/t','E=mc²','I=U/R'], c:0},
+      {q:'Yo‘l birligi qaysi?', a:['metr','kilogramm','amper','gradus'], c:0},
+      {q:'Tezlanish nimani bildiradi?', a:['tezlik o‘zgarishini','massani','zichlikni','haroratni'], c:0}
+    ]
+  },
+  tarix: {
+    default: [
+      {q:'Tarix fani nimani o‘rganadi?', a:['o‘tmish voqealarini','faqat raqamlarni','faqat tabiatni','faqat tilni'], c:0},
+      {q:'Manba nima?', a:['tarixiy ma’lumot beruvchi dalil','matematik amal','kimyoviy modda','sport turi'], c:0},
+      {q:'Xronologiya nimani o‘rganadi?', a:['vaqt ketma-ketligini','joy nomlarini','tovushlarni','kasrlarni'], c:0},
+      {q:'Arxeologlar asosan nimani o‘rganadi?', a:['qadimiy topilmalarni','ob-havoni','o‘simliklarni','algoritmlarni'], c:0}
+    ]
+  },
+  kimyo: {
+    default: [
+      {q:'Atom tarkibida nimalar bor?', a:['proton, neytron, elektron','faqat suv','faqat havo','faqat tuz'], c:0},
+      {q:'H₂O nimaning formulasi?', a:['kislorod','suv','vodorod','tuz'], c:1},
+      {q:'Davriy jadval kim nomi bilan bog‘liq?', a:['Mendeleev','Newton','Al-Xorazmiy','Farobiy'], c:0},
+      {q:'Elektron zaryadi qanday?', a:['musbat','manfiy','zaryadsiz','har doim nol'], c:1}
+    ],
+    atom: [
+      {q:'Atom markazida nima joylashgan?', a:['yadro','elektron qavati','suv','havo'], c:0},
+      {q:'Proton zaryadi qanday?', a:['musbat','manfiy','zaryadsiz','o‘zgaruvchan'], c:0},
+      {q:'Neytron zaryadi qanday?', a:['musbat','manfiy','zaryadsiz','ikki marta musbat'], c:2},
+      {q:'Elektronlar qayerda harakatlanadi?', a:['yadro atrofida','faqat yadro ichida','suvda','jadvalda'], c:0}
+    ]
+  }
+};
+
+const lessonKeyWords = [
+  ['algebra','algebra'],['geometriya','geometriya'],['tengsizlik','tengsizlik'],['funksiya','funksiya'],
+  ['sintaksis','sintaksis'],['morfologiya','morfologiya'],['past','past'],['mexanika','mexanika'],['atom','atom']
+];
+let currentLessonTest = null;
+
+function escapeHtml(str){
+  return String(str||'').replace(/[&<>'"]/g, s=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[s]));
+}
+function getLessonQuestions(fan,title,sub){
+  const bank = LESSON_TEST_BANK[fan] || {};
+  const text = (title+' '+sub).toLowerCase();
+  const found = lessonKeyWords.find(([needle])=>text.includes(needle));
+  return bank[found?.[1]] || bank.default || LESSON_TEST_BANK.matematika.default;
+}
+function ensureLessonTestModal(){
+  if(document.getElementById('lessonTestModal')) return;
+  document.body.insertAdjacentHTML('beforeend', `
+    <div class="lesson-test-modal" id="lessonTestModal" aria-hidden="true">
+      <div class="lt-backdrop" onclick="closeLessonTest()"></div>
+      <div class="lt-card" role="dialog" aria-modal="true" aria-labelledby="ltTitle">
+        <button class="lt-close" type="button" onclick="closeLessonTest()" aria-label="Yopish">✕</button>
+        <div class="lt-head">
+          <span class="lt-badge" id="ltFan">Fan</span>
+          <h2 id="ltTitle">Mavzu testi</h2>
+          <p id="ltSub">Savollarga javob bering va natijangizni tekshiring.</p>
+        </div>
+        <div class="lt-progress"><div id="ltProgressFill"></div></div>
+        <form id="lessonTestForm" class="lt-form"></form>
+        <div class="lt-result" id="ltResult"></div>
+        <div class="lt-actions">
+          <button class="lt-btn lt-secondary" type="button" onclick="resetLessonTest()">Qayta yechish</button>
+          <button class="lt-btn lt-primary" type="button" onclick="submitLessonTest()">Natijani ko‘rish</button>
+        </div>
+      </div>
+    </div>`);
+}
+function openLessonTest(card){
+  ensureLessonTestModal();
+  const block = card.closest('.fan-block');
+  const fan = block?.dataset.fan || 'matematika';
+  const fanName = block?.querySelector('.sec-title')?.textContent.trim() || card.querySelector('.uc-subj-tag')?.textContent.trim() || 'Fan';
+  const title = card.querySelector('.uc-title')?.textContent.trim() || 'Dars';
+  const sub = card.querySelector('.uc-sub')?.textContent.trim() || 'Mavzu bo‘yicha test';
+  const questions = getLessonQuestions(fan,title,sub);
+  currentLessonTest = {fan,fanName,title,sub,questions,storageKey:'kt_lesson_test_'+fan+'_'+title.toLowerCase().replace(/\W+/g,'-')};
+  document.getElementById('ltFan').textContent = fanName;
+  document.getElementById('ltTitle').textContent = title + ' testi';
+  document.getElementById('ltSub').textContent = sub;
+  renderLessonQuestions();
+  document.getElementById('lessonTestModal').classList.add('open');
+  document.getElementById('lessonTestModal').setAttribute('aria-hidden','false');
+  document.body.classList.add('lt-no-scroll');
+}
+function renderLessonQuestions(){
+  const form = document.getElementById('lessonTestForm');
+  const result = document.getElementById('ltResult');
+  if(!form || !currentLessonTest) return;
+  form.innerHTML = currentLessonTest.questions.map((item,idx)=>`
+    <div class="lt-question" data-q="${idx}">
+      <div class="lt-q-title"><span>${idx+1}</span>${escapeHtml(item.q)}</div>
+      <div class="lt-options">
+        ${item.a.map((ans,i)=>`<label class="lt-option"><input type="radio" name="q${idx}" value="${i}"><span>${escapeHtml(ans)}</span></label>`).join('')}
+      </div>
+    </div>`).join('');
+  result.className = 'lt-result';
+  result.innerHTML = '';
+  updateLessonProgress();
+  form.querySelectorAll('input[type=radio]').forEach(inp=>inp.addEventListener('change', updateLessonProgress));
+}
+function updateLessonProgress(){
+  const total = currentLessonTest?.questions.length || 1;
+  const answered = document.querySelectorAll('#lessonTestForm .lt-question input:checked').length;
+  const fill = document.getElementById('ltProgressFill');
+  if(fill) fill.style.width = Math.round(answered/total*100)+'%';
+}
+function submitLessonTest(){
+  if(!currentLessonTest) return;
+  const form = document.getElementById('lessonTestForm');
+  const result = document.getElementById('ltResult');
+  let score = 0;
+  let answered = 0;
+  currentLessonTest.questions.forEach((item,idx)=>{
+    const box = form.querySelector(`.lt-question[data-q="${idx}"]`);
+    const checked = form.querySelector(`input[name="q${idx}"]:checked`);
+    box?.classList.remove('correct','wrong');
+    box?.querySelectorAll('.lt-option').forEach((label,i)=>{
+      label.classList.remove('right-answer','wrong-answer');
+      if(i===item.c) label.classList.add('right-answer');
+    });
+    if(checked){
+      answered++;
+      const val = Number(checked.value);
+      const selectedLabel = checked.closest('.lt-option');
+      if(val===item.c){ score++; box?.classList.add('correct'); }
+      else { box?.classList.add('wrong'); selectedLabel?.classList.add('wrong-answer'); }
+    }
+  });
+  if(answered < currentLessonTest.questions.length){
+    result.className = 'lt-result warn show';
+    result.innerHTML = `Avval barcha savollarga javob bering: ${answered}/${currentLessonTest.questions.length} ta belgilandi.`;
+    return;
+  }
+  const percent = Math.round(score/currentLessonTest.questions.length*100);
+  const testStorageKey = window.KTAuth ? window.KTAuth.storageKey(currentLessonTest.storageKey) : currentLessonTest.storageKey;
+  const previous = JSON.parse(localStorage.getItem(testStorageKey) || 'null');
+  const coinReward = 1;
+  const alreadyRewarded = previous && previous.rewarded === true;
+  localStorage.setItem(testStorageKey, JSON.stringify({
+    score,
+    total:currentLessonTest.questions.length,
+    percent,
+    coinReward: alreadyRewarded ? 0 : coinReward,
+    rewarded:true,
+    date:new Date().toISOString()
+  }));
+  if(!alreadyRewarded && window.KTRewards){
+    window.KTRewards.addCoins(coinReward, currentLessonTest.title + ' testi');
+  }
+  result.className = 'lt-result show '+(percent>=70?'success':'warn');
+  const coinText = alreadyRewarded
+    ? `<div class="lt-coin-note">ℹ️ Bu test uchun coin oldin berilgan. Qayta yechishda balans oshmaydi.</div>`
+    : `<div class="lt-coin-note">🪙 Hisobingizga <b>+${coinReward} coin/ball</b> qo‘shildi. Jami: <b>${window.KTRewards ? window.KTRewards.formatCoin(window.KTRewards.getBalance()) : ''} ⭐</b></div>`;
+  result.innerHTML = (percent>=70
+    ? `🎉 Zo‘r! Natijangiz: <b>${score}/${currentLessonTest.questions.length}</b> — <b>${percent}%</b>. Test muvaffaqiyatli yakunlandi.`
+    : `Natijangiz: <b>${score}/${currentLessonTest.questions.length}</b> — <b>${percent}%</b>. Yana bir bor urinib ko‘ring.`) + coinText;
+}
+function resetLessonTest(){
+  renderLessonQuestions();
+}
+function closeLessonTest(){
+  const modal = document.getElementById('lessonTestModal');
+  if(!modal) return;
+  modal.classList.remove('open');
+  modal.setAttribute('aria-hidden','true');
+  document.body.classList.remove('lt-no-scroll');
+}
+document.addEventListener('DOMContentLoaded',()=>{
+  document.querySelectorAll('.unit-card').forEach(card=>{
+    card.setAttribute('tabindex','0');
+    card.setAttribute('role','button');
+    card.title = 'Mavzu testini ochish';
+    card.addEventListener('click',()=>openLessonTest(card));
+    card.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openLessonTest(card);}});
+  });
+});
+document.addEventListener('keydown',e=>{if(e.key==='Escape') closeLessonTest();});
+</script>
+
+<!-- Student AI FAB -->
+<button id="fab" onclick="toggleStudentChat()" aria-label="AI yordamchi"><img src="static/img/ai-bot.png" alt="AI yordamchi"></button>
+<div id="chatwin">
+  <div class="chdr"><div class="chdri"><div class="chav">🤖</div><div><div class="cname">KATTA TANAFFUS AI</div><div class="cst"><span class="stdot"></span>Student yordamchi</div></div></div><button class="cx" onclick="toggleStudentChat()">✕</button></div>
+  <div class="cmsgs" id="student-chat-msgs"><div class="cmsg bot"><div class="mav">🤖</div><div class="mbub">Assalomu alaykum! 👋 Men student yordamchiman. Reyting balli, fanlar, baholar va darslar bo‘yicha savollarga javob beraman.</div></div></div>
+  <div class="qrps" id="student-qrps">
+    <button class="qr" onclick="sendStudentQuick(this.textContent)">⭐ Reyting ballim</button>
+    <button class="qr" onclick="sendStudentQuick(this.textContent)">📚 Fanlar</button>
+    <button class="qr" onclick="sendStudentQuick(this.textContent)">📊 Baholar</button>
+    <button class="qr" onclick="sendStudentQuick(this.textContent)">📝 Vazifa</button>
+  </div>
+  <div class="cinp"><button class="cmic" type="button">🎤</button><input type="text" id="chat-input" placeholder="Student savolini yozing... 💬" onkeydown="if(event.key==='Enter')sendStudentChat()"><button class="csend" onclick="sendStudentChat()">➤</button></div>
+</div>
+
+<script>
+(function(){
+  let studentChatOpen=false;
+  window.toggleStudentChat=function(){
+    studentChatOpen=!studentChatOpen;
+    const w=document.getElementById('chatwin');
+    if(!w)return;
+    w.style.display=studentChatOpen?'flex':'none';
+    if(studentChatOpen)w.classList.add('open');
+  };
+  function addStudentMsg(txt,role){
+    const el=document.getElementById('student-chat-msgs'); if(!el)return;
+    const d=document.createElement('div'); d.className='cmsg '+role;
+    d.innerHTML='<div class="mav">'+(role==='bot'?'🤖':'👤')+'</div><div class="mbub">'+String(txt).replace(/\n/g,'<br>')+'</div>';
+    el.appendChild(d); el.scrollTop=el.scrollHeight;
+  }
+  function studentReply(text){
+    const t=String(text||'').toLowerCase();
+    if(t.includes('reyting')||t.includes('rating')||t.includes('ball')||t.includes("o'rin")||t.includes('orin')) return '⭐ Sizning umumiy reyting ballingiz: 1 240. Hozir 5-sinf A bo‘yicha 4-o‘rindasiz. O‘rtacha natija: 87%.';
+    if(t.includes('fan')||t.includes('matematika')||t.includes('ona')||t.includes('ingliz')||t.includes('fizika')||t.includes('tarix')||t.includes('kimyo')) return '📚 Fanlar bo‘yicha ko‘rsatkichlar: Matematika — 87%, Ona tili — 92%, Ingliz tili — 96%, Fizika — 72%, Tarix — 88%, Kimyo — 40%.';
+    if(t.includes('baho')||t.includes('natija')||t.includes('test')||t.includes('marks')) return '📊 So‘nggi natijalar: Matematika testi — 94%, Ona tili testi — 88%, Fizika testi — 72%. To‘liq ro‘yxat Baholar sahifasida.';
+    if(t.includes('vazifa')||t.includes('uy ishi')||t.includes('dars')||t.includes('lesson')) return '📝 Bugungi vazifa: Matematika 10.3 — Tengsizliklar. Darsni davom ettirish uchun Darslar bo‘limiga o‘ting.';
+    if(t.includes('profil')||t.includes('sertifikat')||t.includes('yutuq')) return '👤 Profil bo‘limida shaxsiy ma’lumotlar, yutuqlar va sertifikatlar saqlanadi.';
+    if(t.includes('do‘kon')||t.includes('dokkon')||t.includes('shop')||t.includes('mahsulot')) return '🛍️ Do‘konda ballaringizga mos mahsulotlarni ko‘rishingiz mumkin. Xarid qilishdan oldin balansni tekshiring.';
+    return 'Men faqat student paneliga oid savollarga javob beraman: reyting balli, fanlar, baholar, darslar, vazifalar, profil va do‘kon. Shu mavzulardan birini so‘rab ko‘ring 😊';
+  }
+  window.sendStudentChat=function(){
+    const i=document.getElementById('chat-input'); if(!i)return;
+    const t=i.value.trim(); if(!t)return;
+    addStudentMsg(t,'user'); i.value='';
+    setTimeout(()=>addStudentMsg(studentReply(t),'bot'),350);
+  };
+  window.sendStudentQuick=function(t){
+    const q=document.getElementById('student-qrps'); if(q)q.style.display='none';
+    addStudentMsg(t,'user');
+    setTimeout(()=>addStudentMsg(studentReply(t),'bot'),350);
+  };
+})();
+</script>
+
+<script src="static/js/auth.js"></script>
+<script src="static/js/rewards.js"></script>
+<script src="static/js/portal-settings.js"></script>
+<script src="static/js/student-mobile.js"></script>
+</body>
+</html>

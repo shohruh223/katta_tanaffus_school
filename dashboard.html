@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bosh sahifa — Maktab Portali</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="static/css/student.css">
+</head>
+<body>
+<div class="sp-loading" id="sp-loading">
+  <div class="ll-logo"><img src="static/img/logo-brand.png" alt=""><span>Katta Tanaffus</span></div>
+  <div class="ll-dots"><div class="ll-dot"></div><div class="ll-dot"></div><div class="ll-dot"></div></div>
+</div>
+
+<div class="sp-wrap">
+<aside class="sp-sidebar">
+  <div class="sb-logo"><img src="static/img/logo-brand.png" alt=""><div class="sb-logo-text"><strong>Katta Tanaffus</strong><span>Maktab portali</span></div></div>
+  <nav class="sb-nav">
+    <a href="dashboard.html" class="active"><span class="sb-icon">🏠</span> Bosh sahifa</a>
+    <a href="lessons.html"><span class="sb-icon">📚</span> Darslar</a>
+    <a href="marks.html"><span class="sb-icon">📊</span> Baholar</a>
+    <a href="shop.html"><span class="sb-icon">🛍️</span> Do'kon</a>
+    <a href="profile.html"><span class="sb-icon">👤</span> Profil</a>
+  </nav>
+  <div class="sb-logout"><a href="javascript:void(0)" onclick="KTAuth.logout()"><span>🚪</span> Chiqish</a></div>
+</aside>
+<div class="sp-menu-backdrop" onclick="closeStudentMenu()"></div>
+
+<div class="sp-main">
+<header class="sp-topbar">
+  <button class="sp-menu-toggle" type="button" onclick="toggleStudentMenu()" aria-label="Menyuni ochish"><span></span><span></span><span></span></button>
+  <h1>Bosh sahifa</h1>
+  <div class="tb-right">
+    <button class="tb-icon-btn">🔔</button>
+    <div class="tb-user" onclick="location.href='profile.html'">
+      <img src="https://i.pravatar.cc/80?img=12" alt="">
+      <div><div class="tb-name">Toxir Toirov</div><div class="tb-level">5-sinf</div></div>
+    </div>
+  </div>
+</header>
+
+<div class="sp-content dashboard-clean">
+
+  <div class="welcome-card ani-1">
+    <div>
+      <div class="welcome-kicker">Bugungi holat</div>
+      <h2>Salom, Toxir! 👋</h2>
+      <p>Kerakli ko‘rsatkichlar, reyting va so‘nggi natijalar bir joyda.</p>
+    </div>
+    <button class="welcome-action" onclick="location.href='lessons.html'">Darsni davom ettirish →</button>
+  </div>
+
+  <div class="stat-row ani-2">
+    <div class="stat-card"><div class="stat-icon">🪙</div><div class="stat-val" data-coin-balance>500</div><div class="stat-label">Coin balans</div></div>
+    <div class="stat-card"><div class="stat-icon">📝</div><div class="stat-val">87%</div><div class="stat-label">O'rtacha baho</div></div>
+    <div class="stat-card"><div class="stat-icon">🏅</div><div class="stat-val">4-o'rin</div><div class="stat-label">Sinf reytingi</div></div>
+    <div class="stat-card hw-card" onclick="location.href='lessons.html'"><div class="hw-arrow">↗</div><div style="font-size:.82rem;font-weight:800;color:#fff;">Vazifa</div><div style="font-size:.68rem;color:rgba(255,255,255,.7);margin-bottom:3px;">Matematika 10.3</div><div class="hw-pct">0%</div></div>
+  </div>
+
+  <div class="dashboard-ranking-full ani-3">
+    <div class="dash-head ranking-title-row">
+      <div>
+        <div class="sec-title">To‘liq reyting</div>
+        <h3>Sinf, fanlar va shaxsiy ko‘rsatkichlar</h3>
+      </div>
+      <span class="dash-pill">↑ 2 o‘rin</span>
+    </div>
+
+    <div class="ranking-wrap dashboard-ranking-wrap">
+
+      <!-- LEFT -->
+      <div>
+        <div class="podium-card">
+          <div class="podium-place">
+            <img src="https://i.pravatar.cc/60?img=20" class="pd-avatar" alt="">
+            <div class="pd-name">Omadbek</div>
+            <div class="pd-col pd-2">2</div>
+          </div>
+          <div class="podium-place" style="order:-1">
+            <img src="https://i.pravatar.cc/60?img=30" class="pd-avatar" alt="" style="width:60px;height:60px;border:3px solid #fff;">
+            <div class="pd-name" style="font-size:.76rem;">Farzona</div>
+            <div class="pd-col pd-1">1</div>
+          </div>
+          <div class="podium-place">
+            <div class="pd-avatar empty">👤</div>
+            <div class="pd-name">Bekzod</div>
+            <div class="pd-col pd-3">3</div>
+          </div>
+        </div>
+
+        <div class="rank-filter">
+          <div class="rf-row">
+            <button class="rtab active" onclick="setTab(this)">5-sinf</button>
+            <button class="rtab" onclick="setTab(this)">Barcha sinflar</button>
+            <button class="rtab" onclick="setTab(this)">Filial</button>
+          </div>
+          <div class="rf-row">
+            <button class="rtab active" onclick="setTab(this)">Barcha fanlar</button>
+            <button class="rtab" onclick="setTab(this)">🔢 Matematika</button>
+            <button class="rtab" onclick="setTab(this)">📖 Ona tili</button>
+            <button class="rtab" onclick="setTab(this)">🌍 Ingliz</button>
+          </div>
+        </div>
+
+        <div class="rank-list">
+          <div class="rank-item"><div class="rk-num rk-medal">🥇</div><img src="https://i.pravatar.cc/40?img=30" alt=""><div style="flex:1"><div class="ri-name">Farzona Saidalieva <span class="badge-v">✓</span></div><div class="ri-sub">5-sinf A • O'rtacha: 97%</div></div><div class="ri-score">1 890 ⭐</div></div>
+          <div class="rank-item"><div class="rk-num rk-medal">🥈</div><img src="https://i.pravatar.cc/40?img=20" alt=""><div style="flex:1"><div class="ri-name">Omadbek Solijonov <span class="badge-v">✓</span></div><div class="ri-sub">5-sinf B • O'rtacha: 94%</div></div><div class="ri-score">1 750 ⭐</div></div>
+          <div class="rank-item"><div class="rk-num rk-medal">🥉</div><img src="https://i.pravatar.cc/40?img=25" alt=""><div style="flex:1"><div class="ri-name">Bekzod Anvarov</div><div class="ri-sub">5-sinf A • O'rtacha: 91%</div></div><div class="ri-score">1 640 ⭐</div></div>
+          <div class="rank-item"><div class="rk-num">4</div><img src="https://i.pravatar.cc/40?img=22" alt=""><div style="flex:1"><div class="ri-name">Nilufar Rashidova <span class="badge-v">✓</span></div><div class="ri-sub">5-sinf B • O'rtacha: 89%</div></div><div class="ri-score">1 520 ⭐</div></div>
+          <div class="rank-item me"><div class="rk-num" style="color:#ff2fd5;">4</div><img src="https://i.pravatar.cc/40?img=12" alt="" style="border:2px solid #ff2fd5;"><div style="flex:1"><div class="ri-name" style="color:#ff2fd5;">Toxir Toirov <span class="badge-v">✓</span> ⭐</div><div class="ri-sub">5-sinf A • O'rtacha: 87%</div></div><div class="ri-score"><span data-coin-balance>500</span> ⭐</div></div>
+          <div class="rank-item"><div class="rk-num">5</div><img src="https://i.pravatar.cc/40?img=18" alt=""><div style="flex:1"><div class="ri-name">Jasur Toshmatov</div><div class="ri-sub">5-sinf A • O'rtacha: 85%</div></div><div class="ri-score">1 180 ⭐</div></div>
+          <div class="rank-item"><div class="rk-num">6</div><img src="https://i.pravatar.cc/40?img=35" alt=""><div style="flex:1"><div class="ri-name">Malika Hasanova <span class="badge-v">✓</span></div><div class="ri-sub">5-sinf B • O'rtacha: 82%</div></div><div class="ri-score">1 050 ⭐</div></div>
+        </div>
+      </div>
+
+      <!-- RIGHT -->
+      <div class="rank-right">
+        <div class="my-rank-card">
+          <div class="mrc-top">
+            <img src="https://i.pravatar.cc/80?img=12" alt="">
+            <div><div class="mrc-name">Toxir Toirov</div><div class="mrc-lvl">5-sinf A • Xalqlar Dostligi</div></div>
+            <div class="mrc-prog">↑ 2 o'rin</div>
+          </div>
+          <div class="mrc-avg">May oyidagi o'rtacha: 87%</div>
+          <div class="mrc-grid">
+            <div class="mrc-item"><div class="mi-icon">🪙</div><div><div class="mi-val" data-coin-balance>500</div><div class="mi-lbl">Coin balans</div></div></div>
+            <div class="mrc-item"><div class="mi-icon">📝</div><div><div class="mi-val">34 ta</div><div class="mi-lbl">Test yechildi</div></div></div>
+          </div>
+          <div class="mrc-badges3">
+            <div class="mb3"><div class="mb3-i">🔢</div><div class="mb3-v">87%</div><div class="mb3-s">Matematika</div></div>
+            <div class="mb3"><div class="mb3-i">📖</div><div class="mb3-v">92%</div><div class="mb3-s">Ona tili</div></div>
+            <div class="mb3"><div class="mb3-i">🌍</div><div class="mb3-v">96%</div><div class="mb3-s">Ingliz</div></div>
+          </div>
+        </div>
+
+        <div class="radar-card">
+          <h4>Fanlar bo'yicha ko'rsatkichlar</h4>
+          <svg class="radar-svg" viewBox="0 0 280 260" xmlns="http://www.w3.org/2000/svg">
+            <g transform="translate(140,130)">
+              <polygon points="0,-80 69.3,-40 69.3,40 0,80 -69.3,40 -69.3,-40" fill="none" stroke="#f0eaff" stroke-width="1.5"/>
+              <polygon points="0,-60 52,-30 52,30 0,60 -52,30 -52,-30" fill="none" stroke="#f0eaff" stroke-width="1.5"/>
+              <polygon points="0,-40 34.6,-20 34.6,20 0,40 -34.6,20 -34.6,-20" fill="none" stroke="#f0eaff" stroke-width="1.5"/>
+              <polygon points="0,-20 17.3,-10 17.3,10 0,20 -17.3,10 -17.3,-10" fill="none" stroke="#f0eaff" stroke-width="1.5"/>
+              <line x1="0" y1="0" x2="0" y2="-80" stroke="#f0eaff" stroke-width="1"/>
+              <line x1="0" y1="0" x2="69.3" y2="-40" stroke="#f0eaff" stroke-width="1"/>
+              <line x1="0" y1="0" x2="69.3" y2="40" stroke="#f0eaff" stroke-width="1"/>
+              <line x1="0" y1="0" x2="0" y2="80" stroke="#f0eaff" stroke-width="1"/>
+              <line x1="0" y1="0" x2="-69.3" y2="40" stroke="#f0eaff" stroke-width="1"/>
+              <line x1="0" y1="0" x2="-69.3" y2="-40" stroke="#f0eaff" stroke-width="1"/>
+              <!-- Data: Mat87% OT92% Ing96% Fiz72% Tar88% Kim40% -->
+              <polygon points="0,-69.6 60,-34.8 66.7,38.4 0,57.6 -60.8,28.8 -27.7,-40"
+                fill="rgba(255,47,213,0.18)" stroke="url(#rg-dashboard)" stroke-width="2"/>
+              <circle cx="0" cy="-69.6" r="4" fill="#ff2fd5"/>
+              <circle cx="60" cy="-34.8" r="4" fill="#7c3aed"/>
+              <circle cx="66.7" cy="38.4" r="4" fill="#ff2fd5"/>
+              <circle cx="0" cy="57.6" r="4" fill="#7c3aed"/>
+              <circle cx="-60.8" cy="28.8" r="4" fill="#ff2fd5"/>
+              <circle cx="-27.7" cy="-40" r="4" fill="#7c3aed"/>
+              <defs><linearGradient id="rg-dashboard" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#ff2fd5"/><stop offset="100%" stop-color="#7c3aed"/></linearGradient></defs>
+            </g>
+            <text x="140" y="44" text-anchor="middle" font-size="9" font-weight="800" fill="#ff2fd5">🔢 87%</text>
+            <text x="230" y="88" text-anchor="middle" font-size="9" font-weight="800" fill="#7c3aed">📖 92%</text>
+            <text x="230" y="200" text-anchor="middle" font-size="9" font-weight="800" fill="#ff2fd5">🌍 96%</text>
+            <text x="140" y="240" text-anchor="middle" font-size="9" font-weight="800" fill="#7c3aed">⚛️ 72%</text>
+            <text x="50" y="200" text-anchor="middle" font-size="9" font-weight="800" fill="#ff2fd5">🏛️ 88%</text>
+            <text x="55" y="88" text-anchor="middle" font-size="9" font-weight="800" fill="#7c3aed">🧪 40%</text>
+          </svg>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="dashboard-grid two ani-4">
+    <section class="sp-card dash-section">
+      <div class="dash-head"><div><div class="sec-title">So'nggi natijalar</div><h3>Oxirgi testlar</h3></div><button class="mini-link" onclick="location.href='marks.html'">Baholar →</button></div>
+      <div class="activity-list clean-activity">
+        <div class="act-item"><div class="act-ico" style="background:#dbeafe;">🔢</div><div class="act-text"><h5>Matematika — Test 10.2</h5><p>Bugun soat 10:30</p></div><div class="act-score" style="color:#22c55e;">94%</div></div>
+        <div class="act-item"><div class="act-ico" style="background:#f3e8ff;">📖</div><div class="act-text"><h5>Ona tili — Morfologiya testi</h5><p>Kecha</p></div><div class="act-score" style="color:#22c55e;">88%</div></div>
+        <div class="act-item"><div class="act-ico" style="background:#fce7f3;">⚛️</div><div class="act-text"><h5>Fizika — Mexanika testi</h5><p>3 kun oldin</p></div><div class="act-score" style="color:#fbbf24;">72%</div></div>
+      </div>
+    </section>
+
+    <section class="sp-card dash-section next-card">
+      <div class="sec-title">Bugungi vazifa</div>
+      <h3>Matematika 10.3</h3>
+      <p>Tengsizliklar bo‘yicha mashqlarni yakunlang.</p>
+      <button class="welcome-action" onclick="location.href='lessons.html'">Darslarga o‘tish →</button>
+    </section>
+  </div>
+
+</div>
+<footer class="sp-footer">
+  <span>© 2026 Katta Tanaffus Maktab Portali</span>
+  <div style="display:flex;gap:16px;"><a href="#">Maxfiylik siyosati</a><a href="#">FAQ</a></div>
+</footer>
+</div>
+</div>
+
+<script>
+window.addEventListener('load',()=>setTimeout(()=>document.getElementById('sp-loading').classList.add('hidden'),900));
+function setTab(el){el.closest('.rf-row').querySelectorAll('.rtab').forEach(t=>t.classList.remove('active'));el.classList.add('active');}
+</script>
+
+<!-- Student AI FAB -->
+<button id="fab" onclick="toggleStudentChat()" aria-label="AI yordamchi"><img src="static/img/ai-bot.png" alt="AI yordamchi"></button>
+<div id="chatwin">
+  <div class="chdr"><div class="chdri"><div class="chav">🤖</div><div><div class="cname">KATTA TANAFFUS AI</div><div class="cst"><span class="stdot"></span>Student yordamchi</div></div></div><button class="cx" onclick="toggleStudentChat()">✕</button></div>
+  <div class="cmsgs" id="student-chat-msgs"><div class="cmsg bot"><div class="mav">🤖</div><div class="mbub">Assalomu alaykum! 👋 Men student yordamchiman. Reyting balli, fanlar, baholar va darslar bo‘yicha savollarga javob beraman.</div></div></div>
+  <div class="qrps" id="student-qrps">
+    <button class="qr" onclick="sendStudentQuick(this.textContent)">⭐ Reyting ballim</button>
+    <button class="qr" onclick="sendStudentQuick(this.textContent)">📚 Fanlar</button>
+    <button class="qr" onclick="sendStudentQuick(this.textContent)">📊 Baholar</button>
+    <button class="qr" onclick="sendStudentQuick(this.textContent)">📝 Vazifa</button>
+  </div>
+  <div class="cinp"><button class="cmic" type="button">🎤</button><input type="text" id="chat-input" placeholder="Student savolini yozing... 💬" onkeydown="if(event.key==='Enter')sendStudentChat()"><button class="csend" onclick="sendStudentChat()">➤</button></div>
+</div>
+
+<script>
+(function(){
+  let studentChatOpen=false;
+  window.toggleStudentChat=function(){
+    studentChatOpen=!studentChatOpen;
+    const w=document.getElementById('chatwin');
+    if(!w)return;
+    w.style.display=studentChatOpen?'flex':'none';
+    if(studentChatOpen)w.classList.add('open');
+  };
+  function addStudentMsg(txt,role){
+    const el=document.getElementById('student-chat-msgs'); if(!el)return;
+    const d=document.createElement('div'); d.className='cmsg '+role;
+    d.innerHTML='<div class="mav">'+(role==='bot'?'🤖':'👤')+'</div><div class="mbub">'+String(txt).replace(/\n/g,'<br>')+'</div>';
+    el.appendChild(d); el.scrollTop=el.scrollHeight;
+  }
+  function studentReply(text){
+    const t=String(text||'').toLowerCase();
+    if(t.includes('reyting')||t.includes('rating')||t.includes('ball')||t.includes("o'rin")||t.includes('orin')) return '⭐ Sizning umumiy reyting ballingiz: 1 240. Hozir 5-sinf A bo‘yicha 4-o‘rindasiz. O‘rtacha natija: 87%.';
+    if(t.includes('fan')||t.includes('matematika')||t.includes('ona')||t.includes('ingliz')||t.includes('fizika')||t.includes('tarix')||t.includes('kimyo')) return '📚 Fanlar bo‘yicha ko‘rsatkichlar: Matematika — 87%, Ona tili — 92%, Ingliz tili — 96%, Fizika — 72%, Tarix — 88%, Kimyo — 40%.';
+    if(t.includes('baho')||t.includes('natija')||t.includes('test')||t.includes('marks')) return '📊 So‘nggi natijalar: Matematika testi — 94%, Ona tili testi — 88%, Fizika testi — 72%. To‘liq ro‘yxat Baholar sahifasida.';
+    if(t.includes('vazifa')||t.includes('uy ishi')||t.includes('dars')||t.includes('lesson')) return '📝 Bugungi vazifa: Matematika 10.3 — Tengsizliklar. Darsni davom ettirish uchun Darslar bo‘limiga o‘ting.';
+    if(t.includes('profil')||t.includes('sertifikat')||t.includes('yutuq')) return '👤 Profil bo‘limida shaxsiy ma’lumotlar, yutuqlar va sertifikatlar saqlanadi.';
+    if(t.includes('do‘kon')||t.includes('dokkon')||t.includes('shop')||t.includes('mahsulot')) return '🛍️ Do‘konda ballaringizga mos mahsulotlarni ko‘rishingiz mumkin. Xarid qilishdan oldin balansni tekshiring.';
+    return 'Men faqat student paneliga oid savollarga javob beraman: reyting balli, fanlar, baholar, darslar, vazifalar, profil va do‘kon. Shu mavzulardan birini so‘rab ko‘ring 😊';
+  }
+  window.sendStudentChat=function(){
+    const i=document.getElementById('chat-input'); if(!i)return;
+    const t=i.value.trim(); if(!t)return;
+    addStudentMsg(t,'user'); i.value='';
+    setTimeout(()=>addStudentMsg(studentReply(t),'bot'),350);
+  };
+  window.sendStudentQuick=function(t){
+    const q=document.getElementById('student-qrps'); if(q)q.style.display='none';
+    addStudentMsg(t,'user');
+    setTimeout(()=>addStudentMsg(studentReply(t),'bot'),350);
+  };
+})();
+</script>
+
+<script src="static/js/auth.js"></script>
+<script src="static/js/rewards.js"></script>
+<script src="static/js/portal-settings.js"></script>
+<script src="static/js/student-mobile.js"></script>
+</body>
+</html>

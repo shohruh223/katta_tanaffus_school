@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Do'kon — Maktab Portali</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="static/css/student.css">
+</head>
+<body>
+<div class="sp-loading" id="sp-loading">
+  <div class="ll-logo"><img src="static/img/logo-brand.png" alt=""><span>Katta Tanaffus</span></div>
+  <div class="ll-dots"><div class="ll-dot"></div><div class="ll-dot"></div><div class="ll-dot"></div></div>
+</div>
+<div class="sp-wrap">
+<aside class="sp-sidebar">
+  <div class="sb-logo"><img src="static/img/logo-brand.png" alt=""><div class="sb-logo-text"><strong>Katta Tanaffus</strong><span>Maktab portali</span></div></div>
+  <nav class="sb-nav">
+    <a href="dashboard.html"><span class="sb-icon">🏠</span> Bosh sahifa</a>
+    <a href="lessons.html"><span class="sb-icon">📚</span> Darslar</a>
+    <a href="marks.html"><span class="sb-icon">📊</span> Baholar</a>
+    <a href="shop.html" class="active"><span class="sb-icon">🛍️</span> Do'kon</a>
+    <a href="profile.html"><span class="sb-icon">👤</span> Profil</a>
+  </nav>
+  <div class="sb-logout"><a href="javascript:void(0)" onclick="KTAuth.logout()"><span>🚪</span> Chiqish</a></div>
+</aside>
+<div class="sp-main">
+<header class="sp-topbar">
+  <button class="sp-menu-toggle" type="button" onclick="toggleStudentMenu()" aria-label="Menyuni ochish"><span></span><span></span><span></span></button>
+  <h1>Do'kon</h1>
+  <div class="tb-right">
+    <button class="tb-icon-btn">🔔</button>
+    <div class="tb-user" onclick="location.href='profile.html'">
+      <img src="https://i.pravatar.cc/80?img=12" alt="">
+      <div><div class="tb-name">Toxir Toirov</div><div class="tb-level">5-sinf</div></div>
+    </div>
+  </div>
+</header>
+<div class="sp-content">
+  <div class="shop-top-banner ani-1">
+    <div><h3>Sizning coiningiz: <span data-coin-balance>500</span> ⭐</h3><p>Test yechib coin/ball yig‘ing va sovg‘alarga almashtiring!</p></div>
+    <div class="stb-icon">🛍️</div>
+  </div>
+  <div class="shop-filter-row ani-2">
+    <button class="sh-tab active" onclick="setShTab(this,'all')">Barchasi</button>
+    <button class="sh-tab" onclick="setShTab(this,'school')">📚 Maktab</button>
+    <button class="sh-tab" onclick="setShTab(this,'gadget')">📱 Gadjetlar</button>
+    <button class="sh-tab" onclick="setShTab(this,'book')">📗 Kitoblar</button>
+    <button class="sh-tab" onclick="setShTab(this,'special')">🎁 Maxsus</button>
+    <button class="sh-orders-btn" type="button" onclick="openRewardOrders()">📦 Buyurtmalar ›</button>
+  </div>
+  <div class="shop-grid ani-3" id="shop-grid">
+    <div class="shop-item" data-cat="school" data-price="500" data-title="Maktab xaltasi"><div class="shop-item-img" style="background:linear-gradient(135deg,#ff2fd5,#7c3aed);">🎒</div><div class="shop-item-body"><h4>Maktab xaltasi</h4><div class="shop-item-stock">Mavjud: 5 ta</div><div class="shop-item-price">⭐ 500</div><button class="reward-buy-btn" type="button" onclick="buyReward(event,this)">Sovg‘a olish</button></div></div>
+    <div class="shop-item" data-cat="school" data-price="200" data-title="Maktab krujkasi"><div class="shop-item-img" style="background:linear-gradient(135deg,#fbbf24,#f97316);">☕</div><div class="shop-item-body"><h4>Maktab krujkasi</h4><div class="shop-item-stock">Mavjud: 12 ta</div><div class="shop-item-price">⭐ 200</div><button class="reward-buy-btn" type="button" onclick="buyReward(event,this)">Sovg‘a olish</button></div></div>
+    <div class="shop-item" data-cat="school" data-price="350" data-title="Maktab futbolkasi"><div class="shop-item-img" style="background:linear-gradient(135deg,#22c55e,#14b8a6);">👕</div><div class="shop-item-body"><h4>Maktab futbolkasi</h4><div class="shop-item-stock">Mavjud: 8 ta</div><div class="shop-item-price">⭐ 350</div><button class="reward-buy-btn" type="button" onclick="buyReward(event,this)">Sovg‘a olish</button></div></div>
+    <div class="shop-item" data-cat="school" data-price="150" data-title="Premium qalam seti"><div class="shop-item-img" style="background:linear-gradient(135deg,#7c3aed,#4f46e5);">✏️</div><div class="shop-item-body"><h4>Premium qalam seti</h4><div class="shop-item-stock">Mavjud: 20 ta</div><div class="shop-item-price">⭐ 150</div><button class="reward-buy-btn" type="button" onclick="buyReward(event,this)">Sovg‘a olish</button></div></div>
+    <div class="shop-item" data-cat="gadget" data-price="15000" data-title="iPhone 15"><div class="shop-item-img" style="background:linear-gradient(135deg,#374151,#111827);">📱</div><div class="shop-item-body"><h4>iPhone 15</h4><div class="shop-item-stock">Mavjud: 2 ta</div><div class="shop-item-price">⭐ 15 000</div><button class="reward-buy-btn" type="button" onclick="buyReward(event,this)">Sovg‘a olish</button></div></div>
+    <div class="shop-item" data-cat="gadget" data-price="5000" data-title="AirPods Pro"><div class="shop-item-img" style="background:linear-gradient(135deg,#4b5563,#1f2937);">🎧</div><div class="shop-item-body"><h4>AirPods Pro</h4><div class="shop-item-stock">Mavjud: 3 ta</div><div class="shop-item-price">⭐ 5 000</div><button class="reward-buy-btn" type="button" onclick="buyReward(event,this)">Sovg‘a olish</button></div></div>
+    <div class="shop-item" data-cat="gadget" data-price="12000" data-title="iPad mini"><div class="shop-item-img" style="background:linear-gradient(135deg,#1d4ed8,#2563eb);">💻</div><div class="shop-item-body"><h4>iPad mini</h4><div class="shop-item-stock">Mavjud: 1 ta</div><div class="shop-item-price">⭐ 12 000</div><button class="reward-buy-btn" type="button" onclick="buyReward(event,this)">Sovg‘a olish</button></div></div>
+    <div class="shop-item" data-cat="book" data-price="400" data-title="Matematika olimpiada kitobi"><div class="shop-item-img" style="background:linear-gradient(135deg,#f0fdf4,#dcfce7);">📗</div><div class="shop-item-body"><h4>Matematika olimpiada kitobi</h4><div class="shop-item-stock">Mavjud: 15 ta</div><div class="shop-item-price">⭐ 400</div><button class="reward-buy-btn" type="button" onclick="buyReward(event,this)">Sovg‘a olish</button></div></div>
+    <div class="shop-item" data-cat="book" data-price="350" data-title="Ingliz tili darsligi"><div class="shop-item-img" style="background:linear-gradient(135deg,#eff6ff,#dbeafe);">📘</div><div class="shop-item-body"><h4>Ingliz tili darsligi</h4><div class="shop-item-stock">Mavjud: 10 ta</div><div class="shop-item-price">⭐ 350</div><button class="reward-buy-btn" type="button" onclick="buyReward(event,this)">Sovg‘a olish</button></div></div>
+    <div class="shop-item" data-cat="special" data-price="200" data-title="50% chegirma kuponi"><div class="shop-item-img" style="background:linear-gradient(135deg,#ff2fd5,#f97316);">🎁</div><div class="shop-item-body"><h4>50% chegirma kuponi</h4><div class="shop-item-stock">Cheklangan!</div><div class="shop-item-price">⭐ 200</div><button class="reward-buy-btn" type="button" onclick="buyReward(event,this)">Sovg‘a olish</button></div></div>
+    <div class="shop-item" data-cat="special" data-price="1000" data-title="Olimpiada ro‘yxati"><div class="shop-item-img" style="background:linear-gradient(135deg,#7c3aed,#4f46e5);">🏆</div><div class="shop-item-body"><h4>Olimpiada ro‘yxati</h4><div class="shop-item-stock">Mavjud: 5 ta</div><div class="shop-item-price">⭐ 1 000</div><button class="reward-buy-btn" type="button" onclick="buyReward(event,this)">Sovg‘a olish</button></div></div>
+  </div>
+</div>
+<footer class="sp-footer">
+  <span>© 2026 Katta Tanaffus Maktab Portali</span>
+  <div style="display:flex;gap:16px;"><a href="#">Maxfiylik siyosati</a><a href="#">FAQ</a></div>
+</footer>
+</div>
+</div>
+<div class="reward-modal" id="rewardModal" aria-hidden="true">
+  <div class="reward-backdrop" onclick="closeRewardModal()"></div>
+  <div class="reward-card">
+    <button class="reward-close" type="button" onclick="closeRewardModal()">✕</button>
+    <div id="rewardModalBody"></div>
+  </div>
+</div>
+
+<script>
+window.addEventListener('load',()=>setTimeout(()=>document.getElementById('sp-loading').classList.add('hidden'),900));
+function setShTab(el,cat){
+  el.closest('.shop-filter-row').querySelectorAll('.sh-tab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  document.querySelectorAll('.shop-item').forEach(item=>{item.style.display=(cat==='all'||item.dataset.cat===cat)?'':'none';});
+}
+function openRewardModal(html){
+  const m=document.getElementById('rewardModal'), b=document.getElementById('rewardModalBody');
+  if(!m||!b)return; b.innerHTML=html; m.classList.add('open'); m.setAttribute('aria-hidden','false');
+}
+function closeRewardModal(){
+  const m=document.getElementById('rewardModal'); if(!m)return; m.classList.remove('open'); m.setAttribute('aria-hidden','true');
+}
+function buyReward(event,btn){
+  event.stopPropagation();
+  const item=btn.closest('.shop-item');
+  const title=item.dataset.title;
+  const price=Number(item.dataset.price||0);
+  const balance=window.KTRewards ? window.KTRewards.getBalance() : 0;
+  if(balance < price){
+    openRewardModal(`<div class="reward-icon">🪙</div><h3>Coin yetarli emas</h3><p><b>${title}</b> uchun ${price.toLocaleString('uz-UZ')} ⭐ kerak. Sizda ${balance.toLocaleString('uz-UZ')} ⭐ bor.</p><a class="reward-link" href="lessons.html">Test yechib coin yig‘ish</a>`);
+    return;
+  }
+  const ok = window.KTRewards.spendCoins(price, title + ' sovg‘asi');
+  if(ok){
+    const order = window.KTRewards.saveOrder({title, price});
+    openRewardModal(`<div class="reward-icon">🎁</div><h3>Sovg‘a olindi!</h3><p><b>${title}</b> buyurtmangiz qabul qilindi.</p><div class="reward-order-code">Buyurtma raqami: ${order.id}</div><p class="reward-small">Qolgan balans: <b>${window.KTRewards.formatCoin(window.KTRewards.getBalance())} ⭐</b></p>`);
+  }
+}
+function openRewardOrders(){
+  const orders = window.KTRewards ? window.KTRewards.getOrders() : [];
+  const list = orders.length ? orders.map(o=>`<div class="reward-order"><b>${o.title}</b><span>${Number(o.price).toLocaleString('uz-UZ')} ⭐ • ${o.status}</span><small>${new Date(o.date).toLocaleString('uz-UZ')}</small></div>`).join('') : '<p>Hozircha buyurtmalar yo‘q.</p>';
+  openRewardModal(`<div class="reward-icon">📦</div><h3>Buyurtmalar</h3><div class="reward-orders">${list}</div>`);
+}
+window.addEventListener('kt:coin-change',()=>window.KTRewards?.updateCoinViews());
+</script>
+
+<!-- Student AI FAB -->
+<button id="fab" onclick="toggleStudentChat()" aria-label="AI yordamchi"><img src="static/img/ai-bot.png" alt="AI yordamchi"></button>
+<div id="chatwin">
+  <div class="chdr"><div class="chdri"><div class="chav">🤖</div><div><div class="cname">KATTA TANAFFUS AI</div><div class="cst"><span class="stdot"></span>Student yordamchi</div></div></div><button class="cx" onclick="toggleStudentChat()">✕</button></div>
+  <div class="cmsgs" id="student-chat-msgs"><div class="cmsg bot"><div class="mav">🤖</div><div class="mbub">Assalomu alaykum! 👋 Men student yordamchiman. Reyting balli, fanlar, baholar va darslar bo‘yicha savollarga javob beraman.</div></div></div>
+  <div class="qrps" id="student-qrps">
+    <button class="qr" onclick="sendStudentQuick(this.textContent)">⭐ Reyting ballim</button>
+    <button class="qr" onclick="sendStudentQuick(this.textContent)">📚 Fanlar</button>
+    <button class="qr" onclick="sendStudentQuick(this.textContent)">📊 Baholar</button>
+    <button class="qr" onclick="sendStudentQuick(this.textContent)">📝 Vazifa</button>
+  </div>
+  <div class="cinp"><button class="cmic" type="button">🎤</button><input type="text" id="chat-input" placeholder="Student savolini yozing... 💬" onkeydown="if(event.key==='Enter')sendStudentChat()"><button class="csend" onclick="sendStudentChat()">➤</button></div>
+</div>
+
+<script>
+(function(){
+  let studentChatOpen=false;
+  window.toggleStudentChat=function(){
+    studentChatOpen=!studentChatOpen;
+    const w=document.getElementById('chatwin');
+    if(!w)return;
+    w.style.display=studentChatOpen?'flex':'none';
+    if(studentChatOpen)w.classList.add('open');
+  };
+  function addStudentMsg(txt,role){
+    const el=document.getElementById('student-chat-msgs'); if(!el)return;
+    const d=document.createElement('div'); d.className='cmsg '+role;
+    d.innerHTML='<div class="mav">'+(role==='bot'?'🤖':'👤')+'</div><div class="mbub">'+String(txt).replace(/\n/g,'<br>')+'</div>';
+    el.appendChild(d); el.scrollTop=el.scrollHeight;
+  }
+  function studentReply(text){
+    const t=String(text||'').toLowerCase();
+    if(t.includes('reyting')||t.includes('rating')||t.includes('ball')||t.includes("o'rin")||t.includes('orin')) return '⭐ Sizning umumiy reyting ballingiz: 1 240. Hozir 5-sinf A bo‘yicha 4-o‘rindasiz. O‘rtacha natija: 87%.';
+    if(t.includes('fan')||t.includes('matematika')||t.includes('ona')||t.includes('ingliz')||t.includes('fizika')||t.includes('tarix')||t.includes('kimyo')) return '📚 Fanlar bo‘yicha ko‘rsatkichlar: Matematika — 87%, Ona tili — 92%, Ingliz tili — 96%, Fizika — 72%, Tarix — 88%, Kimyo — 40%.';
+    if(t.includes('baho')||t.includes('natija')||t.includes('test')||t.includes('marks')) return '📊 So‘nggi natijalar: Matematika testi — 94%, Ona tili testi — 88%, Fizika testi — 72%. To‘liq ro‘yxat Baholar sahifasida.';
+    if(t.includes('vazifa')||t.includes('uy ishi')||t.includes('dars')||t.includes('lesson')) return '📝 Bugungi vazifa: Matematika 10.3 — Tengsizliklar. Darsni davom ettirish uchun Darslar bo‘limiga o‘ting.';
+    if(t.includes('profil')||t.includes('sertifikat')||t.includes('yutuq')) return '👤 Profil bo‘limida shaxsiy ma’lumotlar, yutuqlar va sertifikatlar saqlanadi.';
+    if(t.includes('do‘kon')||t.includes('dokkon')||t.includes('shop')||t.includes('mahsulot')) return '🛍️ Do‘konda ballaringizga mos mahsulotlarni ko‘rishingiz mumkin. Xarid qilishdan oldin balansni tekshiring.';
+    return 'Men faqat student paneliga oid savollarga javob beraman: reyting balli, fanlar, baholar, darslar, vazifalar, profil va do‘kon. Shu mavzulardan birini so‘rab ko‘ring 😊';
+  }
+  window.sendStudentChat=function(){
+    const i=document.getElementById('chat-input'); if(!i)return;
+    const t=i.value.trim(); if(!t)return;
+    addStudentMsg(t,'user'); i.value='';
+    setTimeout(()=>addStudentMsg(studentReply(t),'bot'),350);
+  };
+  window.sendStudentQuick=function(t){
+    const q=document.getElementById('student-qrps'); if(q)q.style.display='none';
+    addStudentMsg(t,'user');
+    setTimeout(()=>addStudentMsg(studentReply(t),'bot'),350);
+  };
+})();
+</script>
+
+<script src="static/js/auth.js"></script>
+<script src="static/js/rewards.js"></script>
+<script src="static/js/portal-settings.js"></script>
+<script src="static/js/student-mobile.js"></script>
+</body>
+</html>
