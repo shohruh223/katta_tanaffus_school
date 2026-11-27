@@ -3,253 +3,189 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ro'yxatdan o'tish — KATTA TANAFFUS SCHOOL</title>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="static/css/main.css">
+<title>Ro‘yxatdan o‘tish — Katta Tanaffus</title>
+<meta name="description" content="Oila hisobini oching: telefon, SMS kod, farzandlar va roziliklar — 2 daqiqa.">
+<meta property="og:title" content="Ro‘yxatdan o‘tish — Katta Tanaffus">
+<meta property="og:description" content="Oila hisobini oching: telefon, SMS kod, farzandlar va roziliklar — 2 daqiqa.">
+<meta property="og:image" content="static/img/logo-brand.png">
+<link rel="icon" href="static/img/logo-brand.png">
+<link rel="stylesheet" href="static/css/platform.css">
+<link rel="stylesheet" href="static/css/site.css">
+<link rel="stylesheet" href="static/css/auth-v2.css">
 </head>
-<body>
-
-<div id="loading"><div class="llgo"><img src="static/img/logo-brand.png" alt="Katta Tanaffus logotipi"><span>Yuklanmoqda...</span></div><div class="ldots"><div class="ldot"></div><div class="ldot"></div><div class="ldot"></div></div></div>
-<div class="toast" id="toast"></div>
-
-<!-- MOBILE NAV -->
-<div class="mnav" id="mnav">
-  <a href="index.html" onclick="closemob()">🏠 Bosh sahifa</a>
-  <a href="courses.html" onclick="closemob()">📚 Kurslar</a>
-  <a href="about.html" onclick="closemob()">ℹ️ Biz haqimizda</a>
-  <a href="teachers.html" onclick="closemob()">👨‍🏫 O'qituvchilar</a>
-  <a href="gallery.html" onclick="closemob()">🖼️ Galereya</a>
-  <a href="branches.html" onclick="closemob()">📍 Filiallar</a>
-  <a href="contact.html" onclick="closemob()">📞 Aloqa</a>
-  <button class="btn btn-f" onclick="openAriza();closemob()" style="margin-top:10px">📝 Ariza qoldirish</button>
-  <div class="mnav-auth">
-    <a class="mnav-login" href="login.html" onclick="closemob()">🔐 Kirish</a>
-    <a class="mnav-register" href="register.html" onclick="closemob()">✨ Ro'yxatdan o'tish</a>
-  </div>
-</div>
-
-<!-- NAV -->
-<nav>
-  <a href="index.html" class="logo">
-    <img src="static/img/logo-brand.png" alt="Katta Tanaffus logotipi" class="logo-img">
-    <div class="logo-text">
-      <strong>Katta Tanaffus</strong>
-      <span>School</span>
-    </div>
-  </a>
-  <div class="nav-links">
-    <a href="index.html">Bosh sahifa</a>
-    <a href="courses.html">Kurslar</a>
+<body class="ks" data-role="guest">
+<a class="ks-skip" href="#main">Asosiy mazmunga o‘tish</a>
+<header class="ks-head">
+  <div class="ks-head-in">
+    <a class="ks-logo" href="index.html" aria-label="Katta Tanaffus — bosh sahifa"><img src="static/img/logo-brand.png" alt="" width="48" height="48"><span><b>Katta Tanaffus</b><small>SCHOOL</small></span></a>
+    <nav class="ks-links" aria-label="Asosiy menyu">
+    <a href="platforma.html">Platforma ✨</a>
+    <a href="courses.html">Fanlar</a>
     <a href="about.html">Biz haqimizda</a>
-    <a href="teachers.html">O'qituvchilar</a>
+    <a href="teachers.html">O‘qituvchilar</a>
     <a href="gallery.html">Galereya</a>
     <a href="branches.html">Filiallar</a>
     <a href="contact.html">Aloqa</a>
-  </div>
-  <div class="nav-acts">
-    <a class="btn btn-o" href="login.html" style="text-decoration:none">Kirish</a>
-    <a class="btn btn-f" href="register.html" style="text-decoration:none">Ro'yxatdan o'tish</a>
-    <button class="burger" onclick="togglemob()"><span></span><span></span><span></span></button>
-  </div>
-</nav>
-
-<div class="auth-page auth-register-page">
-  <div class="auth-shell reverse">
-    <div class="auth-card modern-auth">
-      <div class="auth-top-icon">🎓</div>
-      <h2>Ro‘yxatdan o‘tish</h2>
-      <p>KATTA TANAFFUS SCHOOL oilasiga qo‘shiling.</p>
-      <form onsubmit="return KTAuth.handleRegister(event);">
-        <div class="smart-field"><label>Ism va familiya</label><div class="input-wrap"><span>👤</span><input type="text" placeholder="Ismingiz" required></div></div>
-        <div class="smart-field"><label>Email manzil</label><div class="input-wrap"><span>✉️</span><input type="email" placeholder="email@example.com" required></div></div>
-        <div class="smart-grid">
-          <div class="smart-field"><label>Parol</label><div class="input-wrap"><span>🔒</span><input type="password" placeholder="Kamida 8 belgi" required minlength="8"></div></div>
-          <div class="smart-field"><label>Tasdiqlash</label><div class="input-wrap"><span>✅</span><input type="password" placeholder="Parolni takrorlang" required minlength="8"></div></div>
-        </div>
-        <label class="agree"><input type="checkbox" required> Foydalanish shartlariga roziman</label>
-        <button type="submit" class="auth-submit">✨ Ro‘yxatdan o‘tish</button>
-      </form>
-      <div class="auth-switch">Akkountingiz bormi? <a href="login.html">Kirish</a></div>
-    </div>
-    <div class="auth-visual register-visual">
-      <span class="auth-badge">🚀 Yangi boshlanish</span>
-      <h1>Farzandingiz uchun zamonaviy ta’lim muhiti</h1>
-      <p>Ingliz tili, IT, robotika va matematika kurslariga tez va qulay yoziling.</p>
-      <div class="auth-benefits">
-        <div><span>👨‍🏫</span><b>50+</b><small>O‘qituvchi</small></div>
-        <div><span>🏫</span><b>8</b><small>Filial</small></div>
-        <div><span>⭐</span><b>5000+</b><small>O‘quvchi</small></div>
-      </div>
+    </nav>
+    <div class="ks-acts">
+      <div class="ks-acc"><a href="login.html">Kirish</a><a href="register.html" aria-current="page">Ro‘yxatdan o‘tish</a></div>
+      <a class="ks-btn ks-btn-sm" href="yozilish.html">Qabulga ariza</a>
+      <button class="ks-burger" type="button" aria-expanded="false" aria-controls="ksMenu" aria-label="Menyu"><i></i><i></i><i></i></button>
     </div>
   </div>
+</header>
+<div class="ks-menu" id="ksMenu">
+  <a href="index.html"><span aria-hidden="true">🏠</span>Bosh sahifa</a>
+  <a href="platforma.html"><span aria-hidden="true">✨</span>Platforma</a>
+  <a href="courses.html"><span aria-hidden="true">📚</span>Fanlar</a>
+  <a href="about.html"><span aria-hidden="true">💛</span>Biz haqimizda</a>
+  <a href="teachers.html"><span aria-hidden="true">🧑‍🏫</span>O‘qituvchilar</a>
+  <a href="gallery.html"><span aria-hidden="true">📸</span>Galereya</a>
+  <a href="branches.html"><span aria-hidden="true">📍</span>Filiallar</a>
+  <a href="contact.html"><span aria-hidden="true">📞</span>Aloqa</a>
+  <a href="diagnostika.html"><span aria-hidden="true">🧭</span>Bepul diagnostika</a>
+  <div class="ks-menu-acc"><a href="login.html">🔑 Kirish</a><a href="register.html" aria-current="page">✨ Ro‘yxatdan o‘tish</a></div>
+  <a class="ks-btn" href="yozilish.html">Qabulga ariza</a>
 </div>
+<main id="main">
+<div class="au">
+  <section class="au-l" aria-labelledby="rgT">
+    <h1 class="au-h1" id="rgT">Oila hisobini oching</h1>
+    <p class="au-sub" id="rgSub">2 daqiqa: telefon, ismingiz, farzandlar va roziliklar. Parol shart emas.</p>
+    <ol class="au-steps" id="steps" aria-label="Bosqichlar"></ol>
+    <div id="stage"></div>
+    <p class="au-hint" style="margin-top:22px">Hisobingiz bormi? <a class="au-link" href="login.html">Kirish</a></p>
+  </section>
+  <aside class="au-r" aria-label="Oila kartasi">
+    <span class="au-glow" aria-hidden="true"></span>
+    <p class="au-cap" id="cap">Oila kartangiz yig‘ilmoqda</p>
+    <div class="stack" id="stack"></div>
+    <div class="au-trust"><span>👨‍👩‍👧 Bola hisobini faqat ota-ona ochadi</span><span>👀 Har kim faqat o‘z natijasini ko‘radi</span><span>📸 Rasm — faqat roziligingiz bilan</span></div>
+  </aside>
+</div>
+</main>
 
-<!-- FOOTER -->
-<footer>
-  <div class="fgrid">
-    <div class="fbrand"><a href="index.html" class="footer-logo"><img src="static/img/logo-brand.png" alt="Katta Tanaffus logotipi"><div><h3>Katta Tanaffus School</h3><span>Bolalar ta'lim markazi</span></div></a><p>O'zbekistondagi eng zamonaviy ta'lim markazi. 5,000+ o'quvchi, 50+ o'qituvchi, 8 ta filial.</p><div class="fsocials"><a href="#" class="sbtn">📱</a><a href="#" class="sbtn">💬</a><a href="#" class="sbtn">📸</a><a href="#" class="sbtn">▶️</a></div></div>
-    <div class="fcol"><h4>Kurslar</h4><ul>
-      <li><a href="courses.html">English</a></li><li><a href="courses.html">IELTS</a></li>
-      <li><a href="courses.html">Matematika</a></li><li><a href="courses.html">IT & Dasturlash</a></li>
-      <li><a href="courses.html">Robotika</a></li><li><a href="courses.html">Mental Arifmetika</a></li>
-    </ul></div>
-    <div class="fcol"><h4>Kompaniya</h4><ul>
-      <li><a href="about.html">Biz haqimizda</a></li><li><a href="teachers.html">O'qituvchilar</a></li>
-      <li><a href="gallery.html">Galereya</a></li><li><a href="branches.html">Filiallar</a></li>
-      <li><a href="contact.html">Bog'lanish</a></li>
-    </ul></div>
-    <div class="fcol"><h4>Aloqa</h4><ul>
-      <li><a href="tel:+998712345678">+998 71 234-56-78</a></li>
-      <li><a href="mailto:info@kattatanaffus.uz">info@kattatanaffus.uz</a></li>
-      <li><a href="contact.html">Xabar yuborish</a></li>
-    </ul></div>
+<footer class="ks-foot">
+  <div class="ks-wrap">
+    <div class="ks-foot-grid">
+      <div>
+        <a class="ks-logo" href="index.html"><img src="static/img/logo-brand.png" alt="" width="48" height="48"><span><b>Katta Tanaffus</b><small style="color:var(--sun)">SCHOOL</small></span></a>
+        <p>Xususiy maktab: 1–11-sinflar, 3 filial, Taekwondo va Gimnastika to‘garaklari. Ota-ona, o‘qituvchi va AI — bitta jamoada.</p>
+        <div class="ks-soc"><a href="https://t.me/kattatanaffus" aria-label="Telegram" rel="noopener">✈️</a><a href="https://instagram.com/kattatanaffus" aria-label="Instagram" rel="noopener">📸</a><a href="https://youtube.com/@kattatanaffus" aria-label="YouTube" rel="noopener">▶️</a></div>
+      </div>
+      <div><h4>Ta’lim</h4><ul><li><a href="courses.html">Fanlar</a></li><li><a href="courses.html#taekwondo">Taekwondo</a></li><li><a href="courses.html#gymnastics">Gimnastika</a></li><li><a href="yozilish.html">Qabulga ariza</a></li><li><a href="diagnostika.html">Bepul diagnostika</a></li></ul></div>
+      <div><h4>Maktab</h4><ul><li><a href="about.html">Biz haqimizda</a></li><li><a href="teachers.html">O‘qituvchilar</a></li><li><a href="gallery.html">Galereya</a></li><li><a href="branches.html">Filiallar</a></li><li><a href="platforma.html">Platforma</a></li><li><a href="ota-ona.html">Ota-ona kabineti</a></li><li><a href="register.html">Ro‘yxatdan o‘tish</a></li><li><a href="login.html">Kirish</a></li></ul></div>
+      <div><h4>Aloqa</h4><ul><li><a href="tel:+998712345678">+998 71 234-56-78</a></li><li><a href="mailto:info@kattatanaffus.uz">info@kattatanaffus.uz</a></li><li><a href="https://t.me/kattatanaffus" rel="noopener">Telegram: @kattatanaffus</a></li><li><a href="contact.html">Xabar yuborish</a></li></ul><p style="margin-top:14px">Qabul bo‘limi: har kuni 09:00–21:00</p></div>
+    </div>
+    <div class="ks-word" aria-hidden="true">Katta Tanaffus</div>
+    <div class="ks-foot-bot"><span>© <span data-year>2026</span> Katta Tanaffus School</span><span>Bola rasmlari va ismlari faqat ota-ona roziligi bilan e’lon qilinadi</span></div>
   </div>
-  <div class="fbot"><p>© 2024 KATTA TANAFFUS SCHOOL. Barcha huquqlar himoyalangan. 💛</p><p>Privacy Policy · Foydalanish shartlari</p></div>
 </footer>
-
-<!-- AI FAB -->
-<button id="fab" onclick="toggleChat()" aria-label="AI yordamchi"><img src="static/img/ai-bot.png" alt="AI yordamchi"></button>
-<div id="chatwin">
-  <div class="chdr"><div class="chdri"><div class="chav">🤖</div><div><div class="cname">KATTA TANAFFUS AI</div><div class="cst"><span class="stdot"></span>Online</div></div></div><button class="cx" onclick="toggleChat()">✕</button></div>
-  <div class="cmsgs" id="chat-msgs"><div class="cmsg bot"><div class="mav">🤖</div><div class="mbub">Assalomu alaykum! 👋 Kurslar, narxlar yoki manzil haqida savollaringizga javob beraman!</div></div></div>
-  <div class="qrps" id="qrps">
-    <button class="qr" onclick="sendQuick(this.textContent)">📚 Kurslar</button>
-    <button class="qr" onclick="sendQuick(this.textContent)">💰 Narxlar</button>
-    <button class="qr" onclick="sendQuick(this.textContent)">📍 Manzil</button>
-    <button class="qr" onclick="sendQuick(this.textContent)">✍️ Yozilish</button>
-  </div>
-  <div class="cinp"><button class="cmic">🎤</button><input type="text" id="chat-input" placeholder="Xabar yozing... 💬" onkeydown="if(event.key==='Enter')sendChat()"><button class="csend" onclick="sendChat()">➤</button></div>
-</div>
-
-<!-- ARIZA MODAL -->
-<div class="mov" id="ariza-modal" style="display:none">
-  <div class="modal" style="max-width:460px">
-    <button class="mx" onclick="closeAriza()">✕</button>
-    <div id="ariza-content">
-      <!-- Ariza shakli -->
-      <div id="ariza-form-block">
-        <div style="font-size:2.5rem;text-align:center;margin-bottom:8px">📝</div>
-        <h2 style="font-family:var(--fh);font-size:1.5rem;margin-bottom:5px;text-align:center">Ariza qoldirish</h2>
-        <p style="color:var(--txd);font-size:.875rem;font-weight:600;margin-bottom:22px;text-align:center">Ma'lumotlaringizni qoldiring — biz siz bilan bog'lanamiz!</p>
-        <div class="fg"><label style="display:block;font-size:.85rem;font-weight:800;margin-bottom:7px;color:var(--txd)">Ismingiz *</label>
-          <input type="text" id="ariza-ism" class="form-inp" placeholder="Ism va familiya" oninput="clearArizaErr()"></div>
-        <div class="fg"><label style="display:block;font-size:.85rem;font-weight:800;margin-bottom:7px;color:var(--txd)">Telefon *</label>
-          <input type="tel" id="ariza-tel" class="form-inp" placeholder="+998 90 123 45 67" oninput="clearArizaErr()"></div>
-        <div class="fg"><label style="display:block;font-size:.85rem;font-weight:800;margin-bottom:7px;color:var(--txd)">Qiziqadigan kurs</label>
-          <select id="ariza-kurs" class="form-inp">
-            <option value="">— Kursni tanlang —</option>
-            <option>General English</option><option>IELTS Tayyorlov</option>
-            <option>Matematika</option><option>IT & Dasturlash</option>
-            <option>Robotika & Arduino</option><option>Mental Arifmetika</option>
-            <option>Maktabgacha ta'lim</option><option>Sport</option>
-          </select>
-        </div>
-        <div id="ariza-err" style="display:none;color:#be123c;font-size:.82rem;font-weight:700;margin-bottom:10px;background:var(--pkl);padding:8px 12px;border-radius:8px">⚠️ Xatolik</div>
-        <button class="btn btn-f" id="ariza-btn" style="width:100%;padding:14px;font-size:1rem;border-radius:50px" onclick="submitAriza()">📨 Ariza yuborish</button>
-        <p style="text-align:center;margin-top:14px;font-size:.8rem;color:var(--txm);font-weight:600">Biz 10:30 dan 20:00 gacha bog'lanamiz 📞</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- RAHMAT MODAL -->
-<div class="mov" id="rahmat-modal" style="display:none">
-  <div class="modal" style="max-width:440px;text-align:center">
-    <button class="mx" onclick="closeRahmat()">✕</button>
-    <div style="font-size:3.5rem;margin-bottom:10px">🎉</div>
-    <div style="display:flex;justify-content:center;gap:6px;font-size:1.5rem;margin-bottom:16px">⭐⭐⭐</div>
-    <h2 style="font-family:var(--fh);font-size:1.6rem;margin-bottom:10px;color:var(--tx)">Rahmat, <span id="rahmat-ism" style="color:var(--yd)">do'stim</span>!</h2>
-    <p style="color:var(--txd);font-size:.95rem;font-weight:600;line-height:1.7;margin-bottom:20px">Arizangiz muvaffaqiyatli qabul qilindi! 🎓<br>Tez orada siz bilan bog'lanamiz.</p>
-    <!-- Kutish kartochkasi -->
-    <div style="background:linear-gradient(135deg,var(--y),var(--or));border-radius:20px;padding:22px 20px;margin-bottom:20px;box-shadow:0 8px 28px rgba(251,191,36,.4)">
-      <div style="font-size:1.4rem;margin-bottom:8px">📅</div>
-      <div style="font-family:var(--fh);font-size:1.2rem;color:#fff;margin-bottom:8px">Sizni kutamiz!</div>
-      <div style="color:rgba(255,255,255,.95);font-size:.95rem;font-weight:700;line-height:1.7">
-        ⏰ Ertaga <strong>soat 10:30</strong> dan<br>
-        <strong>kechki 20:00</strong> gacha<br>
-        farzandingiz bilan keling! 👨‍👩‍👧
-      </div>
-      <div style="background:rgba(255,255,255,.2);border-radius:12px;padding:10px 14px;margin-top:12px;font-size:.84rem;color:#fff;font-weight:700">
-        📍 Eng yaqin filialni tanlang
-      </div>
-    </div>
-    <div style="display:flex;gap:8px;justify-content:center;margin-bottom:16px;flex-wrap:wrap">
-      <div style="background:var(--grl);border:2px solid var(--gr);border-radius:50px;padding:6px 14px;font-size:.76rem;font-weight:800;color:#065f46">✅ Bepul konsultatsiya</div>
-      <div style="background:var(--bll);border:2px solid var(--bl);border-radius:50px;padding:6px 14px;font-size:.76rem;font-weight:800;color:#0369a1">📚 Sinov darsi</div>
-      <div style="background:var(--pul);border:2px solid var(--pu);border-radius:50px;padding:6px 14px;font-size:.76rem;font-weight:800;color:#7c3aed">🎁 Sovg'a</div>
-    </div>
-    <p style="font-size:.88rem;font-weight:700;color:var(--txd)">Kuniz xayrli o'tsin! ☀️</p>
-    <button class="btn btn-f" style="margin-top:16px;width:100%;padding:13px;font-size:.95rem;border-radius:50px" onclick="closeRahmat()">🏠 Bosh sahifaga qaytish</button>
-    <p id="rahmat-cd" style="font-size:.76rem;color:var(--txm);margin-top:10px;font-weight:600">Bu oyna <span id="cd-sec" style="color:var(--yd);font-weight:800">10</span> soniyadan keyin yopiladi</p>
-  </div>
-</div>
-
-<!-- TEACHER MODAL -->
-<div class="mov" id="tmod"><div class="modal tmod"><button class="mx" onclick="document.getElementById('tmod').classList.remove('open')">✕</button><div id="tmod-content"></div></div></div>
-<div class="mov" id="cmod"><div class="modal" style="max-width:520px"><button class="mx" onclick="document.getElementById('cmod').classList.remove('open')">✕</button><div id="cmod-content"></div></div></div>
-
-<script src="static/js/main.js"></script>
+<script src="static/js/kt-data.js"></script>
+<script src="static/js/kt-platform.js"></script>
+<script src="static/js/kt-assistant.js"></script>
+<script src="static/js/ks.js"></script>
+<script src="static/js/ks-auth.js"></script>
 <script>
-// ── ARIZA MODAL ──
-function openAriza(){
-  document.getElementById('ariza-modal').classList.add('open');
-  document.getElementById('ariza-modal').style.display='flex';
-  document.getElementById('ariza-form-block').style.display='block';
-}
-function closeAriza(){
-  document.getElementById('ariza-modal').classList.remove('open');
-  document.getElementById('ariza-modal').style.display='none';
-}
-document.getElementById('ariza-modal').addEventListener('click',function(e){if(e.target===this)closeAriza();});
+(function(){
+  const esc=KA.esc;
+  const S={step:0, phone:'', name:'', who:'Ona', kids:[], cons:{data:false,notify:true,ai:true,photo:false}};
+  const card=KA.pass(document.getElementById('stack'),{role:'parent', ph:'Ismingiz', sub:'Oila hisobi'});
+  const stage=document.getElementById('stage'), steps=document.getElementById('steps');
+  const N=5;
+  function bar(){ steps.innerHTML=Array.from({length:N},(_,i)=>`<li class="${i<S.step?'done':i===S.step?'on':''}" aria-label="${i+1}-bosqich${i===S.step?' (hozir)':''}"></li>`).join(''); }
+  function kidsChips(){ return S.kids.map(k=>`${k.name}, ${k.age}`); }
+  function go(n){ S.step=n; bar(); [s0,s1,s2,s3,s4,s5][n](); const f=stage.querySelector('input,select,button'); if(f && n) f.focus(); }
 
-function clearArizaErr(){document.getElementById('ariza-err').style.display='none';}
-
-function submitAriza(){
-  var ism = document.getElementById('ariza-ism').value.trim();
-  var tel = document.getElementById('ariza-tel').value.trim();
-  var err = document.getElementById('ariza-err');
-  if(!ism){err.textContent='⚠️ Ismingizni kiriting!';err.style.display='block';return;}
-  if(!tel){err.textContent='⚠️ Telefon raqamingizni kiriting!';err.style.display='block';return;}
-  closeAriza();
-  document.getElementById('rahmat-ism').textContent = ism.split(' ')[0];
-  document.getElementById('rahmat-modal').classList.add('open');
-  document.getElementById('rahmat-modal').style.display='flex';
-  startCountdown();
-}
-
-// ── RAHMAT MODAL ──
-var cdTimer=null;
-function startCountdown(){
-  var sec=10;
-  var el=document.getElementById('cd-sec');
-  if(cdTimer)clearInterval(cdTimer);
-  cdTimer=setInterval(function(){
-    sec--;
-    if(el)el.textContent=sec;
-    if(sec<=0){clearInterval(cdTimer);closeRahmat();}
-  },1000);
-}
-function closeRahmat(){
-  if(cdTimer)clearInterval(cdTimer);
-  document.getElementById('rahmat-modal').classList.remove('open');
-  document.getElementById('rahmat-modal').style.display='none';
-}
-document.getElementById('rahmat-modal').addEventListener('click',function(e){if(e.target===this)closeRahmat();});
-
-// Kurs kartochkasidan ariza ochish
-function openCourseAriza(kursNomi){
-  openAriza();
-  setTimeout(function(){
-    var sel=document.getElementById('ariza-kurs');
-    if(sel){for(var i=0;i<sel.options.length;i++){if(sel.options[i].text===kursNomi){sel.selectedIndex=i;break;}}}
-  },100);
-}
-
-// "Yozilish" tugmasi barcha joylarda
-function openMod(type){openAriza();}
-
+  function s0(){
+    stage.innerHTML=`<form class="au-form" id="f0" novalidate><div class="ks-field"><label for="ph">Telefon raqam</label><input class="ks-input" id="ph" inputmode="tel" autocomplete="tel" placeholder="+998 90 123 45 67"></div><div class="ks-err" role="alert"></div><button class="ks-btn ks-btn-mag ks-btn-lg" type="submit">SMS kod olish</button></form><div class="au-form" id="otp"></div>`;
+    const ph=document.getElementById('ph'); KA.phoneMask(ph);
+    ph.addEventListener('input',()=>card.set({id:'KT-2026-'+(KA.digits9(ph.value).slice(-4)||'0000')}));
+    document.getElementById('f0').onsubmit=e=>{ e.preventDefault(); const d=KA.digits9(ph.value), err=stage.querySelector('.ks-err');
+      if(d.length<9){ err.textContent='Telefon raqamni to‘liq kiriting — 9 ta raqam'; ph.focus(); return; }
+      const had=KA.findFamily(d); if(had){ err.innerHTML=`Bu raqamda oila hisobi bor (${esc(had.name)}). <a class="au-link" href="login.html">Kirish</a>`; return; }
+      err.textContent=''; S.phone=KA.fmt(d); const b=e.target.querySelector('[type=submit]'); b.disabled=true; b.textContent='Kod yuborildi ✓';
+      KA.otp(document.getElementById('otp'),{note:KA.maskPhone(S.phone)+' raqamiga yuborildi', onOk(){ card.set({sub:'Telefon tasdiqlandi ✓'}); setTimeout(()=>go(1),500); }}); };
+  }
+  function s1(){
+    stage.innerHTML=`<form class="au-form" id="f1" novalidate><div class="ks-field"><label for="nm">Ism va familiyangiz</label><input class="ks-input" id="nm" autocomplete="name" value="${esc(S.name)}" placeholder="Masalan, Malika Yusupova"></div>
+      <div class="ks-field"><span style="font-weight:900;font-size:.88rem">Siz farzandga kim bo‘lasiz?</span><div class="ks-chips" role="group" aria-label="Qarindoshlik" id="who">${['Ona','Ota','Vasiy'].map(w=>`<button class="ks-chip" type="button" aria-pressed="${w===S.who}">${w}</button>`).join('')}</div></div>
+      <div class="ks-err" role="alert"></div><div class="au-row"><button class="ks-btn ks-btn-white" type="button" id="bk">Orqaga</button><button class="ks-btn ks-btn-mag ks-btn-lg" type="submit">Davom etish</button></div></form>`;
+    const nm=document.getElementById('nm');
+    const upd=()=>card.set({name:nm.value.trim(), sub:S.who+' · oila hisobi'}); nm.addEventListener('input',upd); upd();
+    document.getElementById('who').addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b) return; S.who=b.textContent; document.querySelectorAll('#who button').forEach(x=>x.setAttribute('aria-pressed',String(x===b))); upd(); });
+    document.getElementById('bk').onclick=()=>go(0);
+    document.getElementById('f1').onsubmit=e=>{ e.preventDefault(); const v=nm.value.trim(); if(v.split(/\s+/).length<2||v.length<5){ stage.querySelector('.ks-err').textContent='Ism va familiyani yozing — masalan, Malika Yusupova'; nm.focus(); return; } S.name=v; go(2); };
+  }
+  function s2(){
+    stage.innerHTML=`<div class="au-form"><div class="kid-list" id="kl"></div>
+      <form class="kid-row" id="kf" novalidate><div class="ks-field"><label for="kn">Farzand ismi</label><input class="ks-input" id="kn" placeholder="Sardor" autocomplete="off"></div>
+      <div class="ks-field"><label for="ka">Yoshi</label><select class="ks-input" id="ka">${Array.from({length:16},(_,i)=>`<option ${i+3===11?'selected':''}>${i+3}</option>`).join('')}</select></div>
+      <div class="ks-field"><label for="kg">Sinf</label><select class="ks-input" id="kg"><option value="">Maktabgacha</option>${Array.from({length:11},(_,i)=>`<option ${i===4?'selected':''}>${i+1}-sinf</option>`).join('')}</select></div>
+      <button class="ks-btn" type="submit">+ Qo‘shish</button></form>
+      <div class="ks-err" role="alert"></div>
+      <div class="au-row"><button class="ks-btn ks-btn-white" type="button" id="bk">Orqaga</button><button class="ks-btn ks-btn-mag ks-btn-lg" type="button" id="nx">Davom etish</button></div></div>`;
+    function list(){ document.getElementById('kl').innerHTML=S.kids.map((k,i)=>`<div class="kid-item"><span class="pass-av" style="width:42px;height:42px;font-size:1rem;border-radius:12px;border-width:2px">${esc(KA.initials(k.name))}</span><b>${esc(k.name)}<br><small>${k.age} yosh · ${esc(k.grade||'maktabgacha')}</small></b><label class="au-check" style="font-size:.86rem"><input type="checkbox" data-p="${i}" ${k.portal?'checked':''}> Portal logini</label><button type="button" data-x="${i}" aria-label="${esc(k.name)}ni olib tashlash">✕</button></div>`).join('') || '<p class="au-note">Farzandingizni qo‘shing — bir hisobda bir nechta farzand bo‘lishi mumkin.</p>'; card.set({kids:kidsChips()}); }
+    list();
+    document.getElementById('kf').onsubmit=e=>{ e.preventDefault(); const n=document.getElementById('kn').value.trim(); const err=stage.querySelector('.ks-err');
+      if(n.length<2){ err.textContent='Farzand ismini yozing'; document.getElementById('kn').focus(); return; }
+      if(S.kids.length>=5){ err.textContent='Bir hisobga 5 tagacha farzand qo‘shiladi'; return; }
+      const age=+document.getElementById('ka').value; S.kids.push({name:n, age, grade:document.getElementById('kg').value, portal:age>=7}); err.textContent=''; document.getElementById('kn').value=''; document.getElementById('kn').focus(); list(); };
+    document.getElementById('kl').addEventListener('click',e=>{ const x=e.target.closest('[data-x]'); if(x){ S.kids.splice(+x.dataset.x,1); list(); } });
+    document.getElementById('kl').addEventListener('change',e=>{ const p=e.target.closest('[data-p]'); if(p) S.kids[+p.dataset.p].portal=p.checked; });
+    document.getElementById('bk').onclick=()=>go(1);
+    document.getElementById('nx').onclick=()=>{ if(!S.kids.length){ stage.querySelector('.ks-err').textContent='Kamida bitta farzand qo‘shing'; document.getElementById('kn').focus(); return; } go(S.kids.some(k=>k.portal)?3:4); };
+  }
+  function s3(){
+    const tail=KA.digits9(S.phone).slice(-4);
+    const ks=S.kids.map((k,i)=>({k,i})).filter(o=>o.k.portal);
+    stage.innerHTML=`<form class="au-form" id="f3" novalidate><p class="au-note">O‘quvchi portali: bilim xaritasi, mashqlar, baholar. Login va parolni siz yaratasiz — parolni unutsa, siz tiklaysiz.</p>
+      ${ks.map(({k,i})=>`<fieldset style="border:2px solid var(--ink);border-radius:18px;padding:14px;display:grid;gap:10px;background:#fff"><legend style="font-weight:900;padding:0 6px">${esc(k.name)}</legend>
+        <div class="ks-field"><label for="lg${i}">Login</label><input class="ks-input" id="lg${i}" value="${esc(k.login||(KA.translit(k.name)+'.'+tail))}" autocomplete="off"></div>
+        <div class="ks-field"><label for="pw${i}">Parol (kamida 8 belgi)</label><div class="au-pw"><input class="ks-input" id="pw${i}" type="password" autocomplete="new-password"><button class="au-eye" type="button" aria-label="Parolni ko‘rsatish">👁️</button></div><div class="meter" id="m${i}"><i></i><i></i><i></i><i></i></div></div></fieldset>`).join('')}
+      <div class="ks-err" role="alert"></div><div class="au-row"><button class="ks-btn ks-btn-white" type="button" id="bk">Orqaga</button><button class="ks-btn ks-btn-mag ks-btn-lg" type="submit">Davom etish</button></div></form>`;
+    ks.forEach(({i})=>{ const pw=document.getElementById('pw'+i); KA.eye(pw.nextElementSibling,pw); pw.addEventListener('input',()=>{ document.getElementById('m'+i).className='meter s'+KA.strength(pw.value); }); });
+    document.getElementById('bk').onclick=()=>go(2);
+    document.getElementById('f3').onsubmit=e=>{ e.preventDefault(); const err=stage.querySelector('.ks-err');
+      for(const {k,i} of ks){ const lg=document.getElementById('lg'+i).value.trim().toLowerCase(), pw=document.getElementById('pw'+i).value;
+        if(!/^[a-z0-9._-]{4,}$/.test(lg)){ err.textContent=`${k.name}: login kamida 4 belgi — lotin harflari, raqam, nuqta`; document.getElementById('lg'+i).focus(); return; }
+        if(KA.findUser(lg) && KA.findUser(lg).login!==k.login){ err.textContent=`${k.name}: “${lg}” logini band — boshqasini tanlang`; document.getElementById('lg'+i).focus(); return; }
+        if(pw.length<8){ err.textContent=`${k.name}: parol kamida 8 belgidan iborat bo‘lsin`; document.getElementById('pw'+i).focus(); return; }
+        k.login=lg; k.password=pw; }
+      go(4); };
+  }
+  function s4(){
+    const C=[['data','Farzandlarim ma’lumotlarini o‘quv jarayoni uchun qayta ishlashga roziman','Majburiy. Ma’lumot O‘zbekistondagi serverda; AI ga ism va telefon yuborilmaydi.'],['notify','Telegram va SMS xabarlari','Davomat, baho, to‘lov va har juma hisobot. 21:00–08:00 xabar yo‘q.'],['ai','AI o‘qish yordamchisi','13 yoshgacha — faqat o‘qituvchi bergan mashqlar, erkin suhbat yo‘q.'],['photo','Rasm va ism sayt yoki galereyada chiqishi mumkin','Ixtiyoriy. O‘chiq bo‘lsa — hech qayerda e’lon qilinmaydi.']];
+    stage.innerHTML=`<form class="au-form" id="f4" novalidate>${C.map(c=>`<label class="au-check" style="align-items:flex-start;background:#fff;border:2px solid var(--ink);border-radius:16px;padding:12px 14px"><input type="checkbox" data-c="${c[0]}" ${S.cons[c[0]]?'checked':''} style="margin-top:3px"><span><b style="display:block">${c[1]}</b><span class="au-hint">${c[2]}</span></span></label>`).join('')}
+      <div class="ks-err" role="alert"></div><div class="au-row"><button class="ks-btn ks-btn-white" type="button" id="bk">Orqaga</button><button class="ks-btn ks-btn-mag ks-btn-lg" type="submit">Hisobni ochish</button></div></form>`;
+    stage.querySelectorAll('[data-c]').forEach(c=>c.onchange=()=>S.cons[c.dataset.c]=c.checked);
+    document.getElementById('bk').onclick=()=>go(S.kids.some(k=>k.portal)?3:2);
+    document.getElementById('f4').onsubmit=e=>{ e.preventDefault(); if(!S.cons.data){ stage.querySelector('.ks-err').textContent='Hisob ochish uchun ma’lumotlarni qayta ishlashga rozilik kerak'; return; } finish(); };
+  }
+  function finish(){
+    S.kids.filter(k=>k.portal).forEach(k=>KA.addStudent({name:k.name, login:k.login, password:k.password, grade:k.grade, parentPhone:S.phone}));
+    const fam={phone:S.phone, name:S.name, who:S.who, kids:S.kids.map(k=>({name:k.name, age:k.age, grade:k.grade||'', login:k.portal?k.login:''})), consents:Object.assign({},S.cons)};
+    KA.saveFamily(fam); KA.parentSession(fam);
+    if(window.KS) S.kids.forEach(k=>KS.addLead({parent:S.name, phone:S.phone, child:k.name, age:k.age, source:'Sayt: ro‘yxatdan o‘tish', note:'Oila hisobi ochildi'}));
+    go(5);
+  }
+  function s5(){
+    steps.innerHTML=Array.from({length:N},()=>'<li class="done"></li>').join('');
+    document.getElementById('cap').textContent='Oila kartangiz tayyor!';
+    const hadAcc=document.querySelector('.au-hint a[href="login.html"]'); if(hadAcc) hadAcc.parentElement.hidden=true;
+    card.set({sub:S.who+' · '+S.kids.length+' farzand'}); card.stamp(); KA.confetti();
+    document.getElementById('rgT').textContent='Xush kelibsiz, '+S.name.split(/\s+/)[0]+'!';
+    document.getElementById('rgSub').textContent='Oila hisobi ochildi. Kabinetingizda har bir farzandning qabul jarayoni ko‘rinadi: diagnostika, ariza, suhbat, shartnoma.';
+    const k0=S.kids[0]||{}, g0=parseInt(k0.grade,10)||'';
+    const portal=S.kids.some(k=>k.portal&&k.login);
+    stage.innerHTML=`<div class="au-form"><div class="kid-list">${S.kids.map(k=>`<div class="kid-item"><b>${esc(k.name)}, ${k.age} yosh<br><small>${k.portal&&k.login?'Portal logini: '+esc(k.login):'Portal logini keyinroq yaratiladi'}</small></b><span class="ks-badge">✓</span></div>`).join('')}</div>
+      <div class="au-row" style="margin-top:6px"><a class="ks-btn ks-btn-mag ks-btn-lg" href="ota-ona.html">Kabinetimga o‘tish</a><a class="ks-btn ks-btn-lg" href="yozilish.html?name=${encodeURIComponent(k0.name||'')}&age=${k0.age||''}${g0?'&grade='+g0:''}">Qabulga ariza</a></div>
+      ${portal?`<p class="au-hint">Farzandingiz o‘quvchi portaliga yuqoridagi login va siz yaratgan parol bilan kiradi: <a class="au-link" href="login.html?rol=student">O‘quvchi sifatida kirish</a></p>`:''}
+      <a class="au-link" href="diagnostika.html">Avval bepul diagnostikadan o‘tish (15 daqiqa)</a></div>`;
+    window.scrollTo({top:0}); stage.querySelector('a').focus({preventScroll:true});
+  }
+  go(0);
+})();
 </script>
-
-<script src="static/js/auth.js"></script>
 </body>
 </html>

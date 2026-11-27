@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ota-ona kabineti — Katta Tanaffus</title>
+<link rel="stylesheet" href="static/css/platform.css">
+<style>
+  /* yangi oila: qabul jarayoni */
+  .adm{border:1.5px solid color-mix(in srgb,var(--acc) 45%,var(--kp-line));margin-bottom:22px}
+  .adm-kids{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))}
+  .adm-kid{border:1px solid var(--kp-line);border-radius:var(--kp-r2);padding:16px;background:#fff}
+  .adm-kid-h{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+  .adm-kid-h b{display:block;font-size:1rem}
+  .adm-kid-h small{display:block;color:var(--kp-ink2);font-weight:700;font-size:.8rem}
+  .adm-steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
+  .adm-steps li{display:grid;grid-template-columns:24px 1fr auto;gap:10px;align-items:center;padding:7px 0;font-weight:800;font-size:.88rem;position:relative}
+  .adm-steps li small{display:block;font-weight:700;font-size:.76rem;color:var(--kp-ink3)}
+  .adm-steps .d{width:24px;height:24px;border-radius:50%;border:2px solid var(--kp-line);background:#fff;display:grid;place-items:center;font-size:.72rem;font-weight:900;color:var(--kp-ink3)}
+  .adm-steps li.ok .d{background:var(--kp-ok);border-color:var(--kp-ok);color:#fff}
+  .adm-steps li.now .d{border-color:var(--acc);color:var(--accd);box-shadow:0 0 0 4px var(--accl)}
+  .adm-steps li.ok > span:nth-child(2){color:var(--kp-ink2)}
+  .adm-foot{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:16px}
+  .adm-foot .kp-note{flex:1 1 320px}
+  .kids{display:flex;gap:8px;flex-wrap:wrap}
+  .kid{display:flex;align-items:center;gap:10px;border:1.5px solid var(--kp-line);background:#fff;border-radius:16px;padding:8px 14px 8px 8px;cursor:pointer;font:800 .9rem var(--kp-fb);color:var(--kp-ink)}
+  .kid small{display:block;font-size:.74rem;color:var(--kp-ink3);font-weight:800}
+  .kid[aria-pressed=true]{border-color:var(--acc);background:var(--accl)}
+  .pulse{display:flex;flex-direction:column;gap:10px}
+  .pulse-row{display:grid;grid-template-columns:14px 1fr auto;gap:12px;align-items:center;padding:14px 16px;border-radius:18px;background:var(--kp-soft)}
+  .pulse-dot{width:14px;height:14px;border-radius:50%;box-shadow:0 0 0 5px color-mix(in srgb,var(--pc) 20%,transparent);background:var(--pc)}
+  .pulse-row b{font-size:.98rem}
+  .pulse-row p{font-size:.85rem;color:var(--kp-ink2);font-weight:700}
+  .lesson{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:center}
+  .lesson-time{font-family:var(--kp-fh);font-size:2.1rem;line-height:1;color:var(--accd)}
+  .tt{list-style:none;margin:14px 0 0;padding:0;display:flex;flex-direction:column;gap:4px}
+  .tt li{display:grid;grid-template-columns:48px 1fr auto;gap:10px;align-items:center;font-weight:800;font-size:.86rem;padding:6px 10px;border-radius:10px;background:var(--kp-soft)}
+  .tt li time{color:var(--kp-ink3);font-size:.8rem}
+  .tt li.now{background:var(--accl);outline:2px solid var(--acc)}
+  .tt li.club{background:#fff4d6}
+  .tt li small{color:var(--kp-ink3);font-weight:800}
+  .cal{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-top:12px}
+  .cal span{font-size:.7rem;font-weight:900;color:var(--kp-ink3);text-align:center}
+  .cal i{aspect-ratio:1;border-radius:10px;display:grid;place-items:center;font-style:normal;font-size:.78rem;font-weight:800;color:var(--kp-ink3);background:#faf7fd}
+  .cal i.l{color:var(--kp-ink)}
+  .cal i.present{background:#dff6ee;color:#08704d}
+  .cal i.absent{background:#ffe4ea;color:#be123c}
+  .cal i.excused{background:#fdf0dc;color:#9a5a05}
+  .cal i.today{outline:2px solid var(--acc);outline-offset:1px}
+  .legend{display:flex;gap:12px;flex-wrap:wrap;margin-top:10px;font-size:.76rem;font-weight:800;color:var(--kp-ink2)}
+  .legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+  .report{background:#fff;border-radius:var(--kp-r1);border:1px solid var(--kp-line);overflow:hidden;box-shadow:var(--kp-shadow)}
+  .report-head{background:var(--acc);color:#fff;padding:20px 22px;display:flex;gap:12px;align-items:flex-start;flex-wrap:wrap}
+  .report-head h3{font-family:var(--kp-fh);font-weight:400;font-size:1.35rem}
+  .report-head p{font-size:.84rem;font-weight:700;opacity:.9}
+  .report-head .kp-chip{background:rgba(255,255,255,.18);color:#fff;margin-left:auto}
+  .facts{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--kp-line)}
+  .facts div{padding:16px 18px;border-right:1px solid var(--kp-line)}
+  .facts div:last-child{border-right:0}
+  .facts b{display:block;font-family:var(--kp-fh);font-weight:400;font-size:1.5rem;line-height:1.1}
+  .facts small{font-size:.76rem;font-weight:800;color:var(--kp-ink2)}
+  .report-body{padding:20px 22px;display:grid;grid-template-columns:1.3fr 1fr;gap:20px}
+  .ai-text{font-size:1rem;line-height:1.7;font-weight:700}
+  .ai-text mark{background:#e3f3fc;color:inherit;border-radius:5px;padding:0 3px}
+  .quote{border-left:4px solid var(--acc);padding:4px 0 4px 14px;font-weight:800;font-size:.92rem}
+  .quote small{display:block;color:var(--kp-ink3);font-weight:800;font-size:.76rem;margin-top:3px}
+  .dinner{background:linear-gradient(135deg,#fff7e0,#fff1f8);border-radius:20px;padding:18px;display:flex;flex-direction:column;gap:8px}
+  .dinner b{font-family:var(--kp-fh);font-weight:400;font-size:1.1rem}
+  .dinner p{font-weight:700;font-size:.92rem;line-height:1.55}
+  .checks{display:flex;gap:8px;flex-wrap:wrap;padding:0 22px 20px}
+  .mastery{display:flex;flex-direction:column;gap:10px}
+  .m-row{display:grid;grid-template-columns:1fr 120px;gap:12px;align-items:center}
+  .m-row b{font-size:.9rem}
+  .m-track{display:grid;grid-template-columns:repeat(5,1fr);gap:3px}
+  .m-track i{height:10px;border-radius:4px;background:#eee6f5}
+  .goal{display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:center}
+  .ring{--p:33;width:110px;height:110px;border-radius:50%;background:conic-gradient(var(--acc) calc(var(--p)*1%),#e8eef3 0);display:grid;place-items:center}
+  .ring span{width:84px;height:84px;border-radius:50%;background:#fff;display:grid;place-items:center;font-family:var(--kp-fh);font-size:1.5rem}
+  .consent{display:flex;gap:14px;align-items:center;padding:13px 0;border-top:1px solid var(--kp-line)}
+  .consent:first-child{border-top:0}
+  .consent div{flex:1}
+  .consent b{display:block;font-size:.92rem}
+  .consent small{color:var(--kp-ink2);font-weight:700;font-size:.8rem}
+  .phone-wrap{display:flex;flex-direction:column;align-items:center;gap:12px;position:sticky;top:96px}
+  .phone-wrap .kp-phone{height:600px}
+  .reward{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+  .reward .kp-row-main{min-width:150px}
+  .reward .kp-row-r{width:100%;justify-content:flex-start;padding-left:64px}
+  .reward-emo{width:52px;height:52px;border-radius:16px;background:#fff7e0;display:grid;place-items:center;font-size:1.6rem}
+  .pay-opt{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0}
+  .pay-opt button{border:2px solid var(--kp-line);background:#fff;border-radius:16px;padding:16px;font:900 1rem var(--kp-fb);cursor:pointer}
+  .pay-opt button[aria-pressed=true]{border-color:var(--acc);background:var(--accl)}
+  @media (max-width:1100px){.phone-wrap{position:static}.report-body{grid-template-columns:1fr}}
+  @media (max-width:640px){.facts{grid-template-columns:1fr 1fr}.facts div:nth-child(2){border-right:0}.facts div{border-bottom:1px solid var(--kp-line)}}
+</style>
+</head>
+<body class="kp-body" data-role="parent">
+<div class="kp-app">
+  <aside class="kp-side" id="kpSide"></aside>
+  <div class="kp-main">
+    <header class="kp-top">
+      <div><h1>Assalomu alaykum, Malika opa</h1><div class="kp-sub" data-kp-today></div></div>
+      <div class="kp-top-r">
+        <span class="kp-live">Jonli</span>
+        <button class="kp-bell" data-kp-bell id="bell" aria-label="Bildirishnomalar">🔔<b id="bellN"></b></button>
+        <div class="kp-user"></div>
+      </div>
+    </header>
+
+    <div class="kp-content">
+      <section class="kp-panel adm" id="qabul" aria-labelledby="admH" hidden></section>
+      <div class="kids" role="group" aria-label="Farzandni tanlang" id="kids"></div>
+
+      <div class="kp-grid kp-g-side">
+        <div style="display:flex;flex-direction:column;gap:20px;min-width:0">
+          <!-- BUGUN -->
+          <section class="kp-panel kp-anchor" id="bugun">
+            <div class="kp-ph"><div><h2>Bugungi puls</h2><p>Har farzand uchun bitta qator: yashil — hammasi joyida, sariq — e’tibor bering, qizil — bog‘laning</p></div></div>
+            <div class="pulse" id="pulse"></div>
+          </section>
+
+          <div class="kp-grid kp-g2">
+            <section class="kp-panel" aria-labelledby="lessonH">
+              <div class="kp-ph"><div><h3 id="lessonH">Bugungi maktab kuni</h3><p id="lessonSub"></p></div></div>
+              <div class="lesson" id="lesson"></div>
+              <div style="margin-top:16px;display:flex;gap:8px;flex-wrap:wrap" id="excuseBox"></div>
+            </section>
+            <section class="kp-panel" aria-labelledby="calH">
+              <div class="kp-ph"><div><h3 id="calH">Davomat</h3><p id="calSub"></p></div></div>
+              <div class="cal" id="cal"></div>
+              <div class="legend"><span><i style="background:#dff6ee"></i>keldi</span><span><i style="background:#fdf0dc"></i>sababli</span><span><i style="background:#ffe4ea"></i>kelmadi</span></div>
+            </section>
+          </div>
+
+          <!-- HISOBOT -->
+          <section class="kp-anchor" id="hisobot">
+            <div class="report">
+              <div class="report-head">
+                <div><h3 id="repTitle">Haftalik hisobot</h3><p>17–21-noyabr · Juma 18:00 da Telegramga yuborildi</p></div>
+                <span class="kp-chip ai">AI tayyorladi · faktlar jurnaldan</span>
+              </div>
+              <div class="facts" id="repFacts"></div>
+              <div class="report-body">
+                <div style="display:flex;flex-direction:column;gap:16px">
+                  <p class="ai-text" id="repText"></p>
+                  <div class="quote" id="repNote"></div>
+                </div>
+                <div class="dinner"><span class="kp-chip acc" style="align-self:flex-start">Yangi g‘oya</span><b>Kechki savol</b><p id="dinnerQ"></p><small class="kp-muted kp-strong">30 soniya — bola mavzuni o‘z so‘zi bilan aytib beradi, siz esa nima o‘rganganini eshitasiz.</small></div>
+              </div>
+              <div class="checks">
+                <span class="kp-chip ok">✓ Har raqam jurnal bilan solishtirildi</span>
+                <span class="kp-chip ok">✓ Yorliq va tashxis yo‘q</span>
+                <span class="kp-chip info">O‘qituvchi izohi qo‘shilgan</span>
+                <span style="margin-left:auto;display:flex;gap:8px"><button class="kp-btn kp-btn-soft kp-btn-sm" data-fb="up">👍 Foydali</button><button class="kp-btn kp-btn-ghost kp-btn-sm" data-fb="down">Savolim bor</button></span>
+              </div>
+            </div>
+          </section>
+
+          <!-- BILIM -->
+          <div class="kp-grid kp-g2 kp-anchor" id="bilim">
+            <section class="kp-panel">
+              <div class="kp-ph"><div><h3 id="mapH">Bilim xaritasi</h3><p>Har mavzu bo‘yicha o‘zlashtirish — test va mashqlardan hisoblanadi</p></div></div>
+              <div class="mastery" id="mastery"></div>
+              <div class="legend" id="lvlLegend"></div>
+            </section>
+            <section class="kp-panel">
+              <div class="kp-ph"><div><h3>So‘nggi baholar</h3><p>Bahoni faqat o‘qituvchi qo‘yadi · siz faqat o‘z farzandingiznikini ko‘rasiz</p></div></div>
+              <div class="kp-list" id="grades"></div>
+            </section>
+          </div>
+
+          <!-- TO‘LOV -->
+          <section class="kp-panel kp-anchor" id="tolov">
+            <div class="kp-ph"><div><h2>To‘lovlar va hisoblar</h2><p>Hisob har oy 1-kuni yaratiladi, muddat — 5-kuni. O‘qish to‘lovi va to‘garak — alohida qatorlarda. To‘lov xabarlari faqat sizga keladi, bolaga emas.</p></div>
+              <div class="kp-ph-r"><span class="kp-chip vio">Aka-uka imtiyozi −10%</span><span class="kp-chip">demo summalar</span></div></div>
+            <div class="kp-scroll"><table class="kp-table" id="inv"></table></div>
+            <div class="kp-note" style="margin-top:14px;display:flex;gap:12px;align-items:center;flex-wrap:wrap"><span style="flex:1;min-width:220px">Avtoto‘lov: kartani bir marta bog‘lang — hisob har oy o‘zi to‘lanadi (Payme Subscribe API).</span><span class="kp-chip">2-bosqich</span></div>
+          </section>
+
+          <div class="kp-grid kp-g2">
+            <!-- SOVG‘A -->
+            <section class="kp-panel kp-anchor" id="sovga">
+              <div class="kp-ph"><div><h3>Sovg‘a so‘rovlari</h3><p>O‘quvchi so‘raydi → siz tasdiqlaysiz → administrator beradi</p></div></div>
+              <div id="orders"></div>
+              <div class="kp-note" style="margin-top:12px" id="coinNote"></div>
+            </section>
+            <!-- MAQSAD -->
+            <section class="kp-panel kp-anchor" id="maqsad">
+              <div class="kp-ph"><div><h3>Oilaviy maqsad</h3><p>Pul emas — o‘sish rag‘batlanadi</p></div><div class="kp-ph-r"><span class="kp-chip acc">Yangi g‘oya</span></div></div>
+              <div class="goal" id="goal"></div>
+              <form id="goalForm" style="display:grid;grid-template-columns:minmax(0,1fr) 76px;gap:8px;margin-top:16px">
+                <label class="kp-sr" for="gText">Mukofot</label><input class="kp-input" id="gText" placeholder="Masalan: oilaviy kino kechasi">
+                <label class="kp-sr" for="gN">Mavzular soni</label><select class="kp-select" id="gN"><option>2</option><option selected>3</option><option>4</option><option>5</option></select>
+                <button class="kp-btn kp-btn-acc" type="submit" style="grid-column:1/-1">Maqsadni saqlash</button>
+              </form>
+            </section>
+          </div>
+
+          <!-- ROZILIK -->
+          <section class="kp-panel kp-anchor" id="rozilik">
+            <div class="kp-ph"><div><h2>Roziliklar va maxfiylik</h2><p>Bola hisobini faqat siz boshqarasiz. Har o‘zgarish sana va matn versiyasi bilan saqlanadi.</p></div></div>
+            <div id="consents"></div>
+          </section>
+        </div>
+
+        <!-- TELEFON -->
+        <aside class="phone-wrap kp-anchor" id="bot" aria-label="Telegram bot">
+          <div id="phone"></div>
+          <p class="kp-small kp-muted kp-strong" style="text-align:center;max-width:300px">Ota-ona boti: davomat, baho, to‘lov va hisobot. 21:00–08:00 jim vaqt — xabar ertalab keladi.</p>
+          <a class="kp-btn kp-btn-ghost kp-btn-sm" href="oqituvchi.html" target="_blank" rel="noopener">O‘qituvchi ekranini yonma-yon ochish ↗</a>
+        </aside>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="kp-modal-bg" id="payModal" hidden>
+  <div class="kp-modal" role="dialog" aria-modal="true" aria-labelledby="payH">
+    <button class="kp-modal-x" data-close aria-label="Yopish">✕</button>
+    <h3 id="payH">To‘lov</h3>
+    <p class="kp-small kp-muted kp-strong" id="payWhat"></p>
+    <div class="pay-opt" role="group" aria-label="To‘lov usuli"><button type="button" data-prov="Click" aria-pressed="true">Click</button><button type="button" data-prov="Payme" aria-pressed="false">Payme</button></div>
+    <div class="kp-note">Demo: haqiqiy pul yechilmaydi. Haqiqiy tizimda provayder sahifasi ochiladi, natija webhook orqali keladi; bir xil xabar ikki marta kelsa ham to‘lov bitta yoziladi.</div>
+    <button class="kp-btn kp-btn-acc kp-btn-lg kp-btn-block" style="margin-top:16px" id="payGo">To‘lash</button>
+  </div>
+</div>
+
+<script src="static/js/kt-data.js"></script>
+<script src="static/js/kt-platform.js"></script>
+<script>
+(function(){
+  const {esc, money, store, avatar} = KT; const D = KTD;
+  // Ro‘yxatdan o‘tgan oila (register.html yoki login.html dan) — bo‘lmasa namunaviy oila ko‘rsatiladi
+  const FAM = (()=>{ const f=store.get('parentSession',null); return f && f.name && Array.isArray(f.kids) && f.kids.length ? f : null; })();
+  const ownName = FAM ? FAM.name : 'Malika Yusupova';
+  document.querySelector('.kp-user').innerHTML = avatar(ownName,'#229ED9') + `<span>${esc(ownName)}<small>Oila hisobi · ${FAM?FAM.kids.length:2} farzand</small></span>`;
+  if(FAM) document.querySelector('.kp-top h1').textContent = 'Assalomu alaykum, '+ownName.trim().split(/\s+/)[0];
+  KT.mountSide({role:'parent', who:ownName, active:'#bugun', nav:[
+    {href:'#bugun', icon:'🏠', label:'Bugun'}, {href:'#hisobot', icon:'📊', label:'Haftalik hisobot'}, {href:'#bilim', icon:'🧠', label:'Bilim va baholar'},
+    {href:'#tolov', icon:'💳', label:'To‘lovlar'}, {href:'#sovga', icon:'🎁', label:'Sovg‘alar', badge:'orders'}, {href:'#maqsad', icon:'🎯', label:'Oilaviy maqsad'},
+    {href:'#rozilik', icon:'🔐', label:'Roziliklar'}, {href:'#bot', icon:'📱', label:'Telegram bot'}
+  ]});
+
+  let cur = 'sardor';
+  const kid = id => D.FAMILY.children.find(c=>c.id===id);
+  const tk = KT.dayKey();
+
+  /* ---------- yangi oila: har farzand uchun qabul jarayoni ---------- */
+  function renderAdmission(){
+    const box=document.getElementById('qabul'); if(!FAM){ box.hidden=true; return; }
+    const d9=p=>String(p||'').replace(/\D/g,'').slice(-9), low=s=>String(s||'').trim().toLowerCase();
+    const ORDER=D.LEAD_STAGES.map(s=>s.id);
+    const leads=(store.get('leads',[])||[]).filter(l=>d9(l.phone)===d9(FAM.phone));
+    const diags=store.get('diags',{})||{};
+    const kids=FAM.kids.map(k=>{
+      const mine=leads.filter(l=>low(l.child)===low(k.name));
+      const apps=mine.filter(l=>l.source!=='Sayt: ro‘yxatdan o‘tish');
+      const best=mine.slice().sort((a,b)=>ORDER.indexOf(b.stage)-ORDER.indexOf(a.stage))[0];
+      const si=best?ORDER.indexOf(best.stage):-1, app=apps[0]||null, dg=diags[low(k.name)];
+      const g=parseInt(k.grade,10)||'';
+      const q=`name=${encodeURIComponent(k.name)}&age=${k.age}${g?'&grade='+g:''}`;
+      const steps=[
+        {t:'Oila hisobi ochildi', s:FAM.createdAt?new Date(FAM.createdAt).toLocaleDateString('uz-UZ'):'', ok:true},
+        {t:'Bepul diagnostika', s:dg?`Ingliz tili: ${dg.level}`:'Ixtiyoriy · 15 daqiqa', ok:!!dg, a:dg?'':`<a class="kp-btn kp-btn-ghost kp-btn-sm" href="diagnostika.html?${q}">Boshlash</a>`},
+        {t:'Qabulga ariza', s:app?`${esc(D.WANT[app.want]||'Ariza')}${app.branch&&D.branch(app.branch)?' · '+esc(D.branch(app.branch).name):''}`:'Sinf yoki to‘garak, filial, uchrashuv vaqti', ok:!!app||si>=2, a:(app||si>=2)?'':`<a class="kp-btn kp-btn-brand kp-btn-sm" href="yozilish.html?${q}">Yuborish</a>`},
+        {t:'Qabul suhbati', s:app&&app.time?'Belgilangan: '+esc(app.time):'Qabul bo‘limi vaqtni tasdiqlaydi', ok:si>=3},
+        {t:'Shartnoma va birinchi kun', s:si>=4?'Qabul qilindi':'Suhbatdan keyin', ok:si>=4}
+      ];
+      const later=i=>steps.slice(i+1).some(x=>x.ok); // diagnostika ixtiyoriy — keyingi qadam bajarilgan bo‘lsa, “hozir” uni o‘tkazib yuboradi
+      const now=steps.findIndex((x,i)=>!x.ok && !(i===1 && later(i)));
+      return `<div class="adm-kid"><div class="adm-kid-h">${avatar(k.name,'#229ED9')}<div><b>${esc(k.name)}</b><small>${k.age} yosh · ${esc(k.grade||'maktabgacha')}${k.login?' · portal: '+esc(k.login):''}</small></div>
+          <span class="kp-chip ${si>=4?'ok':'acc'}" style="margin-left:auto">${si>=4?'Qabul qilindi':'Qabul jarayonida'}</span></div>
+        <ol class="adm-steps">${steps.map((x,i)=>`<li class="${x.ok?'ok':i===now?'now':''}"><span class="d" aria-hidden="true">${x.ok?'✓':i+1}</span><span>${x.t}${x.s?`<small>${x.s}</small>`:''}</span>${x.a||''}</li>`).join('')}</ol></div>`;
+    }).join('');
+    box.innerHTML=`<div class="kp-ph"><div><h2 id="admH">Qabul jarayoni</h2><p>Har bir farzand uchun: qaysi qadam tugadi va keyingisi nima</p></div></div>
+      <div class="adm-kids">${kids}</div>
+      <div class="adm-foot"><div class="kp-note">Pastdagi bo‘limlar — namunaviy oila misolida. Farzandingiz qabul qilingach, darslar, davomat, baholar va haftalik hisobot shu yerda uning o‘z ma’lumotlari bilan chiqadi.</div>
+        <button class="kp-btn kp-btn-ghost kp-btn-sm" type="button" id="famOut">Hisobdan chiqish</button></div>`;
+    box.hidden=false;
+    document.getElementById('famOut').onclick=()=>{ localStorage.removeItem('ktp:parentSession'); KT.toast('Hisobdan chiqdingiz'); setTimeout(()=>location.href='index.html',500); };
+  }
+  renderAdmission();
+  store.on('leads', renderAdmission);
+
+  function renderKids(){
+    document.getElementById('kids').innerHTML = D.FAMILY.children.map(c=>`<button class="kid" aria-pressed="${c.id===cur}" data-k="${c.id}">${avatar(c.name,c.color)}<span>${esc(c.name)}<small>${c.age} yosh · ${esc(D.cls(c.cls).name)} sinf</small></span></button>`).join('') + `<button class="kid" disabled title="Ota-ona farzand qo‘shadi (F-1.2)" style="opacity:.6;cursor:not-allowed"><span class="kp-av" style="--av:#8f86a3">+</span><span>Farzand qo‘shish<small>ism, tug‘ilgan yil, sinf</small></span></button>`;
+  }
+  document.getElementById('kids').addEventListener('click',e=>{ const b=e.target.closest('[data-k]'); if(!b) return; cur=b.dataset.k; renderAll(); });
+
+  function todayStatus(cid){
+    const c=kid(cid); const att=store.get('attendance',{})[tk+':'+c.cls]; const ex=(store.get('excuses',{})[tk]||{})[cid];
+    if(att && att[cid]) return att[cid];
+    if(ex) return 'excused';
+    return null;
+  }
+  function pulseFor(c){
+    const g=D.cls(c.cls); const st=todayStatus(c.id); const cl=todayClubs(c);
+    const inv=store.get('invoices',[]).filter(i=>i.child===c.id && i.status!=='paid');
+    const orders=store.get('rewardOrders',[]).filter(o=>o.child===c.id && o.status==='requested');
+    let col='#0f9f6e', bits=[];
+    if(st==='absent'){ col='#e11d48'; bits.push('bugun darsda yo‘q — sinf rahbari belgiladi'); }
+    else if(st==='present'||st==='late'){ bits.push(`maktabda ✓ (${g.name}, ${g.room}-xona)`); }
+    else if(st==='excused'){ col='#e8890c'; bits.push('bugun sababli qoldiradi'); }
+    else bits.push(`bugun 08:30 da 1-dars, ${g.room}-xona`);
+    if(cl.length && st!=='absent' && st!=='excused') bits.push(cl.map(x=>`${D.club(x.club).title} ${x.time}`).join(', '));
+    if(inv.some(i=>['debt','late'].includes(i.status))){ col='#e11d48'; bits.push('to‘lov kechikdi'); }
+    else if(inv.length) bits.push(`to‘lov muddati: ${inv[0].due}`);
+    if(orders.length){ if(col==='#0f9f6e') col='#e8890c'; bits.push(`${orders.length} ta sovg‘a so‘rovi`); }
+    return {col, text:bits.join(' · ')};
+  }
+  function renderPulse(){
+    document.getElementById('pulse').innerHTML = D.FAMILY.children.map(c=>{ const p=pulseFor(c); return `<div class="pulse-row" style="--pc:${p.col}"><span class="pulse-dot"></span><div><b>${esc(c.name)}</b><p>${esc(p.text)}</p></div><button class="kp-btn kp-btn-ghost kp-btn-sm" data-k2="${c.id}">Ko‘rish</button></div>`; }).join('');
+  }
+  document.getElementById('pulse').addEventListener('click',e=>{ const b=e.target.closest('[data-k2]'); if(b){ cur=b.dataset.k2; renderAll(); document.getElementById('hisobot').scrollIntoView({behavior:'smooth'}); } });
+
+  function todayClubs(c){ const wd=new Date().getDay(); return (c.clubs||[]).map(D.cgroup).filter(g=>g && KT.groupDays(g).includes(wd)); }
+  function renderLesson(){
+    const c=kid(cur), g=D.cls(c.cls), st=todayStatus(cur), tt=D.TIMETABLE[c.cls]||[];
+    const now=new Date(), mins=now.getHours()*60+now.getMinutes(), toM=t=>{ const [h,m]=t.split(':').map(Number); return h*60+m; };
+    document.getElementById('lessonSub').textContent = `${g.name} sinf · ${D.branch(g.branch).name} filiali, ${g.room}-xona`;
+    document.getElementById('lesson').innerHTML = `<div class="lesson-time">08:30</div><div><b>${tt.length} ta dars${todayClubs(c).length?' + to‘garak':''}</b><div class="kp-small kp-muted kp-strong">Sinf rahbari: ${esc(c.cls==='5a'?D.teacher('dilnoza').name:D.teacher('zulfiya').name)}</div>
+      <div style="margin-top:6px">${st==='present'?'<span class="kp-chip ok">✓ Maktabda</span>':st==='late'?'<span class="kp-chip warn">Kechikdi</span>':st==='absent'?'<span class="kp-chip bad">Kelmadi</span>':st==='excused'?'<span class="kp-chip warn">Sababli — sinf rahbari xabardor</span>':'<span class="kp-chip">Davomat dars boshida belgilanadi</span>'}</div></div>`;
+    const old=document.getElementById('tt'); if(old) old.remove();
+    document.getElementById('lesson').insertAdjacentHTML('afterend', `<ol class="tt" id="tt">${tt.map((x,i)=>{ const b=D.BELLS[i]; const on=mins>=toM(b[0])&&mins<toM(b[1]); return `<li class="${on?'now':''}"><time>${b[0]}</time><span>${esc(x)}</span><small>${on?'hozir':(i+1)+'-dars'}</small></li>`; }).join('')}${todayClubs(c).map(x=>`<li class="club"><time>${esc(x.time)}</time><span>${D.club(x.club).emoji} ${esc(x.name)}</span><small>${esc(x.room)}</small></li>`).join('')}</ol>`);
+    const box=document.getElementById('excuseBox');
+    if(st==='excused'){ box.innerHTML=`<button class="kp-btn kp-btn-ghost kp-btn-sm" id="exUndo">Bekor qilish — keladi</button>`; document.getElementById('exUndo').onclick=()=>{ store.update('excuses',x=>{ x=x||{}; if(x[tk]) delete x[tk][cur]; return x; },{}); KT.toast('Belgi olib tashlandi'); }; }
+    else if(!st){ box.innerHTML=`<select class="kp-select" id="exR" style="width:auto"><option>Kasal</option><option>Oilaviy sabab</option><option>Safarda</option><option>Maktabda tadbir</option></select><button class="kp-btn kp-btn-soft" id="exGo">Bugun kela olmaydi</button><span class="kp-chip acc">Yangi g‘oya</span>`;
+      document.getElementById('exGo').onclick=()=>{ const r=document.getElementById('exR').value; store.update('excuses',x=>{ x=x||{}; x[tk]=x[tk]||{}; x[tk][cur]={reason:r, ts:Date.now()}; return x; },{}); KT.notifyParent({child:cur, kind:'attendance', title:'Qabul qilindi', text:`${c.name} bugun kelmasligi (${r.toLowerCase()}) sinf rahbariga yetkazildi. Darslar mavzusi va uy vazifasi kabinetda bo‘ladi.`}); KT.toast('Sinf rahbari xabardor qilindi'); }; }
+    else box.innerHTML='';
+  }
+
+  function renderCal(){
+    const c=kid(cur), days=KT.groupDays({days:'Du–Sh'});
+    const now=new Date(), y=now.getFullYear(), m=now.getMonth(); const first=new Date(y,m,1); const n=new Date(y,m+1,0).getDate();
+    const lead=(first.getDay()+6)%7; let html=['Du','Se','Ch','Pa','Ju','Sh','Ya'].map(d=>`<span>${d}</span>`).join('') + '<i style="visibility:hidden"></i>'.repeat(lead);
+    let total=0, came=0;
+    for(let d=1; d<=n; d++){
+      const dt=new Date(y,m,d); const isL=days.includes(dt.getDay()) || d===now.getDate(); let cls='';
+      if(isL && d<now.getDate()){ cls = (d===11 && cur==='sardor')?'excused':'present'; total++; if(cls==='present') came++; }
+      if(d===now.getDate()){ const st=todayStatus(cur); if(st){ cls = st==='absent'?'absent':st==='excused'?'excused':'present'; total++; if(cls==='present') came++; } cls+=' today'; }
+      html+=`<i class="${isL?'l ':''}${cls}" title="${d}-${KT.MONTHS[m]}">${d}</i>`;
+    }
+    document.getElementById('cal').innerHTML=html;
+    document.getElementById('calSub').textContent=`${KT.MONTHS[m][0].toUpperCase()+KT.MONTHS[m].slice(1)}: ${came}/${total} o‘quv kuni · ${total?Math.round(came/total*100):100}%`;
+  }
+
+  function renderReport(){
+    const c=kid(cur), w=D.WEEKLY[cur];
+    document.getElementById('repTitle').textContent=`Haftalik hisobot — ${c.name}`;
+    document.getElementById('repFacts').innerHTML = `<div><b>${w.days[0]}/${w.days[1]}</b><small>kun maktabda</small></div><div><b>${w.lessons[0]}/${w.lessons[1]}</b><small>dars</small></div><div><b>${w.club[1]}/${w.club[2]}</b><small>${esc(w.club[0])}</small></div><div><b>+${w.coins}</b><small>coin</small></div>`;
+    document.getElementById('repText').innerHTML = `${esc(c.name)} bu hafta <mark>${w.days[1]} o‘quv kunining ${w.days[0]} tasida</mark> maktabda bo‘ldi. ${w.results.map(r=>`${esc(r[0])}: <mark>${esc(r[1])}</mark>`).join('. ')}. To‘garak — ${esc(w.club[0])}: <mark>${w.club[1]}/${w.club[2]}</mark> mashg‘ulot. Keyingi hafta: <b>${esc(w.next)}</b>.`;
+    document.getElementById('repNote').innerHTML = `“${esc(w.teacherNote)}”<small>— ${esc(w.noteBy)}</small>`;
+    document.getElementById('dinnerQ').textContent = w.dinnerQ;
+  }
+  document.querySelectorAll('[data-fb]').forEach(b=>b.onclick=()=>{ KT.toast(b.dataset.fb==='up'?'Rahmat! Fikringiz sinf rahbariga yetkaziladi':'Savolingiz sinf rahbariga yuborildi — 24 soat ichida javob beriladi'); });
+
+  function renderMastery(){
+    const list = cur==='sardor' ? (store.get('mastery')||D.MASTERY.sardor) : D.MASTERY[cur];
+    document.getElementById('mapH').textContent = 'Bilim xaritasi · '+D.subject(kid(cur).subject).title;
+    document.getElementById('mastery').innerHTML = list.map(t=>{ const L=D.levelOf(t.p); const idx=D.LEVELS.indexOf(L);
+      return `<div class="m-row"><div><b>${esc(t.topic)}</b><div class="kp-small kp-strong" style="color:${idx?L.color:'var(--kp-ink3)'}">${esc(L.name)}${t.p?` · ${Math.round(t.p*100)}%`:''}</div></div><div class="m-track" aria-label="${esc(L.name)}">${[1,2,3,4].map(k=>`<i style="${k<=idx?`background:${D.LEVELS[Math.min(idx,4)].color}`:''}"></i>`).join('')}<i style="${idx>=4?`background:${D.LEVELS[4].color}`:''}"></i></div></div>`; }).join('');
+    document.getElementById('lvlLegend').innerHTML = D.LEVELS.map(l=>`<span><i style="background:${l.color}"></i>${esc(l.name)}</span>`).join('');
+    document.getElementById('grades').innerHTML = D.GRADES[cur].map(g=>`<div class="kp-row"><div class="kp-row-main"><b>${esc(g.topic)} · ${esc(g.kind)}</b><small>${esc(g.date)} · “${esc(g.note)}”</small></div><div class="kp-row-r"><span class="kp-chip acc" style="font-size:.85rem">${esc(g.v)}</span></div></div>`).join('');
+  }
+
+  function renderInv(){
+    const inv=store.get('invoices',[]);
+    document.getElementById('inv').innerHTML = `<thead><tr><th>Farzand</th><th>Davr</th><th>Xizmat</th><th class="num">Summa</th><th>Muddat</th><th>Holat</th><th></th></tr></thead><tbody>` + inv.map(i=>{ const c=kid(i.child); const sum=i.amount*(100-i.discount)/100; const S=D.INVOICE_STATUS[i.status];
+      return `<tr><td>${avatar(c.name,c.color,28)} ${esc(c.name)}</td><td>${esc(i.period)}</td><td>${esc(i.item)}</td><td class="num">${money(sum)}${i.discount?`<div class="kp-small kp-muted">−${i.discount}% (${money(i.amount)})</div>`:''}</td><td>${esc(i.due)}</td><td><span class="kp-chip" style="background:color-mix(in srgb,${S.c} 14%,#fff);color:${S.c}">${esc(S.t)}</span>${i.paidVia?`<div class="kp-small kp-muted">${esc(i.paidVia)}, ${esc(i.paidAt)}</div>`:''}</td><td>${i.status==='paid'?'<button class="kp-btn kp-btn-ghost kp-btn-sm" data-receipt="'+i.id+'">Chek</button>':'<button class="kp-btn kp-btn-acc kp-btn-sm" data-pay="'+i.id+'">To‘lash</button>'}</td></tr>`; }).join('') + '</tbody>';
+  }
+  let payId=null, prov='Click';
+  document.getElementById('inv').addEventListener('click',e=>{
+    const p=e.target.closest('[data-pay]'); const r=e.target.closest('[data-receipt]');
+    if(p){ payId=p.dataset.pay; const i=store.get('invoices',[]).find(x=>x.id===payId); const c=kid(i.child); document.getElementById('payWhat').textContent=`${c.name} · ${i.item} · ${i.period} — ${money(i.amount*(100-i.discount)/100)}`; document.getElementById('payModal').hidden=false; document.getElementById('payGo').focus(); }
+    if(r){ KT.toast('Chek kabinetda saqlangan (demo)'); }
+  });
+  document.querySelectorAll('[data-prov]').forEach(b=>b.onclick=()=>{ prov=b.dataset.prov; document.querySelectorAll('[data-prov]').forEach(x=>x.setAttribute('aria-pressed',String(x===b))); });
+  document.querySelectorAll('#payModal [data-close]').forEach(b=>b.onclick=()=>document.getElementById('payModal').hidden=true);
+  document.getElementById('payGo').onclick=()=>{
+    const btn=document.getElementById('payGo'); btn.disabled=true; btn.textContent=prov+' sahifasi…';
+    setTimeout(()=>{
+      const d=new Date(); const dt=String(d.getDate()).padStart(2,'0')+'.'+String(d.getMonth()+1).padStart(2,'0')+'.'+d.getFullYear();
+      let paid; store.update('invoices',arr=>arr.map(i=>{ if(i.id===payId){ paid=i; return {...i,status:'paid',paidVia:prov,paidAt:dt}; } return i; }),[]);
+      const c=kid(paid.child);
+      KT.notifyParent({child:paid.child, kind:'payment', title:'To‘lov qabul qilindi', text:`${c.name}: ${paid.item}, ${paid.period} — ${money(paid.amount*(100-paid.discount)/100)} (${prov}). Chek kabinetda.`});
+      document.getElementById('payModal').hidden=true; btn.disabled=false; btn.textContent='To‘lash'; KT.toast('To‘landi ✓');
+    }, 1100);
+  };
+
+  function renderOrders(){
+    const orders=store.get('rewardOrders',[]).filter(o=>o.child===cur);
+    const coins=store.get('coins',{})[cur]||0;
+    const ST={requested:['Tasdiq kutmoqda','warn'],approved:['Tasdiqlandi — administrator beradi','info'],handed:['Berildi','ok'],rejected:['Rad etildi — coin qaytarildi','bad']};
+    document.getElementById('orders').innerHTML = orders.length ? orders.map(o=>{ const r=D.REWARDS.find(x=>x.id===o.reward); return `<div class="kp-row reward"><span class="reward-emo">${r.emoji}</span><div class="kp-row-main"><b>${esc(r.title)}</b><small>${r.price} coin · ${KT.ago(o.ts)} · <span class="kp-chip ${ST[o.status][1]}">${ST[o.status][0]}</span></small></div>${o.status==='requested'?`<div class="kp-row-r"><button class="kp-btn kp-btn-acc kp-btn-sm" data-ok="${o.id}">Tasdiqlash</button><button class="kp-btn kp-btn-danger kp-btn-sm" data-no="${o.id}">Rad etish</button></div>`:''}</div>`; }).join('')
+      : `<p class="kp-muted kp-strong kp-small">${esc(kid(cur).name)} hozircha sovg‘a so‘ramagan.</p>`;
+    document.getElementById('coinNote').innerHTML = `${esc(kid(cur).name)}ning balansi: <b>${coins} coin</b>. Oylik chegara — 300 coin; coin pulga almashtirilmaydi.`;
+    const pending=store.get('rewardOrders',[]).filter(o=>o.status==='requested').length;
+    const em=document.querySelector('.kp-nav em[data-badge="orders"]'); if(em) em.textContent=pending||'';
+  }
+  document.getElementById('orders').addEventListener('click',e=>{
+    const ok=e.target.closest('[data-ok]'), no=e.target.closest('[data-no]'); if(!ok&&!no) return;
+    const id=(ok||no).dataset.ok||(ok||no).dataset.no; const o=store.get('rewardOrders',[]).find(x=>x.id===id); const r=D.REWARDS.find(x=>x.id===o.reward);
+    store.update('rewardOrders',arr=>arr.map(x=>x.id===id?{...x,status:ok?'approved':'rejected'}:x),[]);
+    if(no){ store.update('coins',c=>({...c,[o.child]:(c[o.child]||0)+r.price}),{}); store.push('ledger',{child:o.child,delta:+r.price,reason:`Qaytarildi: ${r.title} (ota-ona rad etdi)`,ts:Date.now()}); KT.toast('Rad etildi — coin qaytarildi'); }
+    else KT.toast('Tasdiqlandi — administrator 7 kun ichida beradi');
+  });
+
+  function renderGoal(){
+    const g=store.get('goal',{}); const mastered=D.MASTERY[g.child||'sardor'].filter(t=>t.p>=.7).length; const done=Math.min(g.target, Math.max(g.done||0, mastered-2));
+    const pct=Math.round(done/g.target*100);
+    document.getElementById('goal').innerHTML = `<div class="ring" style="--p:${pct}"><span>${done}/${g.target}</span></div><div><b style="font-size:1rem">${esc(g.text)}</b><p class="kp-small kp-muted kp-strong" style="margin-top:6px">${esc(kid(g.child||'sardor').name)} bu oy yana ${g.target-done} ta mavzuni “O‘zlashtirdi” darajasiga chiqarishi kerak. Har o‘tishda sizga xabar keladi.</p></div>`;
+  }
+  document.getElementById('goalForm').onsubmit=e=>{ e.preventDefault(); const t=document.getElementById('gText').value.trim(); if(!t){ document.getElementById('gText').focus(); KT.toast('Mukofotni yozing — masalan, oilaviy kino kechasi'); return; } const n=+document.getElementById('gN').value; store.set('goal',{child:cur,text:`${n} ta mavzu “O‘zlashtirdi” bo‘lsa — ${t}`,target:n,done:1}); document.getElementById('gText').value=''; KT.toast('Oilaviy maqsad saqlandi'); };
+
+  const CONSENTS = [
+    {k:'data', t:'Shaxsiy ma’lumotni qayta ishlash', d:'O‘quv jarayoni uchun majburiy. Ma’lumot O‘zbekistondagi serverda.', lock:true},
+    {k:'ai', t:'AI o‘qish yordamchisi', d:'13 yoshgacha — faqat o‘qituvchi bergan mashqlar va qisqa tushuntirishlar. Erkin suhbat yo‘q.'},
+    {k:'notify', t:'Telegram xabarlari', d:'Davomat, baho, to‘lov, haftalik hisobot.'},
+    {k:'sms', t:'SMS — Telegram ishlamasa', d:'Faqat muhim xabarlar: kelmaganlik va xavfsizlik.'},
+    {k:'photo', t:'Rasm va ism sayt yoki galereyada', d:'O‘chiq bo‘lsa, bola rasmi va ismi hech qayerda chiqmaydi.'},
+    {k:'hideName', t:'Reytingda ismni yashirish', d:'Sinf reytingida “O‘quvchi” deb ko‘rsatiladi, rasmsiz.'},
+    {k:'marketing', t:'Aksiya va yangiliklar', d:'Oyiga ko‘pi bilan 2 ta xabar.'}
+  ];
+  function renderConsents(){
+    const c=store.get('consents',{});
+    document.getElementById('consents').innerHTML = CONSENTS.map(x=>`<div class="consent"><div><b>${esc(x.t)}</b><small>${esc(x.d)}</small></div><label class="kp-switch"><input type="checkbox" data-c="${x.k}" ${c[x.k]?'checked':''} ${x.lock?'disabled':''} aria-label="${esc(x.t)}"><span></span></label></div>`).join('')
+      + `<div class="consent"><div><b>Kunlik AI mashq chegarasi</b><small>Sog‘lom ekran vaqti: mashq shu vaqtdan oshmaydi</small></div><select class="kp-select" style="width:auto" data-screen><option value="10">10 daqiqa</option><option value="15">15 daqiqa</option><option value="20">20 daqiqa</option></select></div>`;
+    document.querySelector('[data-screen]').value=String(c.screen||15);
+  }
+  document.getElementById('consents').addEventListener('change',e=>{
+    const t=e.target; if(t.dataset.c){ store.update('consents',c=>({...c,[t.dataset.c]:t.checked}),{}); KT.toast('Saqlandi: '+(t.checked?'yoqildi':'o‘chirildi')); }
+    if(t.hasAttribute('data-screen')){ store.update('consents',c=>({...c,screen:+t.value}),{}); KT.toast(`Kunlik chegara: ${t.value} daqiqa`); }
+  });
+
+  /* ---- Telegram feed (jonli) ---- */
+  const ph = KT.phone(document.getElementById('phone'), {title:'Katta Tanaffus', sub:'bot · ota-ona uchun'});
+  const shown = new Set();
+  const LABEL={attendance:'Davomat', grade:'Baho', report:'Haftalik hisobot', payment:'To‘lov', reward:'Sovg‘a', safety:'Muhim', reminder:'Eslatma'};
+  function feed(animate){
+    const mine=e=>!e.child || D.FAMILY.children.some(c=>c.id===e.child);
+    const ev=store.get('events',[]).filter(mine).slice().reverse();
+    ev.forEach(e=>{
+      if(shown.has(e.id)) return; shown.add(e.id);
+      const d=new Date(e.ts); const msg={label:(LABEL[e.kind]||'Xabar')+(e.quiet?' · jim vaqt, 08:00 da yetkaziladi':''), time:KT.hm(d), text:e.text, alert:e.kind==='attendance' && /kelmadi/.test(e.text)};
+      if(animate){ const stop=ph.typing(); setTimeout(()=>{ stop(); ph.add(msg); },700); } else ph.add(msg);
+    });
+    const seen=store.get('seen',0); const n=store.get('events',[]).filter(e=>mine(e) && e.ts>seen).length; document.getElementById('bellN').textContent=n||'';
+  }
+  document.getElementById('bell').onclick=()=>{ store.set('seen',Date.now()); document.getElementById('bot').scrollIntoView({behavior:'smooth'}); };
+
+  function renderAll(){ renderKids(); renderPulse(); renderLesson(); renderCal(); renderReport(); renderMastery(); renderInv(); renderOrders(); renderGoal(); renderConsents(); }
+  renderAll(); feed(false);
+  store.on(['events'], ()=>{ feed(true); renderPulse(); KT.pulse(); });
+  store.on(['attendance','excuses'], ()=>{ renderPulse(); renderLesson(); renderCal(); });
+  store.on(['invoices'], ()=>{ renderInv(); renderPulse(); });
+  store.on(['rewardOrders','coins'], ()=>{ renderOrders(); renderPulse(); });
+  store.on(['goal'], renderGoal);
+  store.on(['mastery'], renderMastery);
+})();
+</script>
+</body>
+</html>

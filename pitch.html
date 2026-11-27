@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Taqdimot — Katta Tanaffus platformasi</title>
+<link rel="stylesheet" href="static/css/platform.css">
+<style>
+  html,body{margin:0;height:100%;background:#140a24;overflow:hidden;font-family:var(--kp-fb);color:var(--kp-ink)}
+  .deck{position:fixed;inset:0;display:grid;place-items:center}
+  .stage{width:1280px;height:720px;position:relative;transform-origin:center center}
+  .slide{position:absolute;inset:0;border-radius:18px;overflow:hidden;padding:64px 76px;display:none;flex-direction:column;background:#fbf7ff}
+  .slide.on{display:flex;animation:sIn .45s cubic-bezier(.2,.8,.2,1)}
+  @keyframes sIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  .slide.dark{background:#2a1248;color:#fff}
+  .slide.grad{background:linear-gradient(120deg,#ff2fd5,#7c3aed);color:#fff}
+  .slide.red{background:#e11d48;color:#fff}
+  .slide h1,.slide h2,.slide h3{font-family:var(--kp-fh);font-weight:400;margin:0}
+  .slide h2{font-size:52px;line-height:1.05;max-width:20ch}
+  .slide .sub{font-size:22px;font-weight:700;opacity:.8;margin-top:14px;max-width:52ch;line-height:1.45}
+  .k{font-weight:900;font-size:18px;color:#c026d3;margin-bottom:14px}
+  .dark .k,.grad .k,.red .k{color:#f5d0fe}
+  .foot{position:absolute;left:76px;right:76px;bottom:28px;display:flex;justify-content:space-between;font-size:14px;font-weight:800;opacity:.5}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:auto}
+  .grid5{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:auto}
+  .box{background:#fff;border-radius:22px;padding:22px;border:1px solid #ece3f6}
+  .dark .box{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.12)}
+  .red .box{background:rgba(255,255,255,.12);border:0}
+  .box b{display:block;font-size:21px;line-height:1.25}
+  .box p{font-size:16px;font-weight:700;opacity:.78;margin:8px 0 0;line-height:1.45}
+  .box .n{font-family:var(--kp-fh);font-size:40px;line-height:1;color:#a21caf;margin-bottom:10px}
+  .dark .box .n{color:#f0abfc}
+  .big{font-family:var(--kp-fh);font-size:96px;line-height:.95}
+  .big small{font-size:30px;opacity:.7;margin-left:8px}
+  .market{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;margin-top:auto;border-top:3px solid #2a1248;padding-top:24px}
+  .market p{font-size:18px;font-weight:700;color:#5b4f72;margin:10px 0 0;line-height:1.4}
+  table.t{width:100%;border-collapse:collapse;margin-top:auto;font-size:18px}
+  table.t th,table.t td{padding:12px 14px;text-align:left;border-bottom:1px solid #ece3f6;font-weight:800}
+  table.t th{font-size:15px;color:#5b4f72}
+  table.t .us{background:#2a1248;color:#fff}
+  table.t td.us{background:#f6ecff;color:#6b21a8}
+  .y{color:#0f9f6e}.n{color:#b8aecb}.p{color:#c2410c}
+  .ladder{display:flex;flex-direction:column;gap:10px;margin-top:auto}
+  .rung{display:grid;grid-template-columns:110px 300px 1fr;gap:18px;align-items:center;background:rgba(255,255,255,.08);border-radius:16px;padding:14px 18px;font-size:18px;font-weight:700}
+  .rung span{font-family:var(--kp-fh);font-size:26px}
+  .rung b{font-size:19px}
+  .gantt{margin-top:auto;display:flex;flex-direction:column;gap:12px}
+  .gr{display:grid;grid-template-columns:230px 1fr;gap:16px;align-items:center;font-weight:800;font-size:17px}
+  .gr small{display:block;font-size:14px;opacity:.6}
+  .bar{position:relative;height:40px;background:#f1eaf8;border-radius:12px}
+  .bar i{position:absolute;top:0;bottom:0;border-radius:12px;background:linear-gradient(90deg,#ff2fd5,#7c3aed);color:#fff;font-style:normal;font-size:14px;font-weight:900;display:flex;align-items:center;padding:0 12px;white-space:nowrap}
+  .ctrl{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);display:flex;gap:8px;align-items:center;background:rgba(255,255,255,.08);backdrop-filter:blur(8px);padding:6px;border-radius:30px;z-index:5}
+  .ctrl button,.ctrl a{border:0;background:rgba(255,255,255,.12);color:#fff;font:800 14px var(--kp-fb);padding:9px 14px;border-radius:22px;cursor:pointer;text-decoration:none}
+  .ctrl span{color:#fff;font-weight:900;font-size:14px;min-width:60px;text-align:center}
+  .prog{position:fixed;top:0;left:0;height:4px;background:linear-gradient(90deg,#ff2fd5,#7c3aed);transition:width .3s;z-index:5}
+  .logo{width:96px;height:96px;border-radius:50%;background:#fff;padding:4px;margin-bottom:34px}
+  .roles{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:auto}
+  .role{border-radius:20px;padding:20px;background:#fff;border:1px solid #ece3f6;border-top:6px solid var(--rc)}
+  .role b{font-size:21px;display:block}
+  .role p{margin:8px 0 0;font-size:15.5px;font-weight:700;color:#5b4f72;line-height:1.45}
+  .kpis{display:grid;grid-template-columns:1fr 1fr;gap:0 40px;margin-top:auto}
+  .kpis div{display:flex;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.15);padding:12px 0;font-size:19px;font-weight:800}
+  .kpis b{font-family:var(--kp-fh);font-weight:400;font-size:23px}
+  .kp-dock{display:none}
+  *,*::before,*::after{box-sizing:border-box}
+</style>
+</head>
+<body>
+<div class="prog" id="prog"></div>
+<div class="deck"><div class="stage" id="stage"></div></div>
+<div class="ctrl" aria-label="Boshqaruv"><button id="prev" aria-label="Oldingi">←</button><span id="cnt"></span><button id="next" aria-label="Keyingi">→</button><button id="fs">To‘liq ekran</button><a href="platforma.html">Demoga o‘tish</a></div>
+
+<script src="static/js/kt-data.js"></script>
+<script>
+(function(){
+  const D=KTD; const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const foot=(n)=>`<div class="foot"><span>Katta Tanaffus · platforma</span><span>${n}</span></div>`;
+  const S=[];
+  S.push(`<section class="slide grad"><img class="logo" src="static/img/logo-brand.png" alt=""><div class="k">Katta Tanaffus platformasi</div><h1 style="font-size:78px;line-height:1.02;max-width:16ch">Arizadan haftalik hisobotgacha — bitta tizimda</h1><p class="sub">Xususiy maktablar uchun: AI qabul assistenti, 30 soniyalik davomat, Telegramda ota-ona hisoboti va bolalar xavfsizligi qoidalari.</p></section>`);
+  S.push(`<section class="slide"><div class="k">Muammo</div><h2>Markaz Excel, daftar va Telegram chatlarida yashaydi</h2>
+    <div class="grid3"><div class="box"><div class="n">01</div><b>Arizalar yo‘qoladi</b><p>Saytdagi va Telegramdagi ariza hech kimga yetib bormaydi. Har yo‘qolgan ariza — yo‘qolgan o‘quvchi.</p></div>
+    <div class="box"><div class="n">02</div><b>Ota-ona tizimdan tashqarida</b><p>Pul to‘laydigan inson bola darsga keldimi, nima o‘rgandi — bilmaydi.</p></div>
+    <div class="box"><div class="n">03</div><b>Qo‘lda ish ko‘p</b><p>Sinf va to‘garak ro‘yxatlari, davomat, to‘lov eslatmasi va hisobot — o‘qituvchi va administrator kechqurun to‘ldiradi.</p></div></div>${foot(2)}</section>`);
+  const P=[['📝','Qabul','AI assistent, CRM, bepul diagnostika. Birorta ariza yo‘qolmaydi.'],['📚','O‘quv jarayoni','Sinflar va jadval, to‘garaklar, davomat, uy vazifasi, testlar, baholar.'],['👩‍👦','Ota-ona','Telegram va kabinet: davomat, baho, to‘lov, haftalik hisobot.'],['🧠','AI o‘qish','Bilim xaritasi, shaxsiy mashq, 13+ uchun Sokratik repetitor.'],['📈','Boshqaruv','To‘lov va qarzdorlik, filiallar, ketish xavfi, rahbar paneli.']];
+  S.push(`<section class="slide dark"><div class="k">Yechim</div><h2>Besh tayanch — bitta platforma</h2><p class="sub">AI tayyorlaydi va taklif qiladi. Bahoni o‘qituvchi, pul va intizom qarorini inson qo‘yadi.</p>
+    <div class="grid5">${P.map(p=>`<div class="box"><div style="font-size:34px">${p[0]}</div><b style="margin-top:8px">${p[1]}</b><p>${p[2]}</p></div>`).join('')}</div>${foot(3)}</section>`);
+  const J=[['Du 21:10','Ariza','Ota-ona botga yozadi — AI bo‘sh o‘rinli sinf va qabul suhbatini taklif qiladi'],['Sh 11:00','Diagnostika','18 daqiqalik adaptiv test: A2, zaif — Past Simple'],['Sh 11:30','Qabul','AI 2 ta sinf taklif qiladi, qabul bo‘limi tasdiqlaydi, shartnoma onlayn; xohlasa — Taekwondo'],['2–4-hafta','O‘qish','Davomat 30 s, test 7/10 → mashqdan keyin 9/10'],['Ju 18:00','Hisobot','“5/5 kun maktabda, ingliz tili 7 → 9, matematika — 5, Taekwondo 3/3”']];
+  S.push(`<section class="slide"><div class="k">Qanday ishlaydi · Malika opa va Sardor (11 yosh)</div><h2>Bir oy — besh qadam</h2>
+    <div class="grid5">${J.map((j,i)=>`<div class="box"><div class="n" style="font-size:30px">${i+1}</div><small style="font-weight:900;color:#a21caf">${j[0]}</small><b>${j[1]}</b><p>${j[2]}</p></div>`).join('')}</div>${foot(4)}</section>`);
+  const R=[['#229ED9','Ota-ona','Bir nechta farzand, Telegram feed, hisobot, to‘lov, roziliklar'],['#0f9f6e','O‘qituvchi','Davomat 30 s, AI takliflari navbati, test generatori, jurnal'],['#e8890c','Qabul bo‘limi','Arizalar navbati, AI baholash, sinf va to‘garak tavsiyasi, qarzdorlik'],['#4c1d95','Rahbar','KPI, voronka, filiallar taqqoslovi, AI savol-javob'],['#d61bb6','O‘quvchi','Bilim xaritasi, 5 daqiqalik mashq, yoshga mos AI'],['#ff2fd5','Mehmon','AI qabul assistenti, adaptiv diagnostika, yozilish']];
+  S.push(`<section class="slide"><div class="k">Mahsulot · jonli demo</div><h2>Olti rol — bir-biriga ulangan</h2><p class="sub">O‘qituvchi “kelmadi” deb belgilaydi — ota-ona telefoniga xabar keladi. Saytdagi ariza — administrator ekranida, “issiq” belgisi bilan.</p>
+    <div class="roles">${R.map(r=>`<div class="role" style="--rc:${r[0]}"><b>${r[1]}</b><p>${r[2]}</p></div>`).join('')}</div>${foot(5)}</section>`);
+  S.push(`<section class="slide dark"><div class="k">AI</div><h2>20 AI funksiya, 4 daraja nazorat</h2>
+    <div class="ladder">${D.AUTONOMY.map(a=>`<div class="rung"><span>${a.lvl}</span><b>${esc(a.name)}</b><div style="opacity:.8">${esc(a.ex)}</div></div>`).join('')}</div>${foot(6)}</section>`);
+  S.push(`<section class="slide red"><div class="k">Bolalar xavfsizligi</div><h2>Qoidalar — tizimning asosi, sozlama emas</h2>
+    <div class="grid3" style="grid-template-columns:repeat(3,1fr)">${D.SAFETY.map(s=>`<div class="box"><b>${esc(s.t)}</b><p>${esc(s.d)}</p></div>`).join('')}</div>${foot(7)}</section>`);
+  S.push(`<section class="slide"><div class="k">Bozor</div><h2>Bozor o‘smoqda, ota-ona tajribasi — bo‘sh joy</h2>
+    <div class="market">${D.MARKET.map(m=>`<div><div class="big">${esc(m.n)}<small>${esc(m.u)}</small></div><p>${esc(m.l)}</p><p style="font-size:14px;opacity:.6">Manba: ${esc(m.s)}</p></div>`).join('')}</div>${foot(8)}</section>`);
+  S.push(`<section class="slide"><div class="k">Raqobat</div><h2>CRM ma’muriyatni yopadi. Biz — o‘qitish va ota-onani</h2>
+    <table class="t"><tr><th>Imkoniyat</th><th>Excel + Telegram</th><th>Modme (CRM)</th><th>eMaktab</th><th class="us">Katta Tanaffus</th></tr>
+    <tr><td>Qabul arizalari (CRM)</td><td class="p">qo‘lda</td><td class="y">✓</td><td class="n">—</td><td class="us">✓ + AI assistent</td></tr>
+    <tr><td>Ota-ona kabineti</td><td class="n">—</td><td class="p">qisman</td><td class="y">✓</td><td class="us">✓ + Telegram</td></tr>
+    <tr><td>Testlar va mashqlar</td><td class="n">—</td><td class="p">LMS</td><td class="p">qisman</td><td class="us">✓ bilim xaritasi</td></tr>
+    <tr><td>AI: qabul, diagnostika, tekshiruv, hisobot</td><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="us">✓ 20 funksiya</td></tr>
+    <tr><td>To‘lov</td><td class="p">qisman</td><td class="y">✓</td><td class="n">—</td><td class="us">✓ Payme, Click</td></tr></table>
+    <p style="font-size:13px;font-weight:700;color:#8f86a3;margin-top:10px">Modme va eMaktab — ochiq tavsiflar bo‘yicha, to‘liq emas.</p>${foot(9)}</section>`);
+  S.push(`<section class="slide dark"><div class="k">Biznes model</div><h2>Avval o‘zimizda, keyin obuna sifatida</h2>
+    <div class="grid3"><div class="box"><div class="n">1</div><b>Qolish va konversiya</b><p>Qolish +1 p.p. = 5 000 × 1% × 300 000 = <b style="display:inline;font-size:inherit">15 mln so‘m/oy</b> qo‘shimcha tushum.</p></div>
+    <div class="box"><div class="n">2</div><b>SaaS obuna</b><p>Boshqa xususiy maktab va o‘quv markazlariga o‘quvchi boshiga oylik to‘lov, oq yorliq bilan. 551 ta nodavlat maktab, +21% yiliga.</p></div>
+    <div class="box"><div class="n">3</div><b>Hamkorlar</b><p>To‘lov provayderlari, imtihon markazlari, kitob va robotika to‘plamlari.</p></div></div>${foot(10)}</section>`);
+  S.push(`<section class="slide dark"><div class="k">Maqsadlar · pilot</div><h2 style="max-width:26ch">Asosiy ko‘rsatkich: oyni to‘lov bilan yopgan va yangi mavzuni o‘zlashtirgan o‘quvchilar</h2>
+    <div class="kpis">${D.KPIS.slice(0,8).map(k=>`<div><span>${esc(k.k)}</span><b>${esc(k.t)}</b></div>`).join('')}</div>${foot(11)}</section>`);
+  let st=0; const total=35;
+  S.push(`<section class="slide"><div class="k">Reja</div><h2>34 hafta: xavfsizlik → MVP → pilot → AI → kengayish</h2>
+    <div class="gantt">${D.ROADMAP.map(r=>{ const l=st/total*100,w=r.len/total*100; st+=r.len; return `<div class="gr"><div>${esc(r.f)} · ${esc(r.n)}<small>${esc(r.w)}</small></div><div class="bar"><i style="left:${l}%;width:${w}%">${r.len} hafta</i></div></div>`; }).join('')}</div>
+    <p style="font-size:17px;font-weight:800;color:#5b4f72;margin-top:18px">Jamoa: backend, AI/ML, frontend, mobil yoki Mini App, QA, metodist — 5–6 kishi.</p>${foot(12)}</section>`);
+  S.push(`<section class="slide grad"><div class="k">Keyingi qadam</div><h1 style="font-size:66px;line-height:1.05;max-width:18ch">Pilot: 1–2 filial, 300–500 o‘quvchi, 6 hafta</h1>
+    <p class="sub">O‘lchaymiz: arizadan yozilishgacha konversiya, kelmaganlik xabari tezligi, hisobot ochilishi va AI takliflari aniqligi.</p>
+    <div class="grid3"><div class="box"><b>Pilot hamkorlar</b><p>Xususiy maktablar va o‘quv markazlari</p></div><div class="box"><b>Integratsiyalar</b><p>Payme, Click, Telegram, SMS shlyuz</p></div><div class="box"><b>Jamoa va investitsiya</b><p>MVP uchun 5–6 kishilik jamoa</p></div></div>${foot(13)}</section>`);
+
+  const stage=document.getElementById('stage'); stage.innerHTML=S.join('');
+  const slides=[...stage.querySelectorAll('.slide')]; let i=Math.max(0,Math.min(slides.length-1,(+location.hash.slice(1)||1)-1));
+  function show(n){ i=Math.max(0,Math.min(slides.length-1,n)); slides.forEach((s,k)=>s.classList.toggle('on',k===i)); document.getElementById('cnt').textContent=`${i+1} / ${slides.length}`; document.getElementById('prog').style.width=((i+1)/slides.length*100)+'%'; history.replaceState(null,'','#'+(i+1)); }
+  function fit(){ const s=Math.min(innerWidth/1300, (innerHeight-70)/740); stage.style.transform=`scale(${s})`; }
+  addEventListener('resize',fit); fit(); show(i);
+  document.getElementById('prev').onclick=()=>show(i-1); document.getElementById('next').onclick=()=>show(i+1);
+  document.getElementById('fs').onclick=()=>{ if(!document.fullscreenElement) document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen(); else document.exitFullscreen(); };
+  addEventListener('keydown',e=>{ if(['ArrowRight','PageDown',' '].includes(e.key)){ e.preventDefault(); show(i+1); } if(['ArrowLeft','PageUp'].includes(e.key)){ e.preventDefault(); show(i-1); } if(e.key==='Home') show(0); if(e.key==='End') show(slides.length-1); if(e.key==='f') document.getElementById('fs').click(); });
+  let x0=null; addEventListener('touchstart',e=>x0=e.touches[0].clientX,{passive:true}); addEventListener('touchend',e=>{ if(x0==null) return; const dx=e.changedTouches[0].clientX-x0; if(Math.abs(dx)>50) show(i+(dx<0?1:-1)); x0=null; });
+  stage.addEventListener('click',e=>{ if(e.target.closest('a,button')) return; show(i+1); });
+})();
+</script>
+</body>
+</html>

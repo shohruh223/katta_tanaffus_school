@@ -3,233 +3,192 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Filiallar — KATTA TANAFFUS SCHOOL</title>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="static/css/main.css">
+<title>Filiallar — Katta Tanaffus School</title>
+<meta name="description" content="Toshkentda (Yunusobod, Novza) va Samarqandda 3 filial: manzil, ish vaqti, telefon, sinflar va to‘garaklar.">
+<meta property="og:title" content="Filiallar — Katta Tanaffus School">
+<meta property="og:description" content="Toshkentda (Yunusobod, Novza) va Samarqandda 3 filial: manzil, ish vaqti, telefon, sinflar va to‘garaklar.">
+<meta property="og:image" content="static/img/logo-brand.png">
+<link rel="icon" href="static/img/logo-brand.png">
+<link rel="stylesheet" href="static/css/platform.css">
+<link rel="stylesheet" href="static/css/site.css">
+<style>
+  .bx{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:26px;align-items:start}
+  .map{padding:16px;background:#fff}
+  .map svg{display:block;width:100%;height:auto}
+  .map .st{cursor:pointer}
+  .map .st circle.o{fill:#fff;stroke:var(--ink);stroke-width:5;transition:r .2s}
+  .map .st:hover circle.o,.map .st.on circle.o{r:20}
+  .map .st.on circle.o{fill:var(--sun)}
+  .map .st text{font:400 22px var(--fh);fill:var(--ink)}
+  .map .st text.s{font:800 14px var(--fb);fill:var(--ink2)}
+  .map .st:focus{outline:none}
+  .map .st:focus-visible circle.o{stroke:var(--mag);stroke-width:7}
+  .legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:10px;font-weight:800;font-size:.86rem;padding:0 6px}
+  .legend i{display:inline-block;width:26px;height:8px;border-radius:4px;margin-right:6px;vertical-align:middle;border:1.5px solid var(--ink)}
+  .find{display:flex;gap:10px;margin-top:26px;max-width:560px}
+  .find .ks-input{flex:1}
+  .find-out{font-weight:800;margin-top:10px;min-height:1.5em}
+  .det h2{font-family:var(--fh);font-weight:400;font-size:clamp(2.2rem,4vw,3.2rem);line-height:1}
+  .det .city{font-weight:900;color:var(--ink2);margin-top:4px}
+  .det dl{display:grid;grid-template-columns:auto 1fr;gap:10px 14px;margin:18px 0;font-weight:800}
+  .det dt{color:var(--ink2)}
+  .det dd{margin:0}
+  .grp{display:grid;grid-template-columns:1fr auto;gap:4px 10px;align-items:center;padding:10px 0;border-top:2px dashed #e7dcf3}
+  .grp b{font-size:.95rem}
+  .grp small{font-weight:700;color:var(--ink2)}
+  .seats{grid-column:1/-1;display:flex;gap:3px}
+  .seats i{flex:1;height:8px;border-radius:3px;background:#ece3f6;border:1px solid rgba(42,18,72,.15)}
+  .seats i.f{background:var(--vio)}
+  .det .acts{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+  .tickets{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+  .tk{display:grid;grid-template-columns:64px 1fr;padding:0;overflow:hidden;text-align:left;font:inherit;color:inherit;cursor:pointer;scroll-margin-top:110px}
+  .tk-stub{background:var(--lc);border-right:var(--bw) dashed var(--ink);display:grid;place-items:center;font-family:var(--fh);font-size:1.5rem;color:var(--ink);writing-mode:vertical-rl;transform:rotate(180deg);letter-spacing:.12em}
+  .tk-body{padding:18px}
+  .tk-body b{font-family:var(--fh);font-weight:400;font-size:1.4rem;display:block}
+  .tk-body small{display:block;font-weight:700;color:var(--ink2);margin-top:4px;line-height:1.5}
+  .tk-body em{display:inline-block;margin-top:10px;font-style:normal;font-weight:900;font-size:.82rem;border:2px solid var(--ink);border-radius:999px;padding:3px 10px;background:var(--paper)}
+  @media (max-width:1040px){.bx{grid-template-columns:1fr}.tickets{grid-template-columns:1fr 1fr}}
+  @media (max-width:680px){.tickets{grid-template-columns:1fr}.map{padding:6px}}
+</style>
 </head>
-<body>
-
-<div id="loading"><div class="llgo"><img src="static/img/logo-brand.png" alt="Katta Tanaffus logotipi"><span>Yuklanmoqda...</span></div><div class="ldots"><div class="ldot"></div><div class="ldot"></div><div class="ldot"></div></div></div>
-<div class="toast" id="toast"></div>
-
-<!-- MOBILE NAV -->
-<div class="mnav" id="mnav">
-  <a href="index.html" onclick="closemob()">🏠 Bosh sahifa</a>
-  <a href="courses.html" onclick="closemob()">📚 Kurslar</a>
-  <a href="about.html" onclick="closemob()">ℹ️ Biz haqimizda</a>
-  <a href="teachers.html" onclick="closemob()">👨‍🏫 O'qituvchilar</a>
-  <a href="gallery.html" onclick="closemob()">🖼️ Galereya</a>
-  <a href="branches.html" onclick="closemob()">📍 Filiallar</a>
-  <a href="contact.html" onclick="closemob()">📞 Aloqa</a>
-  <button class="btn btn-f" onclick="openAriza();closemob()" style="margin-top:10px">📝 Ariza qoldirish</button>
-  <div class="mnav-auth">
-    <a class="mnav-login" href="login.html" onclick="closemob()">🔐 Kirish</a>
-    <a class="mnav-register" href="register.html" onclick="closemob()">✨ Ro'yxatdan o'tish</a>
-  </div>
-</div>
-
-<!-- NAV -->
-<nav>
-  <a href="index.html" class="logo">
-    <img src="static/img/logo-brand.png" alt="Katta Tanaffus logotipi" class="logo-img">
-    <div class="logo-text">
-      <strong>Katta Tanaffus</strong>
-      <span>School</span>
-    </div>
-  </a>
-  <div class="nav-links">
-    <a href="index.html">Bosh sahifa</a>
-    <a href="courses.html">Kurslar</a>
+<body class="ks" data-role="guest">
+<a class="ks-skip" href="#main">Asosiy mazmunga o‘tish</a>
+<header class="ks-head">
+  <div class="ks-head-in">
+    <a class="ks-logo" href="index.html" aria-label="Katta Tanaffus — bosh sahifa"><img src="static/img/logo-brand.png" alt="" width="48" height="48"><span><b>Katta Tanaffus</b><small>SCHOOL</small></span></a>
+    <nav class="ks-links" aria-label="Asosiy menyu">
+    <a href="platforma.html">Platforma ✨</a>
+    <a href="courses.html">Fanlar</a>
     <a href="about.html">Biz haqimizda</a>
-    <a href="teachers.html">O'qituvchilar</a>
+    <a href="teachers.html">O‘qituvchilar</a>
     <a href="gallery.html">Galereya</a>
-    <a href="branches.html" class="active">Filiallar</a>
+    <a href="branches.html" aria-current="page">Filiallar</a>
     <a href="contact.html">Aloqa</a>
+    </nav>
+    <div class="ks-acts">
+      <div class="ks-acc"><a href="login.html">Kirish</a><a href="register.html">Ro‘yxatdan o‘tish</a></div>
+      <a class="ks-btn ks-btn-sm" href="yozilish.html">Qabulga ariza</a>
+      <button class="ks-burger" type="button" aria-expanded="false" aria-controls="ksMenu" aria-label="Menyu"><i></i><i></i><i></i></button>
+    </div>
   </div>
-  <div class="nav-acts">
-    <a class="btn btn-o" href="login.html" style="text-decoration:none">Kirish</a>
-    <a class="btn btn-f" href="register.html" style="text-decoration:none">Ro'yxatdan o'tish</a>
-    <button class="burger" onclick="togglemob()"><span></span><span></span><span></span></button>
-  </div>
-</nav>
-
-<section id="branches">
-  <div class="shdr c aos"><span class="stag pu">📍 Filiallar</span><h2 class="stitle">8 ta filial — siz uchun qulay 🗺️</h2><p class="ssub">Toshkent va viloyatlarda faoliyat yurituvchi filiallarimiz</p></div>
-  <div class="bgrid">
-    <div class="bcard aos"><div class="bmap" style="background:linear-gradient(135deg,var(--yl),#fde68a)">🗺️<div class="bpin">📍</div></div><h3 class="bname">Chilonzor filiali</h3><p class="baddr">📍 Chilonzor ko'chasi, 14-uy, Toshkent</p><div class="btags"><span class="btag">⏰ 09:00–21:00</span><span class="btag">📞 71 234-56-78</span><span class="btag">👥 800 o'q</span></div><button class="bbtn" onclick="showToast('Yo\'l ko\'rsatilmoqda... 📍')">Yo'l ko'rsatish 🗺️</button></div>
-    <div class="bcard aos" style="transition-delay:.1s"><div class="bmap" style="background:linear-gradient(135deg,var(--bll),#bae6fd)">🗺️<div class="bpin">📍</div></div><h3 class="bname">Yunusobod filiali</h3><p class="baddr">📍 Amir Temur shoh ko'chasi, 108-uy</p><div class="btags"><span class="btag">⏰ 09:00–21:00</span><span class="btag">📞 71 345-67-89</span><span class="btag">👥 650 o'q</span></div><button class="bbtn" onclick="showToast('Yo\'l ko\'rsatilmoqda... 📍')">Yo'l ko'rsatish 🗺️</button></div>
-    <div class="bcard aos" style="transition-delay:.2s"><div class="bmap" style="background:linear-gradient(135deg,var(--grl),#a7f3d0)">🗺️<div class="bpin">📍</div></div><h3 class="bname">Mirzo Ulug'bek filiali</h3><p class="baddr">📍 Mirzo Ulug'bek ko'chasi, 55-uy</p><div class="btags"><span class="btag">⏰ 09:00–21:00</span><span class="btag">📞 71 456-78-90</span><span class="btag">👥 700 o'q</span></div><button class="bbtn" onclick="showToast('Yo\'l ko\'rsatilmoqda... 📍')">Yo'l ko'rsatish 🗺️</button></div>
-    <div class="bcard aos" style="transition-delay:.3s"><div class="bmap" style="background:linear-gradient(135deg,var(--pkl),#fecdd3)">🗺️<div class="bpin">📍</div></div><h3 class="bname">Samarqand filiali</h3><p class="baddr">📍 Registon ko'chasi, 22-uy, Samarqand</p><div class="btags"><span class="btag">⏰ 09:00–20:00</span><span class="btag">📞 66 234-56-78</span><span class="btag">👥 500 o'q</span></div><button class="bbtn" onclick="showToast('Yo\'l ko\'rsatilmoqda... 📍')">Yo'l ko'rsatish 🗺️</button></div>
-    <div class="bcard aos" style="transition-delay:.4s"><div class="bmap" style="background:linear-gradient(135deg,var(--pul),#ddd6fe)">🗺️<div class="bpin">📍</div></div><h3 class="bname">Andijon filiali</h3><p class="baddr">📍 Bobur ko'chasi, 7-uy, Andijon</p><div class="btags"><span class="btag">⏰ 09:00–20:00</span><span class="btag">📞 74 234-56-78</span><span class="btag">👥 450 o'q</span></div><button class="bbtn" onclick="showToast('Yo\'l ko\'rsatilmoqda... 📍')">Yo'l ko'rsatish 🗺️</button></div>
-    <div class="bcard aos" style="transition-delay:.5s"><div class="bmap" style="background:linear-gradient(135deg,var(--orl),#fed7aa)">🗺️<div class="bpin">📍</div></div><h3 class="bname">Farg'ona filiali</h3><p class="baddr">📍 Mustaqillik ko'chasi, 33-uy, Farg'ona</p><div class="btags"><span class="btag">⏰ 09:00–20:00</span><span class="btag">📞 73 234-56-78</span><span class="btag">👥 380 o'q</span></div><button class="bbtn" onclick="showToast('Yo\'l ko\'rsatilmoqda... 📍')">Yo'l ko'rsatish 🗺️</button></div>
+</header>
+<div class="ks-menu" id="ksMenu">
+  <a href="index.html"><span aria-hidden="true">🏠</span>Bosh sahifa</a>
+  <a href="platforma.html"><span aria-hidden="true">✨</span>Platforma</a>
+  <a href="courses.html"><span aria-hidden="true">📚</span>Fanlar</a>
+  <a href="about.html"><span aria-hidden="true">💛</span>Biz haqimizda</a>
+  <a href="teachers.html"><span aria-hidden="true">🧑‍🏫</span>O‘qituvchilar</a>
+  <a href="gallery.html"><span aria-hidden="true">📸</span>Galereya</a>
+  <a href="branches.html" aria-current="page"><span aria-hidden="true">📍</span>Filiallar</a>
+  <a href="contact.html"><span aria-hidden="true">📞</span>Aloqa</a>
+  <a href="diagnostika.html"><span aria-hidden="true">🧭</span>Bepul diagnostika</a>
+  <div class="ks-menu-acc"><a href="login.html">🔑 Kirish</a><a href="register.html">✨ Ro‘yxatdan o‘tish</a></div>
+  <a class="ks-btn" href="yozilish.html">Qabulga ariza</a>
+</div>
+<main id="main">
+<section class="ks-hero" aria-labelledby="brT">
+  <div class="ks-dots"></div>
+  <div class="ks-wrap">
+    <span class="ks-stk sky ks-pop" style="--rot:-3deg">2 shahar · 3 filial</span>
+    <h1 class="ks-h1 ks-rise" id="brT" style="margin-top:22px;max-width:14ch;--d:.1s">Uyingizga yaqin bekatni toping</h1>
+    <p class="ks-lead ks-rise" style="--d:.2s">Maktabimiz filiallari — metro xaritasi ko‘rinishida. Bekatni bosing: manzil, ish vaqti, telefon, sinflar va to‘garaklardagi bo‘sh o‘rinlar.</p>
+    <form class="find ks-rise" id="findF" style="--d:.3s"><label class="ks-sr" for="findI">Tuman yoki shahar</label><input class="ks-input" id="findI" placeholder="Tumaningiz yoki shahringiz: masalan, Sergeli" autocomplete="off"><button class="ks-btn ks-btn-mag" type="submit">Topish</button></form>
+    <p class="find-out" id="findOut" aria-live="polite"></p>
   </div>
 </section>
 
-<!-- FOOTER -->
-<footer>
-  <div class="fgrid">
-    <div class="fbrand"><a href="index.html" class="footer-logo"><img src="static/img/logo-brand.png" alt="Katta Tanaffus logotipi"><div><h3>Katta Tanaffus School</h3><span>Bolalar ta'lim markazi</span></div></a><p>O'zbekistondagi eng zamonaviy ta'lim markazi. 5,000+ o'quvchi, 50+ o'qituvchi, 8 ta filial.</p><div class="fsocials"><a href="#" class="sbtn">📱</a><a href="#" class="sbtn">💬</a><a href="#" class="sbtn">📸</a><a href="#" class="sbtn">▶️</a></div></div>
-    <div class="fcol"><h4>Kurslar</h4><ul>
-      <li><a href="courses.html">English</a></li><li><a href="courses.html">IELTS</a></li>
-      <li><a href="courses.html">Matematika</a></li><li><a href="courses.html">IT & Dasturlash</a></li>
-      <li><a href="courses.html">Robotika</a></li><li><a href="courses.html">Mental Arifmetika</a></li>
-    </ul></div>
-    <div class="fcol"><h4>Kompaniya</h4><ul>
-      <li><a href="about.html">Biz haqimizda</a></li><li><a href="teachers.html">O'qituvchilar</a></li>
-      <li><a href="gallery.html">Galereya</a></li><li><a href="branches.html">Filiallar</a></li>
-      <li><a href="contact.html">Bog'lanish</a></li>
-    </ul></div>
-    <div class="fcol"><h4>Aloqa</h4><ul>
-      <li><a href="tel:+998712345678">+998 71 234-56-78</a></li>
-      <li><a href="mailto:info@kattatanaffus.uz">info@kattatanaffus.uz</a></li>
-      <li><a href="contact.html">Xabar yuborish</a></li>
-    </ul></div>
+<section class="ks-sec" style="padding-top:10px" aria-label="Filiallar xaritasi">
+  <div class="ks-wrap bx">
+    <div class="ks-card map">
+      <svg viewBox="0 0 1000 420" id="metro" role="group" aria-label="Filiallar sxemasi">
+        <defs><pattern id="dots" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.6" fill="#2a1248" opacity=".12"/></pattern></defs>
+        <rect width="1000" height="420" fill="url(#dots)"/>
+        <ellipse cx="500" cy="205" rx="190" ry="150" fill="#fff1fb" stroke="#2a1248" stroke-width="2" stroke-dasharray="8 8"/>
+        <text x="500" y="392" text-anchor="middle" style="font:400 16px var(--fh);fill:#8f86a3;letter-spacing:4px">TOSHKENT</text>
+        <path d="M110,300 L380,300" fill="none" stroke="#7c3aed" stroke-width="16" stroke-linecap="round"/>
+        <path d="M380,300 L440,250 L560,160" fill="none" stroke="#ff2fd5" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M110,300 L380,300 M380,300 L440,250 L560,160" fill="none" stroke="#2a1248" stroke-width="2" stroke-dasharray="1 0" opacity=".25"/>
+        <g id="stations"></g>
+      </svg>
+      <div class="legend"><span><i style="background:#7c3aed"></i>Samarqand yo‘li</span><span><i style="background:#ff2fd5"></i>Toshkent halqasi</span></div>
+    </div>
+    <div class="ks-card det" id="det" aria-live="polite"></div>
   </div>
-  <div class="fbot"><p>© 2024 KATTA TANAFFUS SCHOOL. Barcha huquqlar himoyalangan. 💛</p><p>Privacy Policy · Foydalanish shartlari</p></div>
+</section>
+
+<section class="ks-sec" style="padding-top:0" aria-labelledby="tkT">
+  <div class="ks-wrap">
+    <div class="ks-head-row"><h2 class="ks-h2" id="tkT">Barcha filiallar</h2><p class="ks-lead">Darslar 08:30 da boshlanadi. Qabul bo‘limi: Toshkentda 09:00–21:00, viloyatlarda 09:00–20:00.</p></div>
+    <div class="tickets" id="tickets"></div>
+  </div>
+</section>
+</main>
+<div class="ks-cta">
+  <div class="ks-wrap ks-cta-in">
+    <div><h2>Qabul ochiq: 1–11-sinflar</h2><p>Avval 15 daqiqalik bepul diagnostika, keyin qabul suhbati. Bo‘sh o‘rinlar soni — filial va sinfga qarab.</p></div>
+    <div class="ks-cta-acts"><a class="ks-btn ks-btn-ink ks-btn-lg" href="yozilish.html">Qabulga ariza</a><a class="ks-btn ks-btn-lg" href="diagnostika.html">Bepul diagnostika</a></div>
+  </div>
+</div>
+<footer class="ks-foot">
+  <div class="ks-wrap">
+    <div class="ks-foot-grid">
+      <div>
+        <a class="ks-logo" href="index.html"><img src="static/img/logo-brand.png" alt="" width="48" height="48"><span><b>Katta Tanaffus</b><small style="color:var(--sun)">SCHOOL</small></span></a>
+        <p>Xususiy maktab: 1–11-sinflar, 3 filial, Taekwondo va Gimnastika to‘garaklari. Ota-ona, o‘qituvchi va AI — bitta jamoada.</p>
+        <div class="ks-soc"><a href="https://t.me/kattatanaffus" aria-label="Telegram" rel="noopener">✈️</a><a href="https://instagram.com/kattatanaffus" aria-label="Instagram" rel="noopener">📸</a><a href="https://youtube.com/@kattatanaffus" aria-label="YouTube" rel="noopener">▶️</a></div>
+      </div>
+      <div><h4>Ta’lim</h4><ul><li><a href="courses.html">Fanlar</a></li><li><a href="courses.html#taekwondo">Taekwondo</a></li><li><a href="courses.html#gymnastics">Gimnastika</a></li><li><a href="yozilish.html">Qabulga ariza</a></li><li><a href="diagnostika.html">Bepul diagnostika</a></li></ul></div>
+      <div><h4>Maktab</h4><ul><li><a href="about.html">Biz haqimizda</a></li><li><a href="teachers.html">O‘qituvchilar</a></li><li><a href="gallery.html">Galereya</a></li><li><a href="branches.html">Filiallar</a></li><li><a href="platforma.html">Platforma</a></li><li><a href="ota-ona.html">Ota-ona kabineti</a></li><li><a href="register.html">Ro‘yxatdan o‘tish</a></li><li><a href="login.html">Kirish</a></li></ul></div>
+      <div><h4>Aloqa</h4><ul><li><a href="tel:+998712345678">+998 71 234-56-78</a></li><li><a href="mailto:info@kattatanaffus.uz">info@kattatanaffus.uz</a></li><li><a href="https://t.me/kattatanaffus" rel="noopener">Telegram: @kattatanaffus</a></li><li><a href="contact.html">Xabar yuborish</a></li></ul><p style="margin-top:14px">Qabul bo‘limi: har kuni 09:00–21:00</p></div>
+    </div>
+    <div class="ks-word" aria-hidden="true">Katta Tanaffus</div>
+    <div class="ks-foot-bot"><span>© <span data-year>2026</span> Katta Tanaffus School</span><span>Bola rasmlari va ismlari faqat ota-ona roziligi bilan e’lon qilinadi</span></div>
+  </div>
 </footer>
-
-<!-- AI FAB -->
-<button id="fab" onclick="toggleChat()" aria-label="AI yordamchi"><img src="static/img/ai-bot.png" alt="AI yordamchi"></button>
-<div id="chatwin">
-  <div class="chdr"><div class="chdri"><div class="chav">🤖</div><div><div class="cname">KATTA TANAFFUS AI</div><div class="cst"><span class="stdot"></span>Online</div></div></div><button class="cx" onclick="toggleChat()">✕</button></div>
-  <div class="cmsgs" id="chat-msgs"><div class="cmsg bot"><div class="mav">🤖</div><div class="mbub">Assalomu alaykum! 👋 Kurslar, narxlar yoki manzil haqida savollaringizga javob beraman!</div></div></div>
-  <div class="qrps" id="qrps">
-    <button class="qr" onclick="sendQuick(this.textContent)">📚 Kurslar</button>
-    <button class="qr" onclick="sendQuick(this.textContent)">💰 Narxlar</button>
-    <button class="qr" onclick="sendQuick(this.textContent)">📍 Manzil</button>
-    <button class="qr" onclick="sendQuick(this.textContent)">✍️ Yozilish</button>
-  </div>
-  <div class="cinp"><button class="cmic">🎤</button><input type="text" id="chat-input" placeholder="Xabar yozing... 💬" onkeydown="if(event.key==='Enter')sendChat()"><button class="csend" onclick="sendChat()">➤</button></div>
-</div>
-
-<!-- ARIZA MODAL -->
-<div class="mov" id="ariza-modal" style="display:none">
-  <div class="modal" style="max-width:460px">
-    <button class="mx" onclick="closeAriza()">✕</button>
-    <div id="ariza-content">
-      <!-- Ariza shakli -->
-      <div id="ariza-form-block">
-        <div style="font-size:2.5rem;text-align:center;margin-bottom:8px">📝</div>
-        <h2 style="font-family:var(--fh);font-size:1.5rem;margin-bottom:5px;text-align:center">Ariza qoldirish</h2>
-        <p style="color:var(--txd);font-size:.875rem;font-weight:600;margin-bottom:22px;text-align:center">Ma'lumotlaringizni qoldiring — biz siz bilan bog'lanamiz!</p>
-        <div class="fg"><label style="display:block;font-size:.85rem;font-weight:800;margin-bottom:7px;color:var(--txd)">Ismingiz *</label>
-          <input type="text" id="ariza-ism" class="form-inp" placeholder="Ism va familiya" oninput="clearArizaErr()"></div>
-        <div class="fg"><label style="display:block;font-size:.85rem;font-weight:800;margin-bottom:7px;color:var(--txd)">Telefon *</label>
-          <input type="tel" id="ariza-tel" class="form-inp" placeholder="+998 90 123 45 67" oninput="clearArizaErr()"></div>
-        <div class="fg"><label style="display:block;font-size:.85rem;font-weight:800;margin-bottom:7px;color:var(--txd)">Qiziqadigan kurs</label>
-          <select id="ariza-kurs" class="form-inp">
-            <option value="">— Kursni tanlang —</option>
-            <option>General English</option><option>IELTS Tayyorlov</option>
-            <option>Matematika</option><option>IT & Dasturlash</option>
-            <option>Robotika & Arduino</option><option>Mental Arifmetika</option>
-            <option>Maktabgacha ta'lim</option><option>Sport</option>
-          </select>
-        </div>
-        <div id="ariza-err" style="display:none;color:#be123c;font-size:.82rem;font-weight:700;margin-bottom:10px;background:var(--pkl);padding:8px 12px;border-radius:8px">⚠️ Xatolik</div>
-        <button class="btn btn-f" id="ariza-btn" style="width:100%;padding:14px;font-size:1rem;border-radius:50px" onclick="submitAriza()">📨 Ariza yuborish</button>
-        <p style="text-align:center;margin-top:14px;font-size:.8rem;color:var(--txm);font-weight:600">Biz 10:30 dan 20:00 gacha bog'lanamiz 📞</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- RAHMAT MODAL -->
-<div class="mov" id="rahmat-modal" style="display:none">
-  <div class="modal" style="max-width:440px;text-align:center">
-    <button class="mx" onclick="closeRahmat()">✕</button>
-    <div style="font-size:3.5rem;margin-bottom:10px">🎉</div>
-    <div style="display:flex;justify-content:center;gap:6px;font-size:1.5rem;margin-bottom:16px">⭐⭐⭐</div>
-    <h2 style="font-family:var(--fh);font-size:1.6rem;margin-bottom:10px;color:var(--tx)">Rahmat, <span id="rahmat-ism" style="color:var(--yd)">do'stim</span>!</h2>
-    <p style="color:var(--txd);font-size:.95rem;font-weight:600;line-height:1.7;margin-bottom:20px">Arizangiz muvaffaqiyatli qabul qilindi! 🎓<br>Tez orada siz bilan bog'lanamiz.</p>
-    <!-- Kutish kartochkasi -->
-    <div style="background:linear-gradient(135deg,var(--y),var(--or));border-radius:20px;padding:22px 20px;margin-bottom:20px;box-shadow:0 8px 28px rgba(251,191,36,.4)">
-      <div style="font-size:1.4rem;margin-bottom:8px">📅</div>
-      <div style="font-family:var(--fh);font-size:1.2rem;color:#fff;margin-bottom:8px">Sizni kutamiz!</div>
-      <div style="color:rgba(255,255,255,.95);font-size:.95rem;font-weight:700;line-height:1.7">
-        ⏰ Ertaga <strong>soat 10:30</strong> dan<br>
-        <strong>kechki 20:00</strong> gacha<br>
-        farzandingiz bilan keling! 👨‍👩‍👧
-      </div>
-      <div style="background:rgba(255,255,255,.2);border-radius:12px;padding:10px 14px;margin-top:12px;font-size:.84rem;color:#fff;font-weight:700">
-        📍 Eng yaqin filialni tanlang
-      </div>
-    </div>
-    <div style="display:flex;gap:8px;justify-content:center;margin-bottom:16px;flex-wrap:wrap">
-      <div style="background:var(--grl);border:2px solid var(--gr);border-radius:50px;padding:6px 14px;font-size:.76rem;font-weight:800;color:#065f46">✅ Bepul konsultatsiya</div>
-      <div style="background:var(--bll);border:2px solid var(--bl);border-radius:50px;padding:6px 14px;font-size:.76rem;font-weight:800;color:#0369a1">📚 Sinov darsi</div>
-      <div style="background:var(--pul);border:2px solid var(--pu);border-radius:50px;padding:6px 14px;font-size:.76rem;font-weight:800;color:#7c3aed">🎁 Sovg'a</div>
-    </div>
-    <p style="font-size:.88rem;font-weight:700;color:var(--txd)">Kuniz xayrli o'tsin! ☀️</p>
-    <button class="btn btn-f" style="margin-top:16px;width:100%;padding:13px;font-size:.95rem;border-radius:50px" onclick="closeRahmat()">🏠 Bosh sahifaga qaytish</button>
-    <p id="rahmat-cd" style="font-size:.76rem;color:var(--txm);margin-top:10px;font-weight:600">Bu oyna <span id="cd-sec" style="color:var(--yd);font-weight:800">10</span> soniyadan keyin yopiladi</p>
-  </div>
-</div>
-
-<!-- TEACHER MODAL -->
-<div class="mov" id="tmod"><div class="modal tmod"><button class="mx" onclick="document.getElementById('tmod').classList.remove('open')">✕</button><div id="tmod-content"></div></div></div>
-<div class="mov" id="cmod"><div class="modal" style="max-width:520px"><button class="mx" onclick="document.getElementById('cmod').classList.remove('open')">✕</button><div id="cmod-content"></div></div></div>
-
-<script src="static/js/main.js"></script>
+<script src="static/js/kt-data.js"></script>
+<script src="static/js/kt-platform.js"></script>
+<script src="static/js/kt-assistant.js"></script>
+<script src="static/js/ks.js"></script>
 <script>
-// ── ARIZA MODAL ──
-function openAriza(){
-  document.getElementById('ariza-modal').classList.add('open');
-  document.getElementById('ariza-modal').style.display='flex';
-  document.getElementById('ariza-form-block').style.display='block';
-}
-function closeAriza(){
-  document.getElementById('ariza-modal').classList.remove('open');
-  document.getElementById('ariza-modal').style.display='none';
-}
-document.getElementById('ariza-modal').addEventListener('click',function(e){if(e.target===this)closeAriza();});
-
-function clearArizaErr(){document.getElementById('ariza-err').style.display='none';}
-
-function submitAriza(){
-  var ism = document.getElementById('ariza-ism').value.trim();
-  var tel = document.getElementById('ariza-tel').value.trim();
-  var err = document.getElementById('ariza-err');
-  if(!ism){err.textContent='⚠️ Ismingizni kiriting!';err.style.display='block';return;}
-  if(!tel){err.textContent='⚠️ Telefon raqamingizni kiriting!';err.style.display='block';return;}
-  closeAriza();
-  document.getElementById('rahmat-ism').textContent = ism.split(' ')[0];
-  document.getElementById('rahmat-modal').classList.add('open');
-  document.getElementById('rahmat-modal').style.display='flex';
-  startCountdown();
-}
-
-// ── RAHMAT MODAL ──
-var cdTimer=null;
-function startCountdown(){
-  var sec=10;
-  var el=document.getElementById('cd-sec');
-  if(cdTimer)clearInterval(cdTimer);
-  cdTimer=setInterval(function(){
-    sec--;
-    if(el)el.textContent=sec;
-    if(sec<=0){clearInterval(cdTimer);closeRahmat();}
-  },1000);
-}
-function closeRahmat(){
-  if(cdTimer)clearInterval(cdTimer);
-  document.getElementById('rahmat-modal').classList.remove('open');
-  document.getElementById('rahmat-modal').style.display='none';
-}
-document.getElementById('rahmat-modal').addEventListener('click',function(e){if(e.target===this)closeRahmat();});
-
-// Kurs kartochkasidan ariza ochish
-function openCourseAriza(kursNomi){
-  openAriza();
-  setTimeout(function(){
-    var sel=document.getElementById('ariza-kurs');
-    if(sel){for(var i=0;i<sel.options.length;i++){if(sel.options[i].text===kursNomi){sel.selectedIndex=i;break;}}}
-  },100);
-}
-
-// "Yozilish" tugmasi barcha joylarda
-function openMod(type){openAriza();}
-
+(function(){
+  const D=KTD, esc=KS.esc;
+  const POS={samarqand:[110,300,'w'],novza:[440,250,'s'],yunusobod:[560,160,'n']};
+  const LINE={samarqand:'#7c3aed',novza:'#ff2fd5',yunusobod:'#ff2fd5'};
+  const LBL={w:[0,-32,'middle'],s:[0,44,'middle'],n:[0,-30,'middle'],e:[28,6,'start'],wl:[-30,6,'end']};
+  const CODE={yunusobod:'YUN',novza:'NOV',samarqand:'SAM'};
+  let cur=(location.hash.slice(1)&&POS[location.hash.slice(1)])?location.hash.slice(1):'yunusobod';
+  const g=document.getElementById('stations');
+  g.innerHTML=D.BRANCHES.map(b=>{ const [x,y,o]=POS[b.id]; const l=LBL[o];
+    return `<g class="st" tabindex="0" role="button" data-b="${b.id}" aria-label="${esc(b.name)} filiali">
+      <circle class="o" cx="${x}" cy="${y}" r="16"/>
+      <text x="${x+l[0]}" y="${y+l[1]}" text-anchor="${l[2]}">${esc(b.name)}</text>
+      <text class="s" x="${x+l[0]}" y="${y+l[1]+18}" text-anchor="${l[2]}">${b.students} o‘quvchi</text></g>`; }).join('');
+  function show(id, scroll){
+    cur=id; const b=D.BRANCHES.find(x=>x.id===id);
+    g.querySelectorAll('.st').forEach(s=>s.classList.toggle('on',s.dataset.b===id));
+    const cls=D.CLASSES.filter(x=>x.branch===id), gs=D.CLUB_GROUPS.filter(x=>x.branch===id);
+    const q=encodeURIComponent(`${b.address}, ${b.city}`);
+    const row=(name,sub,cap,en)=>{ const free=cap-en; return `<div class="grp"><b>${name}</b><small>${sub} · ${free>0?free+' o‘rin':'to‘la'}</small><div class="seats" aria-hidden="true">${Array.from({length:cap},(_,k)=>`<i class="${k<en?'f':''}"></i>`).join('')}</div></div>`; };
+    document.getElementById('det').innerHTML=`<span class="ks-stk" style="--rot:-3deg;background:${LINE[id]};color:#fff">${b.city==='Toshkent'?'Toshkent halqasi':'Samarqand yo‘li'}</span>
+      <h2 style="margin-top:16px">${esc(b.name)}</h2><p class="city">${esc(b.city)}</p>
+      <dl><dt>Manzil</dt><dd>${esc(b.address)}</dd><dt>Ish vaqti</dt><dd>Har kuni ${esc(b.hours)}</dd><dt>Telefon</dt><dd><a href="tel:${b.phone.replace(/[^+\d]/g,'')}">${esc(b.phone)}</a></dd><dt>O‘quvchilar</dt><dd>${b.students}</dd></dl>
+      <h3 class="ks-h3" style="font-size:1.15rem">Sinflar va to‘garaklar <small style="font:800 .75rem var(--fb);color:var(--ink3)">· demo</small></h3>
+      ${cls.length||gs.length ? cls.map(x=>row('🏫 '+esc(x.name)+' sinf', esc(x.room)+'-xona', x.cap, x.enrolled)).join('') + gs.map(x=>{ const c=D.club(x.club); return row(c.emoji+' '+esc(x.name), esc(x.days)+' '+esc(x.time), x.cap, x.enrolled); }).join('') : '<p style="font-weight:700;color:var(--ink2);margin-top:8px">Sinflar va bo‘sh o‘rinlar — qabul bo‘limida. Qo‘ng‘iroq qiling yoki ariza qoldiring.</p>'}
+      <div class="acts"><a class="ks-btn ks-btn-mag" href="yozilish.html?branch=${id}">Shu filialga ariza</a><a class="ks-btn ks-btn-white" href="https://www.google.com/maps/search/?api=1&query=${q}" target="_blank" rel="noopener">Yo‘l ko‘rsatish ↗</a></div>`;
+    if(scroll && innerWidth<1040) document.getElementById('det').scrollIntoView({behavior:'smooth',block:'start'});
+  }
+  g.addEventListener('click',e=>{ const s=e.target.closest('.st'); if(s) show(s.dataset.b,true); });
+  g.addEventListener('keydown',e=>{ const s=e.target.closest('.st'); if(s&&(e.key==='Enter'||e.key===' ')){ e.preventDefault(); show(s.dataset.b,true); } });
+  document.getElementById('tickets').innerHTML=D.BRANCHES.map(b=>`<button class="ks-card hov tk" type="button" id="${b.id}" data-b="${b.id}" style="--lc:${LINE[b.id]}"><span class="tk-stub" aria-hidden="true">${CODE[b.id]}</span><span class="tk-body"><b>${esc(b.name)}</b><small>${esc(b.address)}<br>${esc(b.hours)} · ${esc(b.phone)}</small><em>${b.students} o‘quvchi${(f=>f?` · sinflarda ${f} bo‘sh o‘rin`:'')(D.CLASSES.filter(x=>x.branch===b.id).reduce((s,x)=>s+Math.max(0,x.cap-x.enrolled),0))}</em></span></button>`).join('');
+  document.getElementById('tickets').addEventListener('click',e=>{ const t=e.target.closest('[data-b]'); if(t){ show(t.dataset.b); document.getElementById('metro').scrollIntoView({behavior:'smooth',block:'center'}); } });
+  document.getElementById('findF').onsubmit=e=>{ e.preventDefault(); const v=document.getElementById('findI').value.toLowerCase().replace(/[ʻ'`’]/g,'‘').trim(); const out=document.getElementById('findOut');
+    if(!v){ out.textContent='Tuman yoki shahar nomini yozing.'; return; }
+    const b=D.BRANCHES.find(x=>x.near.some(n=>v.includes(n)||n.includes(v)) || x.name.toLowerCase().includes(v));
+    if(b){ out.innerHTML=`Eng yaqini — <b>${esc(b.name)}</b> filiali.`; show(b.id,true); }
+    else if(/toshkent|tashkent/.test(v)){ out.textContent='Toshkentda 2 filial: Yunusobod va Novza. Tumaningizni yozing.'; }
+    else out.textContent='Bu hududda hali filial yo‘q. Eng yaqinini aniqlash uchun qo‘ng‘iroq qiling: +998 71 234-56-78.'; };
+  show(cur);
+})();
 </script>
-
 </body>
 </html>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bilim xaritasi — Katta Tanaffus</title>
+<link rel="stylesheet" href="static/css/platform.css">
+<style>
+  .hero{display:grid;grid-template-columns:1fr auto;gap:20px;align-items:center;background:var(--kp-grad);color:#fff;border-radius:var(--kp-r1);padding:24px 28px;position:relative;overflow:hidden}
+  .hero h2{font-family:var(--kp-fh);font-weight:400;font-size:1.8rem}
+  .hero p{font-weight:700;opacity:.92;margin-top:4px}
+  .hero-stats{display:flex;gap:10px}
+  .hero-stats div{background:rgba(255,255,255,.16);border-radius:16px;padding:10px 14px;text-align:center;min-width:92px}
+  .hero-stats b{display:block;font-family:var(--kp-fh);font-weight:400;font-size:1.5rem;line-height:1.1}
+  .hero-stats small{font-size:.74rem;font-weight:800;opacity:.9}
+  .map{overflow-x:auto}
+  .map svg{display:block;min-width:760px;width:100%;height:auto}
+  .node{cursor:pointer}
+  .node text{font-family:var(--kp-fb);font-weight:800}
+  .node:focus{outline:none}
+  .node:focus-visible circle.ring{stroke:var(--kp-ink);stroke-width:3}
+  .tdet{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;margin-top:10px;background:var(--kp-soft);border-radius:18px;padding:14px 16px}
+  .tdet .big{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;font-family:var(--kp-fh);color:#fff;font-size:1.05rem}
+  .quiz{display:flex;flex-direction:column;gap:12px}
+  .qprog{display:flex;gap:4px}
+  .qprog i{flex:1;height:6px;border-radius:4px;background:#efe6f7}
+  .qprog i.ok{background:#0f9f6e}.qprog i.no{background:#e11d48}.qprog i.cur{background:var(--acc)}
+  .qtext{font-family:var(--kp-fh);font-size:1.35rem;line-height:1.3}
+  .opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .opts button{border:2px solid var(--kp-line);background:#fff;border-radius:16px;padding:14px;font:800 1rem var(--kp-fb);cursor:pointer;text-align:left;color:var(--kp-ink)}
+  .opts button:hover{border-color:var(--acc)}
+  .opts button.ok{border-color:#0f9f6e;background:#dff6ee}
+  .opts button.no{border-color:#e11d48;background:#ffe4ea}
+  .explain{font-weight:700;font-size:.9rem;border-radius:14px;padding:10px 12px}
+  .result{text-align:center;padding:10px}
+  .result b{font-family:var(--kp-fh);font-weight:400;font-size:2.6rem;display:block;color:var(--accd)}
+  .chat{display:flex;flex-direction:column;gap:8px;height:300px;overflow-y:auto;background:var(--kp-soft);border-radius:18px;padding:12px}
+  .msg{max-width:85%;padding:10px 12px;border-radius:16px;font-weight:700;font-size:.9rem;line-height:1.45}
+  .msg.bot{background:#fff;align-self:flex-start;border-bottom-left-radius:5px}
+  .msg.me{background:var(--acc);color:#fff;align-self:flex-end;border-bottom-right-radius:5px}
+  .msg.safe{background:#fff1f3;color:#9f1239;border:1.5px solid #fecdd3}
+  .chatin{display:flex;gap:8px;margin-top:10px}
+  .chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+  .chips button{border:1.5px solid var(--kp-line);background:#fff;border-radius:20px;padding:6px 11px;font:800 .78rem var(--kp-fb);cursor:pointer;color:var(--kp-ink2)}
+  .rw{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+  .rw button{border:1.5px solid var(--kp-line);background:#fff;border-radius:18px;padding:14px;text-align:left;font:inherit;cursor:pointer;display:flex;flex-direction:column;gap:4px;color:var(--kp-ink)}
+  .rw button:hover:not([disabled]){border-color:var(--acc)}
+  .rw button[disabled]{opacity:.5;cursor:not-allowed}
+  .rw span{font-size:1.6rem}
+  .rw b{font-size:.86rem;line-height:1.25}
+  .rw small{font-weight:900;color:#b45309}
+  @media (max-width:860px){.hero{grid-template-columns:1fr}.opts{grid-template-columns:1fr}}
+</style>
+</head>
+<body class="kp-body" data-role="student">
+<div class="kp-app">
+  <aside class="kp-side" id="kpSide"></aside>
+  <div class="kp-main">
+    <header class="kp-top">
+      <div><h1>Bilim xaritasi</h1><div class="kp-sub">Ingliz tili · 5-A sinf · kuchaytirilgan dastur</div></div>
+      <div class="kp-top-r"><a class="kp-btn kp-btn-ghost kp-btn-sm" href="dashboard.html">Portal bosh sahifasi</a><div class="kp-user" id="me"></div></div>
+    </header>
+    <div class="kp-content">
+      <div class="hero">
+        <div><h2>Salom, Sardor! 👋</h2><p id="heroP"></p></div>
+        <div class="hero-stats"><div><b id="hsCoin">0</b><small>coin</small></div><div><b id="hsStreak">5</b><small>kunlik seriya</small></div><div><b id="hsMin">0/15</b><small>bugun, daqiqa</small></div></div>
+      </div>
+
+      <section class="kp-panel kp-anchor" id="xarita">
+        <div class="kp-ph"><div><h2>Mavzular yo‘li</h2><p>Rang — o‘zlashtirish darajasi. Keyingi mavzu oldingisi “O‘zlashtirdi” (70%) bo‘lganda yoki o‘qituvchi ochganda ochiladi.</p></div></div>
+        <div class="map" id="map"></div>
+        <div class="tdet" id="tdet"></div>
+      </section>
+
+      <div class="kp-grid kp-g2">
+        <section class="kp-panel kp-anchor" id="mashq">
+          <div class="kp-ph"><div><h2>Bugungi 5 daqiqalik mashq</h2><p id="mqSub"></p></div><div class="kp-ph-r"><span class="kp-chip ai">AI tanladi</span></div></div>
+          <div class="quiz" id="quiz"></div>
+        </section>
+        <section class="kp-panel kp-anchor" id="yordamchi">
+          <div class="kp-ph"><div><h2>AI yordamchi</h2><p id="aiSub"></p></div></div>
+          <div class="kp-seg" role="group" aria-label="Yosh rejimi" id="mode" style="margin-bottom:10px"><button aria-pressed="true" data-m="kids">7–12 yosh (Sardor)</button><button aria-pressed="false" data-m="teen">13+ rejimini ko‘rish</button></div>
+          <div class="chat" id="chat" aria-live="polite"></div>
+          <form class="chatin" id="chatF"><label class="kp-sr" for="chatI">Xabar</label><input class="kp-input" id="chatI" autocomplete="off" placeholder="Savolingizni yozing"><button class="kp-btn kp-btn-acc" type="submit">Yuborish</button></form>
+          <div class="chips" id="chips"></div>
+        </section>
+      </div>
+
+      <div class="kp-grid kp-g2">
+        <section class="kp-panel kp-anchor" id="coin">
+          <div class="kp-ph"><div><h2>Coin qanday yig‘iladi</h2><p>Harakat va o‘sish uchun — qayta yechish coin bermaydi</p></div></div>
+          <table class="kp-table" id="rules"></table>
+        </section>
+        <section class="kp-panel kp-anchor" id="sovga">
+          <div class="kp-ph"><div><h2>Sovg‘a so‘rash</h2><p>So‘rov ota-onangga boradi, tasdiqlansa — filialdan olasan</p></div></div>
+          <div class="rw" id="rw"></div>
+          <div class="kp-list" id="ledger" style="margin-top:14px"></div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="static/js/kt-data.js"></script>
+<script src="static/js/kt-platform.js"></script>
+<script>
+(function(){
+  const {esc, store, avatar} = KT; const D = KTD;
+  document.getElementById('me').innerHTML = avatar('Sardor Yusupov','#d61bb6') + '<span>Sardor Yusupov<small>11 yosh · 5-sinf</small></span>';
+  KT.mountSide({role:'student', active:'#xarita', nav:[
+    {href:'#xarita', icon:'🗺️', label:'Bilim xaritasi'}, {href:'#mashq', icon:'⚡', label:'Bugungi mashq'}, {href:'#yordamchi', icon:'🤖', label:'AI yordamchi'},
+    {href:'#coin', icon:'🪙', label:'Coin qoidalari'}, {href:'#sovga', icon:'🎁', label:'Sovg‘alar'},
+    {href:'lessons.html', icon:'📚', label:'Darslar'}, {href:'marks.html', icon:'📊', label:'Baholar'}
+  ]});
+
+  const ID='sardor';
+  function mastery(){ const m=store.get('mastery'); return m || D.MASTERY.sardor.map(t=>({...t})); }
+  const ORDER = D.subject('english').units;
+  function hero(){
+    const coins=store.get('coins',{})[ID]||0; const pr=store.get('practice',{})[ID]||{streak:5,today:0}; const lim=(store.get('consents',{}).screen)||15;
+    document.getElementById('hsCoin').textContent=coins; document.getElementById('hsStreak').textContent=pr.streak; document.getElementById('hsMin').textContent=`${pr.today}/${lim}`;
+    const m=mastery(); const ok=m.filter(t=>t.p>=.7).length;
+    document.getElementById('heroP').textContent=`${ok} ta mavzu o‘zlashtirilgan. Bugun Past Simple bo‘yicha 5 daqiqa — va seriya ${pr.streak+1} kunga chiqadi.`;
+  }
+
+  /* ---- mavzular yo‘li (SVG) ---- */
+  let sel='Past Simple';
+  function unlocked(i,m){ if(i===0) return true; const prev=m.find(t=>t.topic===ORDER[i-1]); const me=m.find(t=>t.topic===ORDER[i]); return (me&&me.p>0) || (prev&&prev.p>=.7); }
+  function renderMap(){
+    const m=mastery(); const W=980,H=230; const n=ORDER.length;
+    const pos=ORDER.map((t,i)=>({x:70+i*(W-140)/(n-1), y:H/2+Math.sin(i*1.05)*58}));
+    let path=`M${pos[0].x},${pos[0].y}`; for(let i=1;i<n;i++){ const a=pos[i-1],b=pos[i]; const mx=(a.x+b.x)/2; path+=` C${mx},${a.y} ${mx},${b.y} ${b.x},${b.y}`; }
+    const nodes=ORDER.map((t,i)=>{ const mt=m.find(x=>x.topic===t)||{p:0}; const L=D.levelOf(mt.p); const un=unlocked(i,m); const p=pos[i]; const isSel=t===sel;
+      const fill=un? (mt.p?L.color:'#fff') : '#f1ecf6'; const stroke=un?(mt.p?L.color:'#c9b8e6'):'#e1d8ea';
+      return `<g class="node" tabindex="0" role="button" aria-label="${esc(t)}: ${un?esc(L.name):'yopiq'}" data-t="${esc(t)}">
+        ${isSel?`<circle cx="${p.x}" cy="${p.y}" r="38" fill="none" stroke="${un?L.color:'#c9b8e6'}" stroke-width="3" stroke-dasharray="4 5" opacity=".7"/>`:''}
+        <circle class="ring" cx="${p.x}" cy="${p.y}" r="28" fill="${fill}" stroke="${stroke}" stroke-width="3"/>
+        <text x="${p.x}" y="${p.y+6}" text-anchor="middle" font-size="${un?16:15}" fill="${mt.p&&un?'#fff':'#8f86a3'}">${un?(mt.p?Math.round(mt.p*100):'▶'):'🔒'}</text>
+        <text x="${p.x}" y="${p.y+(i%2?-44:52)}" text-anchor="middle" font-size="12.5" fill="#2a1248">${esc(t.length>18?t.replace(': ',': ').slice(0,20)+'…':t)}</text></g>`; }).join('');
+    document.getElementById('map').innerHTML = `<svg viewBox="0 0 ${W} ${H}" role="group" aria-label="Mavzular yo‘li"><path d="${path}" fill="none" stroke="#eadff5" stroke-width="10" stroke-linecap="round"/><path d="${path}" fill="none" stroke="#d8c3f0" stroke-width="2" stroke-dasharray="2 8" stroke-linecap="round"/>${nodes}</svg>`;
+    const mt=m.find(x=>x.topic===sel)||{p:0}; const L=D.levelOf(mt.p); const i=ORDER.indexOf(sel); const un=unlocked(i,m);
+    document.getElementById('tdet').innerHTML = `<span class="big" style="background:${un?(mt.p?L.color:'#c9b8e6'):'#cfc6da'}">${un?(mt.p?Math.round(mt.p*100)+'%':'—'):'🔒'}</span><div><b>${esc(sel)}</b><div class="kp-small kp-muted kp-strong">${un?esc(L.name)+' — '+esc(L.hint):'Yopiq: oldingi mavzu 70% ga yetganda yoki o‘qituvchi ochganda ochiladi'}</div></div>${un && mt.p<.9?`<a class="kp-btn kp-btn-acc kp-btn-sm" href="#mashq">Mashq qilish</a>`:''}`;
+  }
+  document.getElementById('map').addEventListener('click',e=>{ const g=e.target.closest('.node'); if(g){ sel=g.dataset.t; renderMap(); } });
+  document.getElementById('map').addEventListener('keydown',e=>{ const g=e.target.closest('.node'); if(g && (e.key==='Enter'||e.key===' ')){ e.preventDefault(); sel=g.dataset.t; renderMap(); const n=document.querySelector(`.node[data-t="${CSS.escape(sel)}"]`); if(n) n.focus(); } });
+
+  /* ---- 5 daqiqalik mashq (AI-12) ---- */
+  const Q=[
+    {q:'Yesterday I ___ my grandma.', o:['visit','visited','visiting'], a:1, e:'To‘g‘ri fe’l: visit → visited (+ed).'},
+    {q:'We ___ to the park last Sunday.', o:['went','goed','go'], a:0, e:'go — noto‘g‘ri fe’l: go → went.'},
+    {q:'She ___ a funny film.', o:['seed','saw','seen'], a:1, e:'see → saw. “seen” — 3-shakl, Past Simple’da ishlatilmaydi.'},
+    {q:'___ you play football yesterday?', o:['Do','Did','Were'], a:1, e:'Savolda Did + fe’lning 1-shakli: Did you play…?'},
+    {q:'He didn‘t ___ his homework.', o:['did','do','done'], a:1, e:'didn‘t dan keyin fe’l 1-shaklda: didn‘t do.'}
+  ];
+  let qi=0, res=[], firstTry=!(store.get('practice',{})[ID]||{}).doneToday;
+  function quiz(){
+    const box=document.getElementById('quiz'); const t=D.levelOf(mastery().find(x=>x.topic==='Past Simple').p);
+    document.getElementById('mqSub').textContent=`Past Simple — ${t.name}. Zaif joy: noto‘g‘ri fe’llar. ${firstTry?'Birinchi urinish coin beradi.':'Qayta yechish — coin bermaydi, lekin o‘zlashtirish hisoblanadi.'}`;
+    if(qi>=Q.length) return finish();
+    const q=Q[qi];
+    box.innerHTML=`<div class="qprog">${Q.map((_,i)=>`<i class="${i<qi?(res[i]?'ok':'no'):i===qi?'cur':''}"></i>`).join('')}</div><div class="qtext">${esc(q.q)}</div><div class="opts">${q.o.map((o,i)=>`<button data-o="${i}">${esc(o)}</button>`).join('')}</div><div id="exp"></div>`;
+    box.querySelectorAll('[data-o]').forEach(b=>b.onclick=()=>{
+      const ok=+b.dataset.o===q.a; res[qi]=ok; box.querySelectorAll('[data-o]').forEach(x=>{ x.disabled=true; if(+x.dataset.o===q.a) x.classList.add('ok'); });
+      if(!ok) b.classList.add('no');
+      document.getElementById('exp').innerHTML=`<div class="explain" style="background:${ok?'#dff6ee':'#fff1f3'}">${ok?'✓ To‘g‘ri! ':'Deyarli. '}${esc(q.e)}</div><button class="kp-btn kp-btn-acc" style="margin-top:10px" id="nx">${qi===Q.length-1?'Natija':'Keyingisi'}</button>`;
+      document.getElementById('nx').onclick=()=>{ qi++; quiz(); }; document.getElementById('nx').focus();
+    });
+  }
+  function finish(){
+    const score=res.filter(Boolean).length; const m=mastery(); const t=m.find(x=>x.topic==='Past Simple'); const before=t.p;
+    t.p=Math.min(.95, +(t.p + (score/Q.length-.4)*.25).toFixed(2)); store.set('mastery', m);
+    let coin=0, notes=[];
+    if(firstTry){ coin=Math.max(1,score); notes.push(`+${coin} coin (1-urinish)`); }
+    if(before<.7 && t.p>=.7){ coin+=10; notes.push('+10 coin: mavzu “O‘zlashtirdi” ga chiqdi'); }
+    const pr=store.get('practice',{}); const cur=pr[ID]||{streak:5,today:0}; cur.today=Math.min(15,cur.today+5); if(!cur.doneToday){ cur.streak++; cur.doneToday=true; } if(cur.streak===7 && firstTry){ coin+=5; notes.push('+5 coin: 7 kunlik seriya'); } pr[ID]=cur; store.set('practice',pr);
+    if(coin){ store.update('coins',c=>({...c,[ID]:(c[ID]||0)+coin}),{}); store.push('ledger',{child:ID,delta:coin,reason:`Mashq: Past Simple ${score}/5`,ts:Date.now()}); }
+    KT.notifyParent({child:ID, kind:'grade', title:'Mashq', text:`Sardor 5 daqiqalik mashqni bajardi: Past Simple ${score}/5. O‘zlashtirish ${Math.round(before*100)}% → ${Math.round(t.p*100)}%.`});
+    document.getElementById('quiz').innerHTML=`<div class="result"><b>${score}/5</b><div class="kp-strong">Past Simple: ${Math.round(before*100)}% → ${Math.round(t.p*100)}% · ${esc(D.levelOf(t.p).name)}</div><div class="kp-small kp-muted kp-strong" style="margin-top:6px">${notes.length?esc(notes.join(' · ')):'Qayta urinish — coin berilmadi'}</div><button class="kp-btn kp-btn-ghost" style="margin-top:14px" id="again">Yana bir marta</button></div>`;
+    firstTry=false; document.getElementById('again').onclick=()=>{ qi=0; res=[]; quiz(); };
+    renderMap(); hero();
+  }
+
+  /* ---- AI yordamchi: yoshga mos rejim (AI-G3, AI-11) ---- */
+  let mode='kids', step=0;
+  const chat=document.getElementById('chat');
+  function say(t,who,cls){ const d=document.createElement('div'); d.className='msg '+who+(cls?' '+cls:''); d.innerHTML=t; chat.appendChild(d); chat.scrollTop=chat.scrollHeight; }
+  function chips(list){ document.getElementById('chips').innerHTML=list.map(x=>`<button type="button">${esc(x)}</button>`).join(''); document.querySelectorAll('#chips button').forEach(b=>b.onclick=()=>send(b.textContent)); }
+  function resetChat(){
+    chat.innerHTML=''; step=0;
+    if(mode==='kids'){ document.getElementById('aiSub').textContent='13 yoshgacha: faqat o‘qituvchi bergan mashqlar va qisqa tushuntirishlar'; say('Salom, Sardor! Men bugungi mavzu — <b>Past Simple</b> bo‘yicha yordam beraman. Qisqa tushuntirish kerakmi yoki mashqmi?','bot'); chips(['Past Simple nima?','Noto‘g‘ri fe’llar','Futbol haqida gaplashamiz']); }
+    else { document.getElementById('aiSub').textContent='13+: Sokratik repetitor — javobni bermaydi, savol bilan yo‘naltiradi'; say('Salom! Men Sokratik repetitorman: javobni darhol aytmayman, birga o‘ylaymiz. Dars materiali: Past Simple.','bot'); chips(['“I goed to school” — to‘g‘rimi? Javobini ayt','went','Insho yozib ber']); }
+  }
+  function reply(t){
+    const s=t.toLowerCase().replace(/[ʻ'`’]/g,'‘');
+    if(/o‘zimni|o‘ldir|urish|urishadi|xafa qil|bezori|qo‘rq/.test(s)) return ['Bu juda muhim. Men bu haqda maslahat bera olmayman — hozir o‘qituvching yoki ota-onang bilan gaplash. Maktabdagi mas’ul xodimga xabar berildi.','safe'];
+    if(mode==='kids'){
+      if(/past simple nima|tushuntir/.test(s)) return ['<b>Past Simple</b> — o‘tgan zamondagi tugagan ish. To‘g‘ri fe’llarga <b>-ed</b> qo‘shiladi: play → played. Noto‘g‘ri fe’llar yodlanadi: go → went. Mashq qilamizmi? ⚡'];
+      if(/noto‘g‘ri fe|irregular/.test(s)) return ['Bugungi 5 ta fe’l: go → <b>went</b>, see → <b>saw</b>, do → <b>did</b>, have → <b>had</b>, buy → <b>bought</b>. Yuqoridagi mashqda sinab ko‘r!'];
+      if(/mashq/.test(s)) return ['Ajoyib! “Bugungi 5 daqiqalik mashq” bo‘limiga o‘t — u sening zaif joying bo‘yicha tanlangan.'];
+      return ['Men faqat o‘qituvching bergan mavzular bo‘yicha yordam beraman 🙂 Bugungi mavzu — Past Simple. Qisqa tushuntirish yoki mashq tanlaysanmi?'];
+    }
+    if(/javob|ayt|yozib ber|insho/.test(s) && step===0){ step=1; return ['Yaxshi savol! Keling, o‘zing topasan. <b>go</b> — to‘g‘ri fe’lmi yoki noto‘g‘ri? Noto‘g‘ri fe’llar jadvalidan go ni top: uning 2-shakli qanday?']; }
+    if(/insho|yozib ber/.test(s)) return ['Inshoni sen o‘rningga yozmayman — lekin reja tuzishda yordam beraman: 1) kecha nima qilding? 2) qayerga bording? 3) qanday his qilding? Har biriga bitta gap yozib ko‘r.'];
+    if(/\bwent\b/.test(s)){ step=2; return ['Barakalla! 🎉 Endi to‘liq gapni o‘zing yozib ko‘r: “I ___ to school yesterday.” Nima uchun bu yerda <b>went</b> ishlatiladi — qaysi so‘z o‘tgan zamonni bildiryapti?']; }
+    if(/yesterday|kecha/.test(s)) return ['Aynan! “yesterday” — Past Simple belgisi. Endi “see” bilan bitta gap tuz.'];
+    if(/futbol|o‘yin|kino|musiqa/.test(s)) return ['Men faqat dars mavzulari bo‘yicha gaplashaman. Lekin futbol haqida Past Simple’da gap tuzib ko‘r: “Yesterday we ___ football.”'];
+    return ['O‘ylab ko‘r: bu gapda harakat qachon bo‘lgan — hozirmi yoki o‘tgan zamondami? Qaysi so‘z senga ishora beradi?'];
+  }
+  function send(t){ t=String(t||'').trim(); if(!t) return; say(esc(t),'me'); const [r,c]=reply(t); setTimeout(()=>say(r,'bot',c),350); }
+  document.getElementById('chatF').onsubmit=e=>{ e.preventDefault(); const i=document.getElementById('chatI'); send(i.value); i.value=''; };
+  document.getElementById('mode').addEventListener('click',e=>{ const b=e.target.closest('[data-m]'); if(!b) return; mode=b.dataset.m; document.querySelectorAll('#mode button').forEach(x=>x.setAttribute('aria-pressed',String(x===b))); resetChat(); });
+
+  /* ---- coin va sovg‘alar ---- */
+  document.getElementById('rules').innerHTML = `<thead><tr><th>Harakat</th><th class="num">Coin</th><th>Cheklov</th></tr></thead><tbody>`+D.COIN_RULES.map(r=>`<tr><td>${esc(r.act)}</td><td class="num"><b>${esc(r.coin)}</b></td><td class="kp-small kp-muted">${esc(r.limit)}</td></tr>`).join('')+'</tbody>';
+  function renderRw(){
+    const coins=store.get('coins',{})[ID]||0; const pending=store.get('rewardOrders',[]).filter(o=>o.child===ID && o.status==='requested').map(o=>o.reward);
+    document.getElementById('rw').innerHTML = D.REWARDS.map(r=>`<button data-r="${r.id}" ${coins<r.price||pending.includes(r.id)?'disabled':''}><span>${r.emoji}</span><b>${esc(r.title)}</b><small>${r.price} coin${pending.includes(r.id)?' · so‘ralgan':''}</small></button>`).join('');
+    const led=store.get('ledger',[]).filter(l=>l.child===ID).slice(0,5);
+    document.getElementById('ledger').innerHTML = '<div class="kp-small kp-strong kp-muted" style="margin-bottom:4px">Coin tarixi (ledger)</div>'+led.map(l=>`<div class="kp-row"><div class="kp-row-main"><b style="font-size:.86rem">${esc(l.reason)}</b><small>${KT.ago(l.ts)}</small></div><b style="color:${l.delta>0?'#08704d':'#be123c'}">${l.delta>0?'+':''}${l.delta}</b></div>`).join('');
+  }
+  document.getElementById('rw').addEventListener('click',e=>{ const b=e.target.closest('[data-r]'); if(!b||b.disabled) return; const r=D.REWARDS.find(x=>x.id===b.dataset.r);
+    store.update('coins',c=>({...c,[ID]:(c[ID]||0)-r.price}),{}); store.push('ledger',{child:ID,delta:-r.price,reason:`Band qilindi: ${r.title}`,ts:Date.now()});
+    store.push('rewardOrders',{id:KT.uid('RO'),child:ID,reward:r.id,status:'requested',ts:Date.now()});
+    KT.notifyParent({child:ID, kind:'reward', title:'Sovg‘a so‘rovi', text:`Sardor “${r.title}” (${r.price} coin) sovg‘asini so‘radi. Kabinetda tasdiqlang yoki rad eting.`});
+    KT.toast('So‘rov ota-onangga yuborildi — coin band qilindi'); });
+
+  hero(); renderMap(); quiz(); resetChat(); renderRw();
+  store.on(['coins','ledger','rewardOrders'], ()=>{ renderRw(); hero(); });
+})();
+</script>
+</body>
+</html>

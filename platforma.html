@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Platforma — Katta Tanaffus: arizadan haftalik hisobotgacha</title>
+<meta name="description" content="Xususiy maktab uchun platforma: AI qabul assistenti, adaptiv diagnostika, 30 soniyalik davomat, Telegramda ota-ona hisoboti va bolalar xavfsizligi qoidalari.">
+<meta property="og:title" content="Platforma — Katta Tanaffus: arizadan haftalik hisobotgacha">
+<meta property="og:description" content="Xususiy maktab uchun platforma: AI qabul assistenti, adaptiv diagnostika, 30 soniyalik davomat, Telegramda ota-ona hisoboti va bolalar xavfsizligi qoidalari.">
+<meta property="og:image" content="static/img/logo-brand.png">
+<link rel="icon" href="static/img/logo-brand.png">
+<link rel="stylesheet" href="static/css/platform.css">
+<link rel="stylesheet" href="static/css/site.css">
+
+</head>
+<body class="ks" data-role="guest">
+<a class="ks-skip" href="#main">Asosiy mazmunga o‘tish</a>
+<header class="ks-head">
+  <div class="ks-head-in">
+    <a class="ks-logo" href="index.html" aria-label="Katta Tanaffus — bosh sahifa"><img src="static/img/logo-brand.png" alt="" width="48" height="48"><span><b>Katta Tanaffus</b><small>SCHOOL</small></span></a>
+    <nav class="ks-links" aria-label="Asosiy menyu">
+    <a href="platforma.html" aria-current="page">Platforma ✨</a>
+    <a href="courses.html">Fanlar</a>
+    <a href="about.html">Biz haqimizda</a>
+    <a href="teachers.html">O‘qituvchilar</a>
+    <a href="gallery.html">Galereya</a>
+    <a href="branches.html">Filiallar</a>
+    <a href="contact.html">Aloqa</a>
+    </nav>
+    <div class="ks-acts">
+      <div class="ks-acc"><a href="login.html">Kirish</a><a href="register.html">Ro‘yxatdan o‘tish</a></div>
+      <a class="ks-btn ks-btn-sm" href="yozilish.html">Qabulga ariza</a>
+      <button class="ks-burger" type="button" aria-expanded="false" aria-controls="ksMenu" aria-label="Menyu"><i></i><i></i><i></i></button>
+    </div>
+  </div>
+</header>
+<div class="ks-menu" id="ksMenu">
+  <a href="index.html"><span aria-hidden="true">🏠</span>Bosh sahifa</a>
+  <a href="platforma.html" aria-current="page"><span aria-hidden="true">✨</span>Platforma</a>
+  <a href="courses.html"><span aria-hidden="true">📚</span>Fanlar</a>
+  <a href="about.html"><span aria-hidden="true">💛</span>Biz haqimizda</a>
+  <a href="teachers.html"><span aria-hidden="true">🧑‍🏫</span>O‘qituvchilar</a>
+  <a href="gallery.html"><span aria-hidden="true">📸</span>Galereya</a>
+  <a href="branches.html"><span aria-hidden="true">📍</span>Filiallar</a>
+  <a href="contact.html"><span aria-hidden="true">📞</span>Aloqa</a>
+  <a href="diagnostika.html"><span aria-hidden="true">🧭</span>Bepul diagnostika</a>
+  <div class="ks-menu-acc"><a href="login.html">🔑 Kirish</a><a href="register.html">✨ Ro‘yxatdan o‘tish</a></div>
+  <a class="ks-btn" href="yozilish.html">Qabulga ariza</a>
+</div>
+<main id="main">
+<div class="pf">
+<!-- HERO: bir oy — bir daqiqada -->
+<header class="pf-hero">
+  <div class="pf-wrap pf-hero-grid">
+    <div>
+      <span class="pf-kicker">Katta Tanaffus platformasi</span>
+      <h1>Arizadan haftalik hisobotgacha.<span class="pf-line2">Bitta tizimda.</span></h1>
+      <p class="pf-lead">Ota-ona Telegramda yozadi, AI bo‘sh o‘rinli sinfni topib qabul suhbatiga yozadi, o‘qituvchi davomatni 30 soniyada belgilaydi, har juma esa ota-onaga faktlarga asoslangan hisobot keladi. AI tayyorlaydi — bahoni o‘qituvchi, pul va intizom qarorini inson qo‘yadi.</p>
+      <div class="pf-ctas">
+        <button class="kp-btn kp-btn-brand kp-btn-lg" onclick="KT.tourStart()">▶ Investor turini boshlash</button>
+        <a class="kp-btn kp-btn-ghost kp-btn-lg" href="#rollar">Rolni tanlab ko‘rish</a>
+      </div>
+      <div class="pf-facts" aria-label="Platforma qisqacha">
+        <div><b>6</b><span>rol: ota-ona, o‘quvchi, o‘qituvchi, administrator, rahbar, mehmon</span></div>
+        <div><b>20</b><span>AI funksiya, 4 darajali nazorat bilan</span></div>
+        <div><b>15 daq</b><span>ichida kelmaganlik xabari ota-onaga</span></div>
+      </div>
+    </div>
+
+    <div class="pf-stage">
+      <ol class="pf-steps" id="storySteps" aria-label="Ota-ona va o‘quvchi yo‘li"></ol>
+      <div id="storyPhone" aria-label="Telegram bot namunasi"></div>
+    </div>
+  </div>
+</header>
+
+<!-- MUAMMO → YECHIM -->
+<div class="pf-wrap pf-block" id="muammo">
+  <div class="pf-head">
+    <h2>Bugun xususiy maktab Excel, daftar va Telegram chatlarida yashaydi</h2>
+    <p>Ariza yo‘qoladi, ota-ona bola nima o‘rganganini bilmaydi, o‘qituvchi kechqurun jurnal to‘ldiradi. Katta Tanaffus har bir ishtirokchining kundalik ishini bitta tizimga yig‘adi.</p>
+  </div>
+  <div class="pf-ba" role="table" aria-label="Oldin va endi">
+    <div class="h" role="columnheader">Kim uchun</div><div class="h" role="columnheader">Oldin</div><div class="h now" role="columnheader">Katta Tanaffus bilan</div>
+    <div class="who">👩‍👦 Ota-ona</div><div class="old">Bola darsga keldimi, nima o‘rgandi, qancha to‘lash kerak — har biri alohida so‘raladi</div><div class="new">Davomat xabari 15 daqiqada, har juma fanlar bo‘yicha hisobot, o‘qish to‘lovi va to‘garak — bitta hisobda</div>
+    <div class="who">📝 Qabul</div><div class="old">Saytdagi ariza hech kimga yetib bormaydi, qo‘ng‘iroqlar daftarda</div><div class="new">Har ariza CRM ga tushadi, AI ustuvorlik beradi, qabul bo‘limi 15 daqiqada javob beradi</div>
+    <div class="who">🧑‍🏫 O‘qituvchi</div><div class="old">Davomat, jurnal va hisobot — qog‘ozda va Excelda</div><div class="new">Davomat bir bosishda, AI test va uy vazifasi bo‘yicha taklif beradi, o‘qituvchi tasdiqlaydi</div>
+    <div class="who">🎒 O‘quvchi</div><div class="old">Hamma uchun bir xil vazifa, coin va baho brauzerda</div><div class="new">Har fan bo‘yicha bilim xaritasi, zaif mavzuga 5 daqiqalik mashq, adolatli coin qoidalari</div>
+    <div class="who">🗂️ Qabul bo‘limi</div><div class="old">Sinflardagi o‘rinlar, to‘garak guruhlari va qarzdorlik — qo‘lda</div><div class="new">AI sinf va to‘garak guruhini tavsiya qiladi, hisob avtomatik, kechikkan to‘lovga muloyim eslatma</div>
+    <div class="who">📈 Rahbar</div><div class="old">Filiallar bo‘yicha qabul va qolish raqamlari yo‘q</div><div class="new">Qabul, qolish, to‘lov va filiallar taqqoslovi — bitta panelda, ismlarsiz</div>
+  </div>
+</div>
+
+<!-- ROLLAR -->
+<div class="pf-wrap pf-block" id="rollar">
+  <div class="pf-head">
+    <h2>Jonli demo: istalgan rol bilan kiring</h2>
+    <p>Har bir kabinet ishlaydi va bir-biriga ulangan. O‘qituvchi bolani “kelmadi” deb belgilasa, ota-ona kabinetiga xabar keladi — ikkalasini yonma-yon tabda ochib ko‘ring.</p>
+  </div>
+  <div class="pf-roles" id="roleGrid"></div>
+  <div class="pf-tourbar">
+    <p><b>Investor turi — 8 qadam, 3 daqiqa.</b> Malika opaning o‘g‘li Sardorni maktabga qabul qildirishidan haftalik hisobotgacha bo‘lgan yo‘l: sayt → CRM → diagnostika → qabul → davomat → mashq → hisobot → rahbar paneli.</p>
+    <button class="kp-btn kp-btn-brand" onclick="KT.tourStart()">▶ Turni boshlash</button>
+    <a class="kp-btn kp-btn-ghost" style="background:transparent;color:#fff;border-color:rgba(255,255,255,.3)" href="pitch.html">Taqdimot rejimi</a>
+  </div>
+</div>
+
+<!-- AI -->
+<div class="pf-wrap pf-block" id="ai">
+  <div class="pf-head">
+    <h2>AI tayyorlaydi, inson qaror qiladi</h2>
+    <p>20 ta AI funksiya to‘rt darajada ishlaydi. Qanchalik muhim qaror bo‘lsa, shunchalik ko‘p inson nazorati. Har AI natijasi model versiyasi va kim tasdiqlagani bilan jurnalga yoziladi.</p>
+  </div>
+  <div class="pf-ladder" id="aiLadder"></div>
+  <div class="pf-never" aria-label="AI hech qachon qilmaydi">
+    <div>✕ Bolaning yakuniy bahosini qo‘ymaydi</div>
+    <div>✕ 13 yoshgacha bola bilan erkin suhbat qurmaydi</div>
+    <div>✕ Yuzni tanimaydi, his-tuyg‘u aniqlamaydi</div>
+    <div>✕ Bolani boshqalar oldida sharmanda qiluvchi reyting chiqarmaydi</div>
+    <div>✕ Uy vazifasini bola o‘rniga yozib bermaydi</div>
+    <div>✕ Psixologik maslahat bermaydi — xavfli signalda insonni chaqiradi</div>
+  </div>
+</div>
+
+<!-- XAVFSIZLIK -->
+<div class="pf-wrap pf-block" id="xavfsizlik">
+  <div class="pf-safe">
+    <h2>Foydalanuvchilarning katta qismi — bolalar. Qoidalar shundan boshlanadi.</h2>
+    <p>Bu qoidalar sozlama emas, tizimning asosi: ular har so‘rovda server tomonida tekshiriladi va sinovlar bilan qoplanadi.</p>
+    <div class="pf-safe-grid" id="safeGrid"></div>
+  </div>
+</div>
+
+<!-- BOZOR -->
+<div class="pf-wrap pf-block" id="bozor">
+  <div class="pf-head">
+    <h2>Bozor o‘smoqda, ota-ona tajribasi esa bo‘sh joy</h2>
+    <p>Tayyor CRM lar o‘quv markazlarining ma’muriy ishini yopadi, eMaktab — davlat maktablari jurnalini. Xususiy maktabga ikkalasi ham kerak — bizning farqimiz: o‘z brendidagi ota-ona tajribasi va o‘qitishning ichiga kiritilgan AI.</p>
+  </div>
+  <div class="pf-market" id="marketGrid"></div>
+  <div class="pf-comp">
+    <table>
+      <thead><tr><th scope="col">Imkoniyat</th><th scope="col">Excel + Telegram</th><th scope="col">Modme (CRM)</th><th scope="col">eMaktab</th><th scope="col" class="us">Katta Tanaffus</th></tr></thead>
+      <tbody>
+        <tr><td>Qabul arizalari (CRM)</td><td class="p">qo‘lda</td><td class="y">✓</td><td class="n">—</td><td class="us">✓ + AI assistent</td></tr>
+        <tr><td>Sinf, jadval, davomat</td><td class="p">qisman</td><td class="y">✓</td><td class="y">✓</td><td class="us">✓ + AI sinf tavsiyasi</td></tr>
+        <tr><td>Baho va jurnal</td><td class="p">qisman</td><td class="y">✓</td><td class="y">✓</td><td class="us">✓ faqat o‘qituvchi qo‘yadi</td></tr>
+        <tr><td>To‘lov va qarzdorlik</td><td class="p">qisman</td><td class="y">✓</td><td class="n">—</td><td class="us">✓ Payme, Click</td></tr>
+        <tr><td>Ota-ona kabineti</td><td class="n">—</td><td class="p">qisman</td><td class="y">✓</td><td class="us">✓ + Telegram bot</td></tr>
+        <tr><td>Testlar va mashqlar</td><td class="n">—</td><td class="p">LMS</td><td class="p">qisman</td><td class="us">✓ savollar banki, bilim xaritasi</td></tr>
+        <tr><td>AI: qabul, diagnostika, tekshiruv, hisobot</td><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="us">✓ 20 funksiya</td></tr>
+        <tr><td>Gamifikatsiya (coin, yutuq)</td><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="us">✓ ledger bilan</td></tr>
+      </tbody>
+    </table>
+    <p class="pf-foot">✓ — bor; to‘q sariq — qisman; — — yo‘q yoki ochiq manbalarda ko‘rsatilmagan. Modme va eMaktab — ochiq tavsiflar bo‘yicha (modme.uz, yuz.uz), to‘liq emas.</p>
+  </div>
+</div>
+
+<!-- BIZNES MODEL -->
+<div class="pf-wrap pf-block" id="model">
+  <div class="pf-head">
+    <h2>Pul qayerdan keladi</h2>
+    <p>Avval — o‘z maktabimizda: kamroq yo‘qolgan ariza va yuqoriroq qolish. Keyin — boshqa xususiy maktablar va o‘quv markazlariga o‘quvchi boshiga oylik obuna (oq yorliq bilan).</p>
+  </div>
+  <div class="pf-biz">
+    <div class="pf-calc">
+      <h3>Qolishning qiymati</h3>
+      <p>Qolish 1 foiz punktga oshsa, maktab har oy qancha qo‘shimcha tushum oladi. Raqamlar — sozlanadigan taxmin.</p>
+      <div class="pf-range"><label for="rS">O‘quvchilar soni <output id="oS"></output></label><input type="range" id="rS" min="300" max="10000" step="100" value="5000"></div>
+      <div class="pf-range"><label for="rP">O‘rtacha oylik to‘lov <output id="oP"></output></label><input type="range" id="rP" min="150000" max="6000000" step="50000" value="300000"></div>
+      <div class="pf-range"><label for="rR">Qolish o‘sishi <output id="oR"></output></label><input type="range" id="rR" min="1" max="10" step="1" value="1"></div>
+      <div class="pf-result"><small>Qo‘shimcha tushum</small><b id="resRet"></b><span>har oy · TZ misoli: 5 000 × 1% × 300 000 = 15 mln so‘m</span></div>
+    </div>
+    <div class="pf-calc">
+      <h3>Platforma — boshqa maktablar uchun</h3>
+      <p>Ko‘p tashkilotli rejim (F-15.4) yoqilgach, platforma obuna sifatida sotiladi. Narx — sozlanadigan taxmin.</p>
+      <div class="pf-range"><label for="rC">Mijoz maktab va markazlar <output id="oC"></output></label><input type="range" id="rC" min="1" max="200" step="1" value="25"></div>
+      <div class="pf-range"><label for="rN">Har birida o‘quvchi <output id="oN"></output></label><input type="range" id="rN" min="50" max="1500" step="50" value="300"></div>
+      <div class="pf-range"><label for="rT">Obuna: o‘quvchi boshiga oyiga <output id="oT"></output></label><input type="range" id="rT" min="3000" max="25000" step="500" value="9000"></div>
+      <div class="pf-result dark"><small>Oylik takroriy tushum</small><b id="resSaas"></b><span id="resSaasNote"></span></div>
+    </div>
+  </div>
+</div>
+
+<!-- KPI -->
+<div class="pf-wrap pf-block" id="kpi">
+  <div class="pf-north">
+    <div class="pf-north-card">
+      <small>Asosiy ko‘rsatkich (North Star)</small>
+      <h3>Oyni to‘lov bilan yopgan va kamida bitta yangi mavzuni o‘zlashtirgan o‘quvchilar soni</h3>
+      <p>Bu bir raqam ham biznesni (qolish, to‘lov), ham ta’lim sifatini o‘lchaydi. Coin, hisobot va mashqlar shu raqamni oshirish uchun ishlaydi.</p>
+    </div>
+    <div>
+      <div class="pf-head" style="margin-bottom:12px"><h2 style="font-size:1.6rem">Pilotdagi maqsadlar</h2></div>
+      <div class="pf-kpis" id="kpiList"></div>
+    </div>
+  </div>
+</div>
+
+<!-- REJA -->
+<div class="pf-wrap pf-block" id="reja">
+  <div class="pf-head">
+    <h2>34 haftalik yo‘l</h2>
+    <p>Avval xavfsizlik, keyin MVP va 1–2 filialda pilot. AI ning murakkab qismlari pilot natijasiga bog‘langan.</p>
+  </div>
+  <div class="pf-gantt" id="gantt"></div>
+  <p class="pf-team">Jamoa: backend (Django), AI/ML (FastAPI), frontend, mobil yoki Telegram Mini App, QA va yarim stavka metodist — 5–6 kishi.</p>
+</div>
+
+<!-- G‘OYALAR -->
+<div class="pf-wrap pf-block" id="goyalar">
+  <div class="pf-head">
+    <h2>G‘oyalar banki</h2>
+    <p>Pushti ramkalilar — TZ dan tashqari yangi g‘oyalar, demoda allaqachon ishlaydi. Qolganlari — TZ ning qo‘shimcha g‘oyalaridan tanlanganlar.</p>
+  </div>
+  <div class="pf-ideas" id="ideaGrid"></div>
+</div>
+
+<div class="pf-final">
+  <h2>Bir oyni bir daqiqada ko‘ring</h2>
+  <p>Investor turi sizni sayt, qabul CRM, diagnostika, qabul arizasi, o‘qituvchi, o‘quvchi, ota-ona va rahbar ekranlaridan olib o‘tadi. Hammasi brauzerda, ro‘yxatdan o‘tmasdan.</p>
+  <div class="pf-ctas"><button class="kp-btn kp-btn-brand kp-btn-lg" onclick="KT.tourStart()">▶ Investor turini boshlash</button><a class="kp-btn kp-btn-ghost kp-btn-lg" href="pitch.html">Taqdimotni ochish</a></div>
+</div>
+</div>
+</main>
+<div class="ks-cta">
+  <div class="ks-wrap ks-cta-in">
+    <div><h2>Qabul ochiq: 1–11-sinflar</h2><p>Avval 15 daqiqalik bepul diagnostika, keyin qabul suhbati. Bo‘sh o‘rinlar soni — filial va sinfga qarab.</p></div>
+    <div class="ks-cta-acts"><a class="ks-btn ks-btn-ink ks-btn-lg" href="yozilish.html">Qabulga ariza</a><a class="ks-btn ks-btn-lg" href="diagnostika.html">Bepul diagnostika</a></div>
+  </div>
+</div>
+<footer class="ks-foot">
+  <div class="ks-wrap">
+    <div class="ks-foot-grid">
+      <div>
+        <a class="ks-logo" href="index.html"><img src="static/img/logo-brand.png" alt="" width="48" height="48"><span><b>Katta Tanaffus</b><small style="color:var(--sun)">SCHOOL</small></span></a>
+        <p>Xususiy maktab: 1–11-sinflar, 3 filial, Taekwondo va Gimnastika to‘garaklari. Ota-ona, o‘qituvchi va AI — bitta jamoada.</p>
+        <div class="ks-soc"><a href="https://t.me/kattatanaffus" aria-label="Telegram" rel="noopener">✈️</a><a href="https://instagram.com/kattatanaffus" aria-label="Instagram" rel="noopener">📸</a><a href="https://youtube.com/@kattatanaffus" aria-label="YouTube" rel="noopener">▶️</a></div>
+      </div>
+      <div><h4>Ta’lim</h4><ul><li><a href="courses.html">Fanlar</a></li><li><a href="courses.html#taekwondo">Taekwondo</a></li><li><a href="courses.html#gymnastics">Gimnastika</a></li><li><a href="yozilish.html">Qabulga ariza</a></li><li><a href="diagnostika.html">Bepul diagnostika</a></li></ul></div>
+      <div><h4>Maktab</h4><ul><li><a href="about.html">Biz haqimizda</a></li><li><a href="teachers.html">O‘qituvchilar</a></li><li><a href="gallery.html">Galereya</a></li><li><a href="branches.html">Filiallar</a></li><li><a href="platforma.html">Platforma</a></li><li><a href="ota-ona.html">Ota-ona kabineti</a></li><li><a href="register.html">Ro‘yxatdan o‘tish</a></li><li><a href="login.html">Kirish</a></li></ul></div>
+      <div><h4>Aloqa</h4><ul><li><a href="tel:+998712345678">+998 71 234-56-78</a></li><li><a href="mailto:info@kattatanaffus.uz">info@kattatanaffus.uz</a></li><li><a href="https://t.me/kattatanaffus" rel="noopener">Telegram: @kattatanaffus</a></li><li><a href="contact.html">Xabar yuborish</a></li></ul><p style="margin-top:14px">Qabul bo‘limi: har kuni 09:00–21:00</p></div>
+    </div>
+    <div class="ks-word" aria-hidden="true">Katta Tanaffus</div>
+    <div class="ks-foot-bot"><span>© <span data-year>2026</span> Katta Tanaffus School</span><span>Bola rasmlari va ismlari faqat ota-ona roziligi bilan e’lon qilinadi</span></div>
+  </div>
+</footer>
+<script src="static/js/kt-data.js"></script>
+<script src="static/js/kt-platform.js"></script>
+<script src="static/js/kt-assistant.js"></script>
+<script src="static/js/ks.js"></script>
+<script>
+(function(){
+  const {esc, money, num} = KT; const D = KTD;
+
+  /* ---- Hero: Malika opa hikoyasi telefonda ---- */
+  const STEPS = [
+    {n:'Ariza', t:'Du 21:10', msgs:[
+      {sep:'Dushanba'},
+      {me:true, time:'21:10', text:'Assalomu alaykum. O‘g‘lim 11 yoshda, 5-sinfga maktab qidiryapmiz, Yunusobodga yaqin. Ingliz tili kuchli bo‘lsin.'},
+      {label:'AI assistent', time:'21:10', html:'Yunusobodda <b>5-A</b> va <b>5-B</b> sinflarida bo‘sh o‘rin bor. Ingliz tili — darsning o‘zida, kuchaytirilgan dastur.<br>Avval bepul diagnostika va qabul suhbati: shanba 11:00 yoki 15:00?', buttons:['Sh 11:00','Sh 15:00']},
+      {me:true, time:'21:11', text:'11:00'},
+      {label:'AI assistent', time:'21:11', text:'Yozib qo‘ydim ✅ Ertaga qabul bo‘limi qo‘ng‘iroq qilib, manzilni yuboradi.'}
+    ]},
+    {n:'Diagnostika', t:'Sh 11:00', msgs:[
+      {sep:'Shanba'},
+      {label:'Diagnostika natijasi', time:'11:19', html:'Sardor testni 18 daqiqada yakunladi.<br>Daraja: <b>A2</b>. Kuchli: Present Simple.<br>Ishlash kerak: Past Simple, lug‘at.'}
+    ]},
+    {n:'Qabul', t:'Sh 11:30', msgs:[
+      {label:'Qabul bo‘limi', time:'11:30', html:'Sinf: <b>5-A</b>, 204-xona — 2 o‘rin qoldi. Shartnoma va roziliklar:', buttons:['Shartnomani o‘qish','Imzolash']},
+      {me:true, time:'11:34', text:'Imzoladim 👍 Taekwondoga ham yozamiz.'},
+      {label:'Katta Tanaffus', time:'11:34', text:'Qabul qilindi ✅ Birinchi kun — dushanba 08:30, 5-A. Taekwondo — Du/Chor/Ju 16:30.'}
+    ]},
+    {n:'O‘qish', t:'2–4-hafta', msgs:[
+      {sep:'2-hafta'},
+      {label:'Davomat', time:'08:24', text:'Sardor maktabga keldi. 1-dars — 08:30. +2 coin'},
+      {label:'Uy vazifasi', time:'19:52', text:'Ingliz tili, Past Simple testi: 7/10. 5 daqiqalik shaxsiy mashqdan keyin — 9/10 🎉'}
+    ]},
+    {n:'Hisobot', t:'Ju 18:00', msgs:[
+      {sep:'Juma'},
+      {label:'Haftalik hisobot', time:'18:00', html:'<b>Sardor:</b> 5/5 kun maktabda. Ingliz tili: Past Simple 7 → 9. Matematika: kasrlar — 5. Taekwondo 3/3.<br>Sinf rahbari: faol, lug‘atni takrorlash kerak.', buttons:['👍 Rahmat','Savol berish']},
+      {label:'Kechki savol 💡', time:'18:00', text:'Kechki ovqatda so‘rang: “What did you do yesterday?” — Sardor Past Simple’da javob bersin.'}
+    ]}
+  ];
+  const stepsEl = document.getElementById('storySteps');
+  stepsEl.innerHTML = STEPS.map((s,i)=>`<li><button type="button" data-i="${i}"><i>${i+1}</i><b>${esc(s.n)}</b><small>${esc(s.t)}</small></button></li>`).join('') + `<li><button type="button" class="pf-replay" data-replay style="grid-template-columns:1fr;text-align:center;font-weight:900;color:#a21caf">↻ Qayta ko‘rish</button></li>`;
+  const ph = KT.phone(document.getElementById('storyPhone'), {title:'Katta Tanaffus', sub:'bot · ota-ona uchun'});
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let timer=null, run=0;
+  function mark(i){ stepsEl.querySelectorAll('button[data-i]').forEach(b=>{ const k=+b.dataset.i; b.classList.toggle('now',k===i); b.classList.toggle('done',k<i); }); }
+  function play(from){
+    clearTimeout(timer); const my=++run; ph.clear();
+    const queue=[]; STEPS.forEach((s,i)=>{ if(i<from) s.msgs.forEach(m=>ph.add(m)); else s.msgs.forEach(m=>queue.push({i,m})); });
+    if(reduce){ queue.forEach(q=>ph.add(q.m)); mark(STEPS.length-1); return; }
+    let k=0;
+    (function next(){
+      if(my!==run) return;
+      if(k>=queue.length){ timer=setTimeout(()=>play(0), 9000); return; }
+      const {i,m}=queue[k++]; mark(i);
+      if(!m.me && !m.sep){ const stop=ph.typing(); timer=setTimeout(()=>{ stop(); if(my!==run) return; ph.add(m); timer=setTimeout(next, 900); }, 750); }
+      else { ph.add(m); timer=setTimeout(next, m.sep?350:900); }
+    })();
+  }
+  stepsEl.addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b) return; if(b.hasAttribute('data-replay')) play(0); else play(+b.dataset.i); });
+  play(0);
+
+  /* ---- Rollar ---- */
+  const ROLE_TXT = {
+    guest:['AI qabul assistenti sinf va to‘garak bo‘yicha javob beradi','Qabul arizasi bir zumda CRM ga tushadi','Bepul adaptiv diagnostika'],
+    parent:['Bir nechta farzand bitta hisobda','Davomat, fanlar bo‘yicha baho, haftalik hisobot','O‘qish to‘lovi, to‘garak, roziliklar'],
+    student:['Har fan bo‘yicha bilim xaritasi','Zaif mavzu bo‘yicha 5 daqiqalik mashq','Yoshga mos AI rejimi'],
+    teacher:['Dars boshida davomat — 30 soniya','5 ballik baho mezon va izoh bilan','AI takliflari navbati va test generatori'],
+    admin:['Qabul arizalari navbati, AI baholash','Sinf va to‘garak tavsiyasi, bo‘sh o‘rinlar','Qarzdorlik va erta ogohlantirish'],
+    director:['Qabul, qolish, to‘lov — haftalik','Filiallar taqqoslovi','Oddiy tilda AI savol-javob']
+  };
+  document.getElementById('roleGrid').innerHTML = KT.ROLES.map(r=>`<a class="pf-role" href="${r.href}" style="--rc:${r.color}">
+    <div class="pf-role-top"><span class="pf-role-ic">${r.icon}</span><div><h3>${esc(r.name)}</h3><small>${esc(r.who)}</small></div></div>
+    <ul>${ROLE_TXT[r.id].map(x=>`<li>${esc(x)}</li>`).join('')}</ul><span class="go">Kirish</span></a>`).join('');
+
+  /* ---- AI zinapoyasi ---- */
+  document.getElementById('aiLadder').innerHTML = D.AUTONOMY.map(a=>{
+    const fs = D.AI_FEATURES.filter(f=>f.lvl===a.lvl);
+    const body = a.lvl==='A0' ? `<div class="pf-feats"><div class="pf-feat" style="background:rgba(255,255,255,.1)"><b>${esc(a.ex)}</b><small style="color:#cdbdf0">Sabab bilan, audit jurnaliga yoziladi</small></div></div>`
+      : `<div class="pf-feats">${fs.map(f=>`<div class="pf-feat"><em>${f.id} · ${f.st==='MVP'?'MVP':f.st+'-bosqich'}</em><b>${esc(f.name)}</b><small>${esc(f.d)}</small></div>`).join('')}</div>`;
+    return `<div class="pf-rung ${a.lvl}"><div class="pf-rung-h"><span class="kp-lvl ${a.lvl}">${a.lvl}</span><b>${esc(a.name)}</b><small>Nazorat: ${esc(a.who)}</small></div>${body}</div>`;
+  }).join('');
+
+  document.getElementById('safeGrid').innerHTML = D.SAFETY.map(s=>`<div><em>${s.id}</em><b>${esc(s.t)}</b><small>${esc(s.d)}</small></div>`).join('');
+  document.getElementById('marketGrid').innerHTML = D.MARKET.map(m=>`<div><b>${esc(m.n)}<span>${esc(m.u)}</span></b><p>${esc(m.l)}</p><small>Manba: ${esc(m.s)}</small></div>`).join('');
+  document.getElementById('kpiList').innerHTML = D.KPIS.map(k=>`<div><span>${esc(k.k)}</span><b>${esc(k.t)}</b></div>`).join('') + `<div><span>Ota-ona NPS</span><b>≥ 50</b></div><div><span>Bola ma’lumoti sizishi</span><b>0</b></div>`;
+
+  /* ---- Reja ---- */
+  let start=0; const total=35;
+  document.getElementById('gantt').innerHTML = D.ROADMAP.map((r,i)=>{ const left=start/total*100, w=r.len/total*100; start+=r.len;
+    const cls = r.f==='Pilot'?'pilot':r.f==='Faza 0'?'f0':r.f==='Faza 3'?'f3':'';
+    return `<div class="pf-gantt-row"><div><b>${esc(r.f)} · ${esc(r.n)}</b><small>${esc(r.w)}</small></div><div><div class="pf-track"><div class="pf-seg ${cls}" style="left:${left}%;width:${w}%">${r.len} hafta</div></div><p class="pf-gd">${esc(r.d)}</p></div></div>`; }).join('')
+    + `<div class="pf-gantt-axis"><div></div><div><span>0</span><span>5</span><span>10</span><span>15</span><span>20</span><span>25</span><span>30</span><span>35 hafta</span></div></div>`;
+
+  /* ---- G‘oyalar ---- */
+  const IDEAS = [
+    {mine:1, t:'Kechki savol', d:'Har hisobot bilan ota-onaga bitta savol: kechki ovqatda bola o‘tgan mavzuni o‘z so‘zi bilan aytib beradi. Ota-ona ishtiroki — 30 soniyada.', a:'ota-ona.html#hisobot'},
+    {mine:1, t:'Oilaviy maqsad', d:'Coin o‘rniga oilaviy mukofot: “3 mavzu o‘zlashtirilsa — hayvonot bog‘iga”. Pul emas, o‘sish rag‘batlanadi.', a:'ota-ona.html#maqsad'},
+    {mine:1, t:'Bugungi puls', d:'Har farzand uchun bitta qator: yashil — hammasi joyida, sariq — e’tibor bering, qizil — bog‘laning.', a:'ota-ona.html'},
+    {mine:1, t:'“Bugun kela olmaydi” tugmasi', d:'Ota-ona darsdan oldin sababni belgilaydi — o‘qituvchi ro‘yxatda ko‘radi, keraksiz qo‘ng‘iroq va xavotirli xabar yo‘q.', a:'ota-ona.html#bugun'},
+    {mine:1, t:'Jonli sinxron va investor turi', d:'Ikki tab yonma-yon: o‘qituvchi belgilaydi — ota-ona telefoniga xabar keladi. 8 qadamli tur mahsulotni 3 daqiqada ko‘rsatadi.', a:'oqituvchi.html'},
+    {mine:1, t:'Qolish kalkulyatori', d:'Rahbar va investor uchun: qolish va konversiyaning pulga aylanishi bir qarashda.', a:'#model'},
+    {t:'Ochiq eshiklar kuni', g:'G-01', d:'Oyiga bir marta: AI diagnostika, maktab bo‘ylab ekskursiya va ota-onaga natija. Qabul oqimi.'},
+    {t:'Aka-uka va “do‘stingni olib kel”', g:'G-02', d:'Moliya qoidasi bo‘yicha imtiyoz va coin — qabul narxini tushiradi.'},
+    {t:'“Uyda qanday yordam beraman”', g:'G-03', d:'Har mavzuga ota-ona uchun 3 daqiqalik video yoki matn.'},
+    {t:'Kelish-ketish xabari', g:'G-06', d:'Boshlang‘ich sinflar uchun QR yoki navbatchi belgisi bilan: maktabga keldi va uyga ketdi.'},
+    {t:'Qoldirilgan mavzu banki', g:'G-09', d:'Kasal bo‘lib qolgan bola o‘tkazib yuborgan mavzuni qisqa video va mashq bilan qoplaydi.'},
+    {t:'Sog‘lom ekran vaqti', g:'G-14', d:'Ota-onaga haftalik vaqt hisobi va kunlik limit sozlamasi.'}
+  ];
+  document.getElementById('ideaGrid').innerHTML = IDEAS.map(x=>`<div class="pf-idea ${x.mine?'mine':''}"><span class="pf-tag">${x.mine?'Yangi g‘oya · demoda bor':'TZ · '+x.g}</span><b>${esc(x.t)}</b><p>${esc(x.d)}</p>${x.a?`<a href="${x.a}">Ko‘rish</a>`:''}</div>`).join('');
+
+  /* ---- Kalkulyatorlar ---- */
+  const $=id=>document.getElementById(id);
+  function calc(){
+    const S=+$('rS').value, P=+$('rP').value, R=+$('rR').value;
+    $('oS').textContent=num(S); $('oP').textContent=money(P); $('oR').textContent=R+' p.p.';
+    $('resRet').textContent=money(S*R/100*P);
+    const C=+$('rC').value, N=+$('rN').value, T=+$('rT').value;
+    $('oC').textContent=num(C); $('oN').textContent=num(N); $('oT').textContent=money(T);
+    const mrr=C*N*T, ai=C*N*3000;
+    $('resSaas').textContent=money(mrr);
+    $('resSaasNote').textContent=`${num(C*N)} o‘quvchi · AI xarajati ≤ ${money(ai)} (o‘quvchi boshiga ≤ 3 000 so‘m, taxmin)`;
+  }
+  ['rS','rP','rR','rC','rN','rT'].forEach(id=>$(id).addEventListener('input',calc)); calc();
+})();
+</script>
+</body>
+</html>

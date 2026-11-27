@@ -3,338 +3,271 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bosh sahifa — KATTA TANAFFUS SCHOOL</title>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="static/css/main.css">
+<title>Katta Tanaffus School — xususiy maktab</title>
+<meta name="description" content="1–11-sinflar: kuchaytirilgan ingliz tili, matematika, informatika va robotika. Taekwondo va Gimnastika to‘garaklari. 3 filial, ota-onaga haftalik hisobot.">
+<meta property="og:title" content="Katta Tanaffus School — xususiy maktab">
+<meta property="og:description" content="1–11-sinflar: kuchaytirilgan ingliz tili, matematika, informatika va robotika. Taekwondo va Gimnastika to‘garaklari. 3 filial, ota-onaga haftalik hisobot.">
+<meta property="og:image" content="static/img/logo-brand.png">
+<link rel="icon" href="static/img/logo-brand.png">
+<link rel="stylesheet" href="static/css/platform.css">
+<link rel="stylesheet" href="static/css/site.css">
+<style>
+  .hx{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);gap:40px;align-items:center}
+  .hx-h1 span{display:block}
+  .hx-vis{position:relative;aspect-ratio:1/1;max-width:540px;width:100%;justify-self:center}
+  .hx-sun{position:absolute;inset:8%;border-radius:50%;background:var(--sun);border:var(--bw) solid var(--ink);box-shadow:10px 10px 0 var(--ink)}
+  .hx-ring{position:absolute;inset:0;animation:spin 40s linear infinite}
+  .hx-ring text{font:400 15.5px var(--fh);letter-spacing:3px;fill:var(--ink)}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .hx-big{position:absolute;inset:26%;display:grid;place-items:center;text-align:center}
+  .hx-big b{font-family:var(--fh);font-weight:400;font-size:clamp(3.4rem,8vw,6rem);line-height:.9;display:block}
+  .hx-big small{font-weight:900;font-size:1rem;display:block;margin-top:6px}
+  .hx-vis .ks-stk{position:absolute;font-size:clamp(.85rem,1.3vw,1.02rem)}
+  .hx-note{position:absolute;left:-6%;bottom:2%;width:min(290px,64%);background:#fff;border:var(--bw) solid var(--ink);border-radius:20px;box-shadow:var(--sh);padding:12px 14px;transform:rotate(-4deg)}
+  .hx-note small{font-weight:900;color:#1b8fc9;font-size:.78rem;display:flex;justify-content:space-between}
+  .hx-note p{font-weight:800;font-size:.92rem;margin-top:4px;line-height:1.4}
+  .hx-facts{margin-top:clamp(36px,5vw,56px)}
+
+  .age{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:36px;align-items:start}
+  .age-num{font-family:var(--fh);font-size:clamp(6rem,16vw,11rem);line-height:.85;display:flex;align-items:baseline;gap:12px}
+  .age-num small{font-size:.22em;font-family:var(--fb);font-weight:900}
+  .age input[type=range]{width:100%;margin-top:18px;accent-color:var(--mag);height:28px}
+  .age-scale{display:flex;justify-content:space-between;font-weight:900;font-size:.8rem;color:var(--ink2)}
+  .age-out{font-weight:800;color:var(--ink2);margin-top:14px;font-size:1.02rem}
+  .tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+  .tile{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:center;text-decoration:none;background:#fff;border:var(--bw) solid var(--ink);border-radius:20px;padding:14px;box-shadow:var(--sh-s);transition:opacity .25s,filter .25s,transform .15s,box-shadow .15s}
+  .tile:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+  .tile i{font-style:normal;width:56px;height:56px;border-radius:16px;display:grid;place-items:center;font-size:1.7rem;background:var(--c);border:2px solid var(--ink)}
+  .tile b{display:block;font-size:1rem;line-height:1.2}
+  .tile small{font-weight:800;color:var(--ink2);font-size:.82rem}
+  .tile.off{opacity:.32;filter:grayscale(1)}
+
+  .par{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:48px;align-items:center}
+  .par ul{list-style:none;padding:0;margin:28px 0 0;display:flex;flex-direction:column;gap:14px}
+  .par li{display:grid;grid-template-columns:52px 1fr;gap:14px;align-items:start}
+  .par li i{font-style:normal;width:52px;height:52px;border-radius:16px;background:var(--sun);color:var(--ink);display:grid;place-items:center;font-size:1.4rem;border:2px solid #fff}
+  .par li b{display:block;font-size:1.08rem}
+  .par li span{color:#d9ccf2;font-weight:700}
+
+  .steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;counter-reset:s}
+  .step{padding:26px 22px}
+  .step::before{counter-increment:s;content:counter(s);position:absolute;top:-22px;left:20px;width:46px;height:46px;border-radius:50%;background:var(--mag);color:#fff;border:var(--bw) solid var(--ink);display:grid;place-items:center;font-family:var(--fh);font-size:1.3rem}
+  .step h3{margin-top:10px}
+  .step p{font-weight:700;color:var(--ink2);margin-top:8px}
+  .step em{display:inline-block;margin-top:12px;font-style:normal;font-weight:900;font-size:.82rem;background:var(--paper);border:2px solid var(--ink);border-radius:999px;padding:3px 10px}
+
+  .tcards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+  .tc{overflow:hidden;padding:0}
+  .tc-top{height:120px;background:var(--c);border-bottom:var(--bw) solid var(--ink);position:relative}
+  .tc-av{position:absolute;left:22px;bottom:-34px;width:84px;height:84px;border-radius:50%;background:#fff;border:var(--bw) solid var(--ink);display:grid;place-items:center;font-family:var(--fh);font-size:1.8rem}
+  .tc-body{padding:46px 22px 22px}
+  .tc-body small{font-weight:900;color:var(--ink2)}
+  .tc-body p{font-weight:700;color:var(--ink2);margin-top:10px;font-size:.95rem}
+
+  .notes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+  .note{padding:24px;border:var(--bw) solid var(--ink);border-radius:6px 22px 22px 22px;box-shadow:var(--sh);transform:rotate(var(--rot));background:var(--bg)}
+  .note blockquote{margin:0;font-weight:800;font-size:1.05rem;line-height:1.55}
+  .note figcaption{margin-top:14px;font-weight:900;font-size:.9rem}
+  .note figcaption small{display:block;font-weight:700;color:var(--ink2)}
+
+  .cities{display:flex;gap:14px;flex-wrap:wrap;margin-top:8px}
+  @media (max-width:1040px){.hx,.age,.par{grid-template-columns:1fr}.steps{grid-template-columns:1fr 1fr;row-gap:40px}.tcards,.notes{grid-template-columns:1fr 1fr}.par .kp-phone{justify-self:center}}
+  @media (max-width:680px){.steps,.tcards,.notes,.tiles{grid-template-columns:1fr}.hx-note{left:0}}
+</style>
 </head>
-<body>
-
-<div id="loading"><div class="llgo"><img src="static/img/logo-brand.png" alt="Katta Tanaffus logotipi"><span>Yuklanmoqda...</span></div><div class="ldots"><div class="ldot"></div><div class="ldot"></div><div class="ldot"></div></div></div>
-<div class="toast" id="toast"></div>
-
-<!-- MOBILE NAV -->
-<div class="mnav" id="mnav">
-  <a href="index.html" onclick="closemob()">🏠 Bosh sahifa</a>
-  <a href="courses.html" onclick="closemob()">📚 Kurslar</a>
-  <a href="about.html" onclick="closemob()">ℹ️ Biz haqimizda</a>
-  <a href="teachers.html" onclick="closemob()">👨‍🏫 O'qituvchilar</a>
-  <a href="gallery.html" onclick="closemob()">🖼️ Galereya</a>
-  <a href="branches.html" onclick="closemob()">📍 Filiallar</a>
-  <a href="contact.html" onclick="closemob()">📞 Aloqa</a>
-  <button class="btn btn-f" onclick="openAriza();closemob()" style="margin-top:10px">📝 Ariza qoldirish</button>
-  <div class="mnav-auth">
-    <a class="mnav-login" href="login.html" onclick="closemob()">🔐 Kirish</a>
-    <a class="mnav-register" href="register.html" onclick="closemob()">✨ Ro'yxatdan o'tish</a>
-  </div>
-</div>
-
-<!-- NAV -->
-<nav>
-  <a href="index.html" class="logo">
-    <img src="static/img/logo-brand.png" alt="Katta Tanaffus logotipi" class="logo-img">
-    <div class="logo-text">
-      <strong>Katta Tanaffus</strong>
-      <span>School</span>
-    </div>
-  </a>
-  <div class="nav-links">
-    <a href="index.html" class="active">Bosh sahifa</a>
-    <a href="courses.html">Kurslar</a>
+<body class="ks" data-role="guest">
+<a class="ks-skip" href="#main">Asosiy mazmunga o‘tish</a>
+<header class="ks-head">
+  <div class="ks-head-in">
+    <a class="ks-logo" href="index.html" aria-label="Katta Tanaffus — bosh sahifa"><img src="static/img/logo-brand.png" alt="" width="48" height="48"><span><b>Katta Tanaffus</b><small>SCHOOL</small></span></a>
+    <nav class="ks-links" aria-label="Asosiy menyu">
+    <a href="platforma.html">Platforma ✨</a>
+    <a href="courses.html">Fanlar</a>
     <a href="about.html">Biz haqimizda</a>
-    <a href="teachers.html">O'qituvchilar</a>
+    <a href="teachers.html">O‘qituvchilar</a>
     <a href="gallery.html">Galereya</a>
     <a href="branches.html">Filiallar</a>
     <a href="contact.html">Aloqa</a>
-  </div>
-  <div class="nav-acts">
-    <a class="btn btn-o" href="login.html" style="text-decoration:none">Kirish</a>
-    <a class="btn btn-f" href="register.html" style="text-decoration:none">Ro'yxatdan o'tish</a>
-    <button class="burger" onclick="togglemob()"><span></span><span></span><span></span></button>
-  </div>
-</nav>
-
-<!-- HERO -->
-<section id="home">
-<div class="hero">
-  <div class="hblob hb1"></div><div class="hblob hb2"></div><div class="hblob hb3"></div><div class="hblob hb4"></div>
-  <div class="femoji" style="top:18%;left:6%">📚</div>
-  <div class="femoji" style="top:22%;right:7%;animation-delay:1.2s">🚀</div>
-  <div class="femoji" style="bottom:28%;left:4%;animation-delay:.6s">🌟</div>
-  <div class="femoji" style="bottom:22%;right:6%;animation-delay:1.8s">🎨</div>
-  <div class="femoji" style="top:55%;left:8%;animation-delay:2.2s;font-size:1.5rem">✏️</div>
-  <div class="femoji" style="top:60%;right:10%;animation-delay:.9s;font-size:1.5rem">🔢</div>
-  <div class="hcontent">
-    <div class="hbadge"><div class="dot"></div>O'zbekistondagi #1 Bolalar Ta'lim Markazi</div>
-    <h1 class="htitle">Kelajak ta'limi<br><span class="hl">Katta Tanaffus bilan boshlanadi! 🎓</span></h1>
-    <p class="hsub">Zamonaviy AI texnologiyalari va quvnoq muhitda farzandingizni kelajakka tayyorlang. 8 ta yo'nalish, 50+ professional o'qituvchi!</p>
-    <div class="hctas">
-      <a href="courses.html" class="hbtn hbtn-p">📚 Kursga yozilish</a>
-      <button class="hbtn hbtn-s" onclick="toggleChat()">🤖 AI bilan suhbat</button>
-    </div>
-    <div class="hcards">
-      <div class="hcard"><span class="hi">🎓</span><div><div class="hn" data-count="5000">0</div><div class="hl2">O'quvchi</div></div></div>
-      <div class="hcard"><span class="hi">👨‍🏫</span><div><div class="hn" data-count="50">0</div><div class="hl2">O'qituvchi</div></div></div>
-      <div class="hcard"><span class="hi">🏢</span><div><div class="hn" data-count="8">0</div><div class="hl2">Filial</div></div></div>
-      <div class="hcard"><span class="hi">⭐</span><div><div class="hn">4.9</div><div class="hl2">Reyting</div></div></div>
+    </nav>
+    <div class="ks-acts">
+      <div class="ks-acc"><a href="login.html">Kirish</a><a href="register.html">Ro‘yxatdan o‘tish</a></div>
+      <a class="ks-btn ks-btn-sm" href="yozilish.html">Qabulga ariza</a>
+      <button class="ks-burger" type="button" aria-expanded="false" aria-controls="ksMenu" aria-label="Menyu"><i></i><i></i><i></i></button>
     </div>
   </div>
+</header>
+<div class="ks-menu" id="ksMenu">
+  <a href="index.html" aria-current="page"><span aria-hidden="true">🏠</span>Bosh sahifa</a>
+  <a href="platforma.html"><span aria-hidden="true">✨</span>Platforma</a>
+  <a href="courses.html"><span aria-hidden="true">📚</span>Fanlar</a>
+  <a href="about.html"><span aria-hidden="true">💛</span>Biz haqimizda</a>
+  <a href="teachers.html"><span aria-hidden="true">🧑‍🏫</span>O‘qituvchilar</a>
+  <a href="gallery.html"><span aria-hidden="true">📸</span>Galereya</a>
+  <a href="branches.html"><span aria-hidden="true">📍</span>Filiallar</a>
+  <a href="contact.html"><span aria-hidden="true">📞</span>Aloqa</a>
+  <a href="diagnostika.html"><span aria-hidden="true">🧭</span>Bepul diagnostika</a>
+  <div class="ks-menu-acc"><a href="login.html">🔑 Kirish</a><a href="register.html">✨ Ro‘yxatdan o‘tish</a></div>
+  <a class="ks-btn" href="yozilish.html">Qabulga ariza</a>
 </div>
-
-<!-- STATS -->
-<div style="padding:80px 5% 0">
-<div class="ssec aos">
-  <div class="shdr c" style="margin-bottom:44px"><span class="stag">📊 Natijalar</span><h2 class="stitle">Raqamlarda muvaffaqiyat 🏆</h2></div>
-  <div class="sgrid">
-    <div class="sitem"><div class="snum">5,000+</div><div class="slbl">Faol o'quvchi</div></div>
-    <div class="sitem"><div class="snum">98%</div><div class="slbl">Mamnuniyat</div></div>
-    <div class="sitem"><div class="snum">150+</div><div class="slbl">IELTS 7+ ball</div></div>
-    <div class="sitem"><div class="snum">8</div><div class="slbl">Shahar filiali</div></div>
-  </div>
-</div>
-</div>
-
-<!-- WHY US -->
-<div style="padding:80px 5% 0">
-<div class="shdr aos"><span class="stag pk">💡 Ustunligimiz</span><h2 class="stitle">Nima uchun biz? 🌟</h2><p class="ssub">Farzandingizga eng zamonaviy usullar bilan sifatli ta'lim beramiz.</p></div>
-<div class="wgrid" style="margin-bottom:80px">
-  <div class="wcard aos"><div class="wicon" style="background:linear-gradient(135deg,#fef3c7,#fde68a)">🤖</div><h3>AI Yordamchi</h3><p>Har bir o'quvchiga shaxsiy AI yordamchi — dars tushuntirishlari va uy vazifalari uchun 24/7 tayyor.</p></div>
-  <div class="wcard aos" style="transition-delay:.08s"><div class="wicon" style="background:linear-gradient(135deg,var(--pkl),#fecdd3)">👨‍🏫</div><h3>Tajribali O'qituvchilar</h3><p>50+ professional o'qituvchi, har biri 5+ yil tajribaga ega. Chet elda malaka oshirgan mutaxassislar.</p></div>
-  <div class="wcard aos" style="transition-delay:.16s"><div class="wicon" style="background:linear-gradient(135deg,var(--bll),#bae6fd)">📊</div><h3>Progress Monitoring</h3><p>Har haftada ota-onalarga bola rivojlanishi bo'yicha batafsil hisobot yuboriladi.</p></div>
-  <div class="wcard aos" style="transition-delay:.24s"><div class="wicon" style="background:linear-gradient(135deg,var(--grl),#a7f3d0)">🏅</div><h3>Sertifikatlar</h3><p>Kurs tugagach xalqaro standartlarga mos sertifikat — oliy ta'limga kirish va ish qidirishda afzallik.</p></div>
-  <div class="wcard aos" style="transition-delay:.32s"><div class="wicon" style="background:linear-gradient(135deg,var(--pul),#ddd6fe)">💻</div><h3>Zamonaviy Texnologiya</h3><p>Smart board, robotika to'plamlari va AI platformalari bilan jihozlangan zamonaviy sinfxonalar.</p></div>
-  <div class="wcard aos" style="transition-delay:.4s"><div class="wicon" style="background:linear-gradient(135deg,var(--orl),#fed7aa)">🎯</div><h3>Individual Yondashuv</h3><p>Har bir bola unikal. Shuning uchun har bir o'quvchi uchun shaxsiy ta'lim rejasi tuziladi.</p></div>
-</div>
-</div>
-
-<!-- POPULAR COURSES -->
-<div style="padding:0 5%">
-<div class="shdr c aos"><span class="stag bl">📚 Kurslar</span><h2 class="stitle">Mashhur kurslar 🔥</h2><p class="ssub">Farzandingiz qiziqishiga mos kursni tanlang</p></div>
-<div class="cgrid" style="margin-bottom:36px">
-  <div class="ccard ct-en aos"><div class="cthumb"><span>🇬🇧</span></div><div class="cbody"><span class="ctag tag-en">English</span><h3 class="ctitle">General English</h3><p class="cdesc">7 yosh va undan kattalar uchun suhbat, grammatika va lug'at boyitish.</p><div class="cmeta"><span>⏱ 3 oy</span><span>👥 8-10</span><span>⭐ 4.9</span></div></div><div class="cfoot"><span class="cprice">350,000 so'm/oy</span><button class="cenroll" onclick="openMod('register')">Yozilish</button></div></div>
-  <div class="ccard ct-ma aos" style="transition-delay:.1s"><div class="cthumb"><span>🔢</span></div><div class="cbody"><span class="ctag tag-ma">Matematika</span><h3 class="ctitle">Chuqurlashtirilgan Matematika</h3><p class="cdesc">Olimpiada va DTM ga tayyorlov. Mantiqiy fikrlash.</p><div class="cmeta"><span>⏱ 6 oy</span><span>👥 6-8</span><span>⭐ 4.8</span></div></div><div class="cfoot"><span class="cprice">300,000 so'm/oy</span><button class="cenroll" onclick="openMod('register')">Yozilish</button></div></div>
-  <div class="ccard ct-ro aos" style="transition-delay:.2s"><div class="cthumb"><span>🤖</span></div><div class="cbody"><span class="ctag tag-ro">Robotika</span><h3 class="ctitle">Robotika & Arduino</h3><p class="cdesc">Robot yasash, dasturlash va muhandislik. 8 yoshdan.</p><div class="cmeta"><span>⏱ 4 oy</span><span>👥 6</span><span>⭐ 5.0</span></div></div><div class="cfoot"><span class="cprice">450,000 so'm/oy</span><button class="cenroll" onclick="openMod('register')">Yozilish</button></div></div>
-</div>
-<div style="text-align:center;margin-bottom:80px"><a href="courses.html" class="btn btn-f" style="padding:14px 40px;font-size:1rem;border-radius:50px;text-decoration:none;display:inline-block">Barcha kurslar →</a></div>
-</div>
-
-<!-- TESTIMONIALS -->
-<div style="padding:0 5%">
-<div class="shdr c aos"><span class="stag gr">💬 Sharhlar</span><h2 class="stitle">Ota-onalar fikri 💛</h2></div>
-<div class="ttrack" style="margin-bottom:80px">
-  <div class="tstcard"><div class="tstars2">⭐⭐⭐⭐⭐</div><p class="ttxt">"O'g'lim 6 oyda ingliz tilini juda yaxshi o'rgandi. AI yordamchi uy vazifalarda katta yordam berdi. Juda mamnunmiz!"</p><div class="tauthor"><div class="tav" style="background:var(--pkl)">👩</div><div><div class="taname">Malika Yusupova</div><div class="tarole">O'g'lining onasi, Toshkent</div></div></div></div>
-  <div class="tstcard"><div class="tstars2">⭐⭐⭐⭐⭐</div><p class="ttxt">"Qizim robotika kursidan keyin IT sohasiga qiziqib qoldi. Hozir o'zi dastur yozmoqda. Ajoyib o'qituvchilar!"</p><div class="tauthor"><div class="tav" style="background:var(--bll)">👨</div><div><div class="taname">Bobur Karimov</div><div class="tarole">Qizining otasi, Samarqand</div></div></div></div>
-  <div class="tstcard"><div class="tstars2">⭐⭐⭐⭐⭐</div><p class="ttxt">"IELTS da 7.5 ball oldim! O'qituvchilar zo'r, materiallar professional. Bu markaz hayotimni o'zgartirdi."</p><div class="tauthor"><div class="tav" style="background:var(--grl)">👩‍🎓</div><div><div class="taname">Nilufar Rashidova</div><div class="tarole">Talaba, 20 yosh</div></div></div></div>
-  <div class="tstcard"><div class="tstars2">⭐⭐⭐⭐⭐</div><p class="ttxt">"Mental arifmetika kursi bolam uchun mo'jiza bo'ldi. Endi kalkulatorsiz tez hisoblaydi!"</p><div class="tauthor"><div class="tav" style="background:var(--yl)">👩</div><div><div class="taname">Dilorom Toshmatova</div><div class="tarole">O'g'lining onasi, Andijon</div></div></div></div>
-  <div class="tstcard"><div class="tstars2">⭐⭐⭐⭐⭐</div><p class="ttxt">"IT kursi juda amaliy. O'g'lim allaqachon freelance ishlar qilyapti. Sarmoya o'zini oqladi!"</p><div class="tauthor"><div class="tav" style="background:var(--pul)">👨‍💼</div><div><div class="taname">Sherzod Nazarov</div><div class="tarole">Tadbirkor, Farg'ona</div></div></div></div>
-</div>
-</div>
-
-<!-- AI SECTION -->
-<div style="padding:0 5%">
-<div class="aisec aos">
-  <div class="aigrid">
-    <div>
-      <span class="stag or">🤖 AI Texnologiya</span>
-      <h2 class="stitle" style="margin-bottom:14px">Aqlli AI Yordamchi — har doim yoningizda! 🚀</h2>
-      <p style="color:var(--txd);font-size:.93rem;font-weight:600;margin-bottom:26px;line-height:1.8">Bizning AI yordamchimiz o'zbek tilida gaplashadi, darslarni tushuntiradi, matematika masalalarini yechadi va ingliz tilini o'rgatishda yordam beradi. 24/7 ishlaydi!</p>
-      <div class="aifeats">
-        <div class="aifeat"><div class="aficon" style="background:var(--yl)">💬</div><div><h4>O'zbek tilida suhbat</h4><p>AI yordamchi to'liq o'zbek tilini tushunadi va javob beradi</p></div></div>
-        <div class="aifeat"><div class="aficon" style="background:var(--bll)">📐</div><div><h4>Matematika yechimi</h4><p>Har qanday murakkab masalani bosqichma-bosqich yechib beradi</p></div></div>
-        <div class="aifeat"><div class="aficon" style="background:var(--grl)">🔤</div><div><h4>Ingliz tili lug'ati</h4><p>So'zlarni izohlab, misollar va talaffuzini o'rgatadi</p></div></div>
-        <div class="aifeat"><div class="aficon" style="background:var(--pkl)">📚</div><div><h4>Kurs tavsiyasi</h4><p>Farzandingiz qiziqishiga mos kurslarni tavsiya etadi</p></div></div>
+<main id="main">
+<section class="ks-hero" aria-labelledby="hxT">
+  <div class="ks-dots"></div>
+  <div class="ks-wrap">
+    <div class="hx">
+      <div>
+        <span class="ks-stk mag ks-pop" style="--rot:-2deg;--d:.05s">Xususiy maktab · 1–11-sinflar · qabul ochiq</span>
+        <h1 class="ks-h1 hx-h1" id="hxT" style="margin-top:22px"><span class="ks-rise" style="--d:.1s">Kelajak ta’limi</span><span class="ks-rise" style="--d:.2s">shu yerda</span><span class="ks-rise" style="--d:.3s">boshlanadi.</span></h1>
+        <p class="ks-lead ks-rise" style="--d:.4s">Kuchaytirilgan ingliz tili, matematika, informatika va robotika — darslarning o‘zida. Darsdan keyin — Taekwondo va Gimnastika. Ota-ona har kuni ko‘radi: davomat, baholar va har juma hisobot.</p>
+        <div class="ks-hero-ctas ks-rise" style="--d:.5s"><a class="ks-btn ks-btn-mag ks-btn-lg" href="yozilish.html">Qabulga ariza</a><a class="ks-btn ks-btn-white ks-btn-lg" href="diagnostika.html">Bepul diagnostika</a></div>
       </div>
-      <button class="btn btn-f" style="margin-top:26px;padding:14px 32px;font-size:1rem;border-radius:50px" onclick="toggleChat()">🤖 AI bilan suhbatni boshlash</button>
-    </div>
-    <div class="ai-visual-card">
-      <span class="ai-chip one">24/7 yordam</span>
-      <span class="ai-chip two">O'zbek tilida</span>
-      <span class="ai-chip three">Tez javob</span>
-      <div class="ai-orbit">
-        <img src="static/img/ai-bot.png" alt="KATTA TANAFFUS AI robot">
+      <div class="hx-vis" aria-hidden="true">
+        <div class="hx-sun"></div>
+        <svg class="hx-ring" viewBox="0 0 400 400"><defs><path id="ringP" d="M200,200 m-150,0 a150,150 0 1,1 300,0 a150,150 0 1,1 -300,0"/></defs><text><textPath href="#ringP">BEPUL DIAGNOSTIKA ✦ 15 DAQIQA ✦ BEPUL DIAGNOSTIKA ✦ 15 DAQIQA ✦ </textPath></text></svg>
+        <div class="hx-big"><div><b>1–11</b><small>sinflar</small></div></div>
+        <span class="ks-stk sky ks-pop" style="top:4%;left:6%;--rot:-8deg;--d:.6s">🇬🇧 Ingliz tili</span>
+        <span class="ks-stk ks-pop" style="top:12%;right:-2%;--rot:7deg;--d:.7s">💻 Informatika</span>
+        <span class="ks-stk mint ks-pop" style="top:44%;right:-6%;--rot:-5deg;--d:.8s">🥋 Taekwondo</span>
+        <span class="ks-stk vio ks-pop" style="top:38%;left:-4%;--rot:6deg;--d:.9s">🤸 Gimnastika</span>
+        <span class="ks-stk flame ks-pop" style="bottom:20%;right:4%;--rot:4deg;--d:1s">🔢 Matematika</span>
+        <div class="hx-note ks-pop" style="--rot:-4deg;--d:1.15s"><small><span>Katta Tanaffus · bot</span><span>08:24</span></small><p>Sardor maktabga keldi. 1-dars — 08:30. +2 coin ✓</p></div>
       </div>
     </div>
+    <div class="ks-facts hx-facts">
+      <div><b>1–11</b><span>sinflar</span></div>
+      <div><b>3</b><span>filial: Toshkent (2) va Samarqand</span></div>
+      <div><b id="stud">3 480</b><span>o‘quvchi</span></div>
+      <div><b>15 daq</b><span>ichida kelmaganlik xabari ota-onaga</span></div>
+    </div>
   </div>
-</div>
-</div>
-
-<!-- BRANCHES PREVIEW -->
-<div style="padding:80px 5% 40px">
-<div class="shdr c aos"><span class="stag pu">📍 Filiallar</span><h2 class="stitle">Bizning manzillar 🗺️</h2></div>
-<div class="bgrid" style="margin-bottom:36px">
-  <div class="bcard aos"><div class="bmap" style="background:linear-gradient(135deg,var(--yl),#fde68a)">🗺️<div class="bpin">📍</div></div><h3 class="bname">Chilonzor filiali</h3><p class="baddr">📍 Chilonzor ko'chasi, 14-uy, Toshkent</p><div class="btags"><span class="btag">⏰ 09:00–21:00</span><span class="btag">📞 71 234-56-78</span></div><a href="branches.html" class="bbtn" style="display:block;text-align:center;text-decoration:none">Batafsil ma'lumot</a></div>
-  <div class="bcard aos" style="transition-delay:.1s"><div class="bmap" style="background:linear-gradient(135deg,var(--bll),#bae6fd)">🗺️<div class="bpin">📍</div></div><h3 class="bname">Yunusobod filiali</h3><p class="baddr">📍 Amir Temur shoh ko'chasi, 108-uy</p><div class="btags"><span class="btag">⏰ 09:00–21:00</span><span class="btag">📞 71 345-67-89</span></div><a href="branches.html" class="bbtn" style="display:block;text-align:center;text-decoration:none">Batafsil ma'lumot</a></div>
-  <div class="bcard aos" style="transition-delay:.2s"><div class="bmap" style="background:linear-gradient(135deg,var(--grl),#a7f3d0)">🗺️<div class="bpin">📍</div></div><h3 class="bname">Mirzo Ulug'bek filiali</h3><p class="baddr">📍 Mirzo Ulug'bek ko'chasi, 55-uy</p><div class="btags"><span class="btag">⏰ 09:00–21:00</span><span class="btag">📞 71 456-78-90</span></div><a href="branches.html" class="bbtn" style="display:block;text-align:center;text-decoration:none">Batafsil ma'lumot</a></div>
-</div>
-<div style="text-align:center;margin-bottom:40px"><a href="branches.html" class="btn btn-o" style="padding:12px 36px;border-radius:50px;text-decoration:none;display:inline-block">Barcha filiallar →</a></div>
-</div>
-
 </section>
 
-<!-- FOOTER -->
-<footer>
-  <div class="fgrid">
-    <div class="fbrand"><a href="index.html" class="footer-logo"><img src="static/img/logo-brand.png" alt="Katta Tanaffus logotipi"><div><h3>Katta Tanaffus School</h3><span>Bolalar ta'lim markazi</span></div></a><p>O'zbekistondagi eng zamonaviy ta'lim markazi. 5,000+ o'quvchi, 50+ o'qituvchi, 8 ta filial.</p><div class="fsocials"><a href="#" class="sbtn">📱</a><a href="#" class="sbtn">💬</a><a href="#" class="sbtn">📸</a><a href="#" class="sbtn">▶️</a></div></div>
-    <div class="fcol"><h4>Kurslar</h4><ul>
-      <li><a href="courses.html">English</a></li><li><a href="courses.html">IELTS</a></li>
-      <li><a href="courses.html">Matematika</a></li><li><a href="courses.html">IT & Dasturlash</a></li>
-      <li><a href="courses.html">Robotika</a></li><li><a href="courses.html">Mental Arifmetika</a></li>
-    </ul></div>
-    <div class="fcol"><h4>Kompaniya</h4><ul>
-      <li><a href="about.html">Biz haqimizda</a></li><li><a href="teachers.html">O'qituvchilar</a></li>
-      <li><a href="gallery.html">Galereya</a></li><li><a href="branches.html">Filiallar</a></li>
-      <li><a href="contact.html">Bog'lanish</a></li>
-    </ul></div>
-    <div class="fcol"><h4>Aloqa</h4><ul>
-      <li><a href="tel:+998712345678">+998 71 234-56-78</a></li>
-      <li><a href="mailto:info@kattatanaffus.uz">info@kattatanaffus.uz</a></li>
-      <li><a href="contact.html">Xabar yuborish</a></li>
-    </ul></div>
+<div class="ks-tapes" aria-hidden="true">
+  <div class="ks-tape b"><div class="ks-tape-track"><span>Ingliz tili</span><span>Matematika</span><span>Informatika</span><span>Robotika</span><span>Mental arifmetika</span><span>Taekwondo</span><span>Gimnastika</span><span>Ingliz tili</span><span>Matematika</span><span>Informatika</span><span>Robotika</span><span>Mental arifmetika</span><span>Taekwondo</span><span>Gimnastika</span></div></div>
+  <div class="ks-tape a"><div class="ks-tape-track"><span>Katta tanaffus</span><span>Qabul ochiq</span><span>Haftalik hisobot</span><span>Bolalar xavfsizligi</span><span>Katta tanaffus</span><span>Qabul ochiq</span><span>Haftalik hisobot</span><span>Bolalar xavfsizligi</span></div></div>
+</div>
+
+<section class="ks-sec" id="yosh" aria-labelledby="ageT">
+  <div class="ks-wrap age">
+    <div>
+      <h2 class="ks-h2" id="ageT">Farzandingiz necha yoshda?</h2>
+      <p class="ks-lead" style="margin-top:14px">Surgichni suring — qaysi sinf, qaysi fanlar va to‘garaklar unga mos ekanini ko‘rasiz.</p>
+      <div class="age-num" aria-live="polite"><span id="ageV">11</span><small>yosh <span id="ageG" class="ks-stk sun" style="--rot:-4deg;font-size:1.1rem;vertical-align:middle;margin-left:8px">5-sinf</span></small></div>
+      <label class="ks-sr" for="ageR">Yosh</label>
+      <input type="range" id="ageR" min="4" max="17" value="11">
+      <div class="age-scale"><span>4</span><span>8</span><span>13</span><span>17</span></div>
+      <p class="age-out" id="ageOut"></p>
+    </div>
+    <div class="tiles" id="tiles"></div>
   </div>
-  <div class="fbot"><p>© 2024 KATTA TANAFFUS SCHOOL. Barcha huquqlar himoyalangan. 💛</p><p>Privacy Policy · Foydalanish shartlari</p></div>
+</section>
+
+<section class="ks-sec ks-dark" aria-labelledby="parT">
+  <div class="ks-wrap par">
+    <div>
+      <h2 class="ks-h2" id="parT">Ota-ona hammasini ko‘radi</h2>
+      <p class="ks-lead" style="margin-top:14px">Bola maktabga keldimi, qaysi fandan qanday baho oldi, qayerda qiynalyapti — so‘rab yurish shart emas. Hammasi Telegramda va kabinetda.</p>
+      <ul>
+        <li><i>✓</i><div><b>Davomat — 15 daqiqada</b><span>Darsda bo‘lmasa, o‘qituvchi belgilagan zahoti xabar keladi.</span></div></li>
+        <li><i>📊</i><div><b>Har juma — haftalik hisobot</b><span>Fanlar bo‘yicha baholar, to‘garak va sinf rahbari izohi.</span></div></li>
+        <li><i>💳</i><div><b>To‘lov — Click yoki Payme</b><span>O‘qish to‘lovi va to‘garak — bitta hisobda, chek kabinetda.</span></div></li>
+      </ul>
+      <div class="ks-hero-ctas"><a class="ks-btn ks-btn-lg" href="ota-ona.html">Ota-ona kabinetini ko‘rish</a><a class="ks-btn ks-btn-ink ks-btn-lg" href="platforma.html">Platforma haqida</a></div>
+    </div>
+    <div id="parPhone"></div>
+  </div>
+</section>
+
+<section class="ks-sec" aria-labelledby="stT">
+  <div class="ks-wrap">
+    <div class="ks-head-row"><div><h2 class="ks-h2" id="stT">Qabul — to‘rt qadamda</h2><p class="ks-lead">Arizadan birinchi o‘quv kunigacha.</p></div><a class="ks-btn ks-btn-mag ks-btn-lg" href="yozilish.html">Qabulga ariza</a></div>
+    <ol class="steps" style="list-style:none;padding:0;margin:0">
+      <li class="ks-card step"><h3 class="ks-h3">Ariza</h3><p>Saytda, Telegramda yoki AI assistentga yozing — sinflardagi bo‘sh o‘rinlarni darhol aytadi.</p><em>2 daqiqa</em></li>
+      <li class="ks-card step"><h3 class="ks-h3">Diagnostika va suhbat</h3><p>Bepul adaptiv test va qabul suhbati: daraja va zaif mavzular aniqlanadi.</p><em>bir kun</em></li>
+      <li class="ks-card step"><h3 class="ks-h3">Shartnoma va sinf</h3><p>Sinf, filial va xohlasangiz to‘garak. Shartnoma va roziliklar — onlayn.</p><em>1–2 kun</em></li>
+      <li class="ks-card step"><h3 class="ks-h3">Birinchi kun</h3><p>Ertalab davomat xabari, juma kuni ota-onaga birinchi hisobot.</p><em>keyingi dushanba</em></li>
+    </ol>
+  </div>
+</section>
+
+<section class="ks-sec ks-sunsec" style="border-block:var(--bw) solid var(--ink)" aria-labelledby="tcT">
+  <div class="ks-wrap">
+    <div class="ks-head-row"><div><h2 class="ks-h2" id="tcT">Bolalar sevadigan o‘qituvchilar</h2><p class="ks-lead" style="color:var(--ink)">Har biri o‘z sohasida 6–15 yillik tajriba bilan.</p></div><a class="ks-btn ks-btn-ink ks-btn-lg" href="teachers.html">Barcha o‘qituvchilar</a></div>
+    <div class="tcards" id="tcards"></div>
+  </div>
+</section>
+
+<section class="ks-sec" aria-labelledby="ntT">
+  <div class="ks-wrap">
+    <div class="ks-head-row"><h2 class="ks-h2" id="ntT">Nega aynan Katta Tanaffus</h2></div>
+    <div class="notes">
+      <figure class="note" style="--rot:-1.5deg;--bg:#fff"><blockquote>Kuchaytirilgan ingliz tili va matematika — qo‘shimcha kursga yugurmasdan, darslarning o‘zida.</blockquote></figure>
+      <figure class="note" style="--rot:1.2deg;--bg:#e9fbf3"><blockquote>Informatika va robotika — bola kod yozadi va robot yig‘adi, faqat o‘qib qolmaydi.</blockquote></figure>
+      <figure class="note" style="--rot:-.8deg;--bg:#fff4d6"><blockquote>Darsdan keyin shu binoda — Taekwondo va Gimnastika. Bolani boshqa joyga olib borish shart emas.</blockquote></figure>
+      <figure class="note" style="--rot:1deg;--bg:#f1eaff"><blockquote>Ota-onaga har kuni davomat, har juma — fanlar bo‘yicha hisobot va sinf rahbarining izohi.</blockquote></figure>
+      <figure class="note" style="--rot:-1.2deg;--bg:#fff"><blockquote>Uyda 5 daqiqa: AI bola qiynalgan mavzuni topib, qisqa mashq beradi. Bahoni esa doim o‘qituvchi qo‘yadi.</blockquote></figure>
+      <figure class="note" style="--rot:.8deg;--bg:#ffe4f7;display:flex;flex-direction:column;justify-content:space-between"><blockquote style="font-family:var(--fh);font-weight:400;font-size:1.5rem;line-height:1.15">Qabul ochiq — 1–11-sinflar.</blockquote><a class="ks-btn" href="yozilish.html" style="margin-top:16px;align-self:flex-start">Qabulga ariza</a></figure>
+    </div>
+  </div>
+</section>
+
+<section class="ks-sec ks-dark" style="padding-block:clamp(56px,7vw,80px)" aria-labelledby="ctT">
+  <div class="ks-wrap">
+    <div class="ks-head-row" style="margin-bottom:24px"><h2 class="ks-h2" id="ctT">Uyingizga yaqin filial</h2><a class="ks-btn ks-btn-lg" href="branches.html">Xaritada ko‘rish</a></div>
+    <div class="cities" id="cities"></div>
+  </div>
+</section>
+</main>
+<div class="ks-cta">
+  <div class="ks-wrap ks-cta-in">
+    <div><h2>Qabul ochiq: 1–11-sinflar</h2><p>Avval 15 daqiqalik bepul diagnostika, keyin qabul suhbati. Bo‘sh o‘rinlar soni — filial va sinfga qarab.</p></div>
+    <div class="ks-cta-acts"><a class="ks-btn ks-btn-ink ks-btn-lg" href="yozilish.html">Qabulga ariza</a><a class="ks-btn ks-btn-lg" href="diagnostika.html">Bepul diagnostika</a></div>
+  </div>
+</div>
+<footer class="ks-foot">
+  <div class="ks-wrap">
+    <div class="ks-foot-grid">
+      <div>
+        <a class="ks-logo" href="index.html"><img src="static/img/logo-brand.png" alt="" width="48" height="48"><span><b>Katta Tanaffus</b><small style="color:var(--sun)">SCHOOL</small></span></a>
+        <p>Xususiy maktab: 1–11-sinflar, 3 filial, Taekwondo va Gimnastika to‘garaklari. Ota-ona, o‘qituvchi va AI — bitta jamoada.</p>
+        <div class="ks-soc"><a href="https://t.me/kattatanaffus" aria-label="Telegram" rel="noopener">✈️</a><a href="https://instagram.com/kattatanaffus" aria-label="Instagram" rel="noopener">📸</a><a href="https://youtube.com/@kattatanaffus" aria-label="YouTube" rel="noopener">▶️</a></div>
+      </div>
+      <div><h4>Ta’lim</h4><ul><li><a href="courses.html">Fanlar</a></li><li><a href="courses.html#taekwondo">Taekwondo</a></li><li><a href="courses.html#gymnastics">Gimnastika</a></li><li><a href="yozilish.html">Qabulga ariza</a></li><li><a href="diagnostika.html">Bepul diagnostika</a></li></ul></div>
+      <div><h4>Maktab</h4><ul><li><a href="about.html">Biz haqimizda</a></li><li><a href="teachers.html">O‘qituvchilar</a></li><li><a href="gallery.html">Galereya</a></li><li><a href="branches.html">Filiallar</a></li><li><a href="platforma.html">Platforma</a></li><li><a href="ota-ona.html">Ota-ona kabineti</a></li><li><a href="register.html">Ro‘yxatdan o‘tish</a></li><li><a href="login.html">Kirish</a></li></ul></div>
+      <div><h4>Aloqa</h4><ul><li><a href="tel:+998712345678">+998 71 234-56-78</a></li><li><a href="mailto:info@kattatanaffus.uz">info@kattatanaffus.uz</a></li><li><a href="https://t.me/kattatanaffus" rel="noopener">Telegram: @kattatanaffus</a></li><li><a href="contact.html">Xabar yuborish</a></li></ul><p style="margin-top:14px">Qabul bo‘limi: har kuni 09:00–21:00</p></div>
+    </div>
+    <div class="ks-word" aria-hidden="true">Katta Tanaffus</div>
+    <div class="ks-foot-bot"><span>© <span data-year>2026</span> Katta Tanaffus School</span><span>Bola rasmlari va ismlari faqat ota-ona roziligi bilan e’lon qilinadi</span></div>
+  </div>
 </footer>
-
-<!-- AI FAB -->
-<button id="fab" onclick="toggleChat()" aria-label="AI yordamchi"><img src="static/img/ai-bot.png" alt="AI yordamchi"></button>
-<div id="chatwin">
-  <div class="chdr"><div class="chdri"><div class="chav">🤖</div><div><div class="cname">KATTA TANAFFUS AI</div><div class="cst"><span class="stdot"></span>Online</div></div></div><button class="cx" onclick="toggleChat()">✕</button></div>
-  <div class="cmsgs" id="chat-msgs"><div class="cmsg bot"><div class="mav">🤖</div><div class="mbub">Assalomu alaykum! 👋 Kurslar, narxlar yoki manzil haqida savollaringizga javob beraman!</div></div></div>
-  <div class="qrps" id="qrps">
-    <button class="qr" onclick="sendQuick(this.textContent)">📚 Kurslar</button>
-    <button class="qr" onclick="sendQuick(this.textContent)">💰 Narxlar</button>
-    <button class="qr" onclick="sendQuick(this.textContent)">📍 Manzil</button>
-    <button class="qr" onclick="sendQuick(this.textContent)">✍️ Yozilish</button>
-  </div>
-  <div class="cinp"><button class="cmic">🎤</button><input type="text" id="chat-input" placeholder="Xabar yozing... 💬" onkeydown="if(event.key==='Enter')sendChat()"><button class="csend" onclick="sendChat()">➤</button></div>
-</div>
-
-<!-- ARIZA MODAL -->
-<div class="mov" id="ariza-modal" style="display:none">
-  <div class="modal" style="max-width:460px">
-    <button class="mx" onclick="closeAriza()">✕</button>
-    <div id="ariza-content">
-      <!-- Ariza shakli -->
-      <div id="ariza-form-block">
-        <div style="font-size:2.5rem;text-align:center;margin-bottom:8px">📝</div>
-        <h2 style="font-family:var(--fh);font-size:1.5rem;margin-bottom:5px;text-align:center">Ariza qoldirish</h2>
-        <p style="color:var(--txd);font-size:.875rem;font-weight:600;margin-bottom:22px;text-align:center">Ma'lumotlaringizni qoldiring — biz siz bilan bog'lanamiz!</p>
-        <div class="fg"><label style="display:block;font-size:.85rem;font-weight:800;margin-bottom:7px;color:var(--txd)">Ismingiz *</label>
-          <input type="text" id="ariza-ism" class="form-inp" placeholder="Ism va familiya" oninput="clearArizaErr()"></div>
-        <div class="fg"><label style="display:block;font-size:.85rem;font-weight:800;margin-bottom:7px;color:var(--txd)">Telefon *</label>
-          <input type="tel" id="ariza-tel" class="form-inp" placeholder="+998 90 123 45 67" oninput="clearArizaErr()"></div>
-        <div class="fg"><label style="display:block;font-size:.85rem;font-weight:800;margin-bottom:7px;color:var(--txd)">Qiziqadigan kurs</label>
-          <select id="ariza-kurs" class="form-inp">
-            <option value="">— Kursni tanlang —</option>
-            <option>General English</option><option>IELTS Tayyorlov</option>
-            <option>Matematika</option><option>IT & Dasturlash</option>
-            <option>Robotika & Arduino</option><option>Mental Arifmetika</option>
-            <option>Maktabgacha ta'lim</option><option>Sport</option>
-          </select>
-        </div>
-        <div id="ariza-err" style="display:none;color:#be123c;font-size:.82rem;font-weight:700;margin-bottom:10px;background:var(--pkl);padding:8px 12px;border-radius:8px">⚠️ Xatolik</div>
-        <button class="btn btn-f" id="ariza-btn" style="width:100%;padding:14px;font-size:1rem;border-radius:50px" onclick="submitAriza()">📨 Ariza yuborish</button>
-        <p style="text-align:center;margin-top:14px;font-size:.8rem;color:var(--txm);font-weight:600">Biz 10:30 dan 20:00 gacha bog'lanamiz 📞</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- RAHMAT MODAL -->
-<div class="mov" id="rahmat-modal" style="display:none">
-  <div class="modal" style="max-width:440px;text-align:center">
-    <button class="mx" onclick="closeRahmat()">✕</button>
-    <div style="font-size:3.5rem;margin-bottom:10px">🎉</div>
-    <div style="display:flex;justify-content:center;gap:6px;font-size:1.5rem;margin-bottom:16px">⭐⭐⭐</div>
-    <h2 style="font-family:var(--fh);font-size:1.6rem;margin-bottom:10px;color:var(--tx)">Rahmat, <span id="rahmat-ism" style="color:var(--yd)">do'stim</span>!</h2>
-    <p style="color:var(--txd);font-size:.95rem;font-weight:600;line-height:1.7;margin-bottom:20px">Arizangiz muvaffaqiyatli qabul qilindi! 🎓<br>Tez orada siz bilan bog'lanamiz.</p>
-    <!-- Kutish kartochkasi -->
-    <div style="background:linear-gradient(135deg,var(--y),var(--or));border-radius:20px;padding:22px 20px;margin-bottom:20px;box-shadow:0 8px 28px rgba(251,191,36,.4)">
-      <div style="font-size:1.4rem;margin-bottom:8px">📅</div>
-      <div style="font-family:var(--fh);font-size:1.2rem;color:#fff;margin-bottom:8px">Sizni kutamiz!</div>
-      <div style="color:rgba(255,255,255,.95);font-size:.95rem;font-weight:700;line-height:1.7">
-        ⏰ Ertaga <strong>soat 10:30</strong> dan<br>
-        <strong>kechki 20:00</strong> gacha<br>
-        farzandingiz bilan keling! 👨‍👩‍👧
-      </div>
-      <div style="background:rgba(255,255,255,.2);border-radius:12px;padding:10px 14px;margin-top:12px;font-size:.84rem;color:#fff;font-weight:700">
-        📍 Eng yaqin filialni tanlang
-      </div>
-    </div>
-    <div style="display:flex;gap:8px;justify-content:center;margin-bottom:16px;flex-wrap:wrap">
-      <div style="background:var(--grl);border:2px solid var(--gr);border-radius:50px;padding:6px 14px;font-size:.76rem;font-weight:800;color:#065f46">✅ Bepul konsultatsiya</div>
-      <div style="background:var(--bll);border:2px solid var(--bl);border-radius:50px;padding:6px 14px;font-size:.76rem;font-weight:800;color:#0369a1">📚 Sinov darsi</div>
-      <div style="background:var(--pul);border:2px solid var(--pu);border-radius:50px;padding:6px 14px;font-size:.76rem;font-weight:800;color:#7c3aed">🎁 Sovg'a</div>
-    </div>
-    <p style="font-size:.88rem;font-weight:700;color:var(--txd)">Kuniz xayrli o'tsin! ☀️</p>
-    <button class="btn btn-f" style="margin-top:16px;width:100%;padding:13px;font-size:.95rem;border-radius:50px" onclick="closeRahmat()">🏠 Bosh sahifaga qaytish</button>
-    <p id="rahmat-cd" style="font-size:.76rem;color:var(--txm);margin-top:10px;font-weight:600">Bu oyna <span id="cd-sec" style="color:var(--yd);font-weight:800">10</span> soniyadan keyin yopiladi</p>
-  </div>
-</div>
-
-<!-- TEACHER MODAL -->
-<div class="mov" id="tmod"><div class="modal tmod"><button class="mx" onclick="document.getElementById('tmod').classList.remove('open')">✕</button><div id="tmod-content"></div></div></div>
-<div class="mov" id="cmod"><div class="modal" style="max-width:520px"><button class="mx" onclick="document.getElementById('cmod').classList.remove('open')">✕</button><div id="cmod-content"></div></div></div>
-
-<script src="static/js/main.js"></script>
+<script src="static/js/kt-data.js"></script>
+<script src="static/js/kt-platform.js"></script>
+<script src="static/js/kt-assistant.js"></script>
+<script src="static/js/ks.js"></script>
 <script>
-// ── ARIZA MODAL ──
-function openAriza(){
-  document.getElementById('ariza-modal').classList.add('open');
-  document.getElementById('ariza-modal').style.display='flex';
-  document.getElementById('ariza-form-block').style.display='block';
-}
-function closeAriza(){
-  document.getElementById('ariza-modal').classList.remove('open');
-  document.getElementById('ariza-modal').style.display='none';
-}
-document.getElementById('ariza-modal').addEventListener('click',function(e){if(e.target===this)closeAriza();});
-
-function clearArizaErr(){document.getElementById('ariza-err').style.display='none';}
-
-function submitAriza(){
-  var ism = document.getElementById('ariza-ism').value.trim();
-  var tel = document.getElementById('ariza-tel').value.trim();
-  var err = document.getElementById('ariza-err');
-  if(!ism){err.textContent='⚠️ Ismingizni kiriting!';err.style.display='block';return;}
-  if(!tel){err.textContent='⚠️ Telefon raqamingizni kiriting!';err.style.display='block';return;}
-  closeAriza();
-  document.getElementById('rahmat-ism').textContent = ism.split(' ')[0];
-  document.getElementById('rahmat-modal').classList.add('open');
-  document.getElementById('rahmat-modal').style.display='flex';
-  startCountdown();
-}
-
-// ── RAHMAT MODAL ──
-var cdTimer=null;
-function startCountdown(){
-  var sec=10;
-  var el=document.getElementById('cd-sec');
-  if(cdTimer)clearInterval(cdTimer);
-  cdTimer=setInterval(function(){
-    sec--;
-    if(el)el.textContent=sec;
-    if(sec<=0){clearInterval(cdTimer);closeRahmat();}
-  },1000);
-}
-function closeRahmat(){
-  if(cdTimer)clearInterval(cdTimer);
-  document.getElementById('rahmat-modal').classList.remove('open');
-  document.getElementById('rahmat-modal').style.display='none';
-}
-document.getElementById('rahmat-modal').addEventListener('click',function(e){if(e.target===this)closeRahmat();});
-
-// Kurs kartochkasidan ariza ochish
-function openCourseAriza(kursNomi){
-  openAriza();
-  setTimeout(function(){
-    var sel=document.getElementById('ariza-kurs');
-    if(sel){for(var i=0;i<sel.options.length;i++){if(sel.options[i].text===kursNomi){sel.selectedIndex=i;break;}}}
-  },100);
-}
-
-// "Yozilish" tugmasi barcha joylarda
-function openMod(type){openAriza();}
-
+(function(){
+  const D=KTD, esc=KS.esc;
+  const sum=D.BRANCHES.reduce((s,b)=>s+b.students,0); document.getElementById('stud').textContent=KT.num(sum);
+  /* yosh → sinf, fanlar va to‘garaklar */
+  const tiles=document.getElementById('tiles');
+  const items=D.SUBJECTS.filter(x=>x.id!=='pe').map(x=>({id:x.id, emoji:x.emoji, title:x.title, color:x.color, sub:x.grades+' · darsda', ok:a=>{ const g=D.ageToGrade(a); return g>=x.gMin && g<=x.gMax; }}))
+    .concat(D.CLUBS.map(c=>({id:c.id, emoji:c.emoji, title:c.title+' to‘garagi', color:c.color, sub:`${c.ageMin}–${c.ageMax} yosh · darsdan keyin`, ok:a=>a>=c.ageMin && a<=c.ageMax})));
+  tiles.innerHTML=items.map((t,i)=>`<a class="tile" href="courses.html#${t.id}" data-i="${i}" style="--c:color-mix(in srgb,${t.color} 22%,#fff)"><i aria-hidden="true">${t.emoji}</i><span><b>${esc(t.title)}</b><small>${esc(t.sub)}</small></span></a>`).join('');
+  const r=document.getElementById('ageR');
+  function upd(){ const a=+r.value, g=D.ageToGrade(a); document.getElementById('ageV').textContent=a; document.getElementById('ageG').textContent=g>=1?g+'-sinf':'1-sinfga tayyorgarlik';
+    let n=0; tiles.querySelectorAll('.tile').forEach(t=>{ const ok=items[+t.dataset.i].ok(a); t.classList.toggle('off',!ok); if(ok) n++; });
+    const cl=D.CLUBS.filter(c=>a>=c.ageMin&&a<=c.ageMax).map(c=>c.title);
+    document.getElementById('ageOut').textContent = g>=1 ? `${a} yosh — odatda ${g}-sinf. ${cl.length?'To‘garaklar: '+cl.join(', ')+'.':''}` : `${a} yosh — maktabgacha. ${cl.length?'Hozirdan to‘garakka yozilish mumkin: '+cl.join(', ')+'.':''}`; }
+  r.addEventListener('input',upd); upd();
+  /* ota-ona telefoni */
+  const ph=KT.phone(document.getElementById('parPhone'),{title:'Katta Tanaffus',sub:'bot · ota-ona uchun'});
+  [{sep:'Bugun'},{label:'Davomat',time:'08:24',text:'Sardor maktabga keldi. +2 coin'},{label:'Baho',time:'14:10',text:'Matematika, nazorat ishi — 5. O‘qituvchi: “Barcha masalalar to‘g‘ri”.'},{label:'Uy vazifasi',time:'19:52',text:'Ingliz tili testi: 7/10 → mashqdan keyin 9/10 🎉'},{sep:'Juma'},{label:'Haftalik hisobot',time:'18:00',html:'<b>Sardor:</b> 5/5 kun maktabda. Ingliz tili 7 → 9, matematika — 5, informatika — 5. Taekwondo 3/3.',buttons:['👍 Rahmat','Savol berish']}].forEach(m=>ph.add(m));
+  /* o‘qituvchilar */
+  const T=[['Alisher Nishonov','Ingliz tili','#41b6ff','8 yil · 250+ o‘quvchi','Cambridge CELTA. O‘quvchilarining ko‘pi IELTS da 7.0 dan yuqori ball olgan.'],['Gulnora Xasanova','Matematika','#2fd39a','6 yil · 180+ o‘quvchi','NUUz matematika magistri. O‘quvchilari respublika olimpiadalarida g‘olib.'],['Sarvar Toshpulatov','Informatika va robotika','#ff6b3d','10 yil · 300+ o‘quvchi','10 yil IT sohasida ishlagan, hozir informatika va robotika kafedrasini boshqaradi.']];
+  document.getElementById('tcards').innerHTML=T.map(t=>`<a class="ks-card hov tc" href="teachers.html" style="--c:${t[2]};text-decoration:none"><div class="tc-top"><span class="tc-av">${esc(KT.initials(t[0]))}</span></div><div class="tc-body"><h3 class="ks-h3">${esc(t[0])}</h3><small>${esc(t[1])} · ${esc(t[3])}</small><p>${esc(t[4])}</p></div></a>`).join('');
+  /* filiallar */
+  const col=['sun','mag','vio','mint','sky','flame'];
+  document.getElementById('cities').innerHTML=D.BRANCHES.map((b,i)=>`<a class="ks-stk ${col[i]}" href="branches.html#${b.id}" style="--rot:${i%2?3:-3}deg;text-decoration:none;font-size:1.05rem;padding:12px 20px;border-color:#fff;box-shadow:4px 4px 0 #fff">📍 ${esc(b.name)}<span style="opacity:.75;font-weight:800">${b.students} o‘quvchi</span></a>`).join('');
+})();
 </script>
-
 </body>
 </html>

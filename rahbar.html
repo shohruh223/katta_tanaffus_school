@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Rahbar paneli — Katta Tanaffus</title>
+<link rel="stylesheet" href="static/css/platform.css">
+<style>
+  .kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+  .kc{background:#fff;border:1px solid var(--kp-line);border-radius:20px;padding:16px}
+  .kc .kp-kpi-v{font-size:1.75rem}
+  .kc .st{font-size:.76rem;font-weight:900;margin-top:4px}
+  .kc .st.ok{color:#08704d}.kc .st.no{color:#be123c}
+  .chart{position:relative}
+  .chart svg{display:block;width:100%;height:auto;overflow:visible}
+  .chart .ax{font:700 11px var(--kp-fb);fill:var(--kp-ink3)}
+  .chart .grid{stroke:#efe8f6;stroke-width:1}
+  .tip{position:absolute;pointer-events:none;background:#2a1248;color:#fff;font-size:.8rem;font-weight:800;padding:7px 10px;border-radius:10px;white-space:nowrap;transform:translate(-50%,-115%);opacity:0;transition:opacity .12s}
+  .tip.on{opacity:1}
+  .tip small{display:block;font-weight:700;color:#d8c8f3;font-size:.72rem}
+  .funnel{display:flex;flex-direction:column;gap:8px}
+  .fr{display:grid;grid-template-columns:110px 1fr 70px;gap:10px;align-items:center;font-size:.86rem;font-weight:800}
+  .fr .fb{height:28px;border-radius:0 4px 4px 0;background:var(--acc);position:relative}
+  .fr .num{text-align:right;font-variant-numeric:tabular-nums}
+  .fr small{color:var(--kp-ink3);font-weight:800;font-size:.74rem;display:block}
+  .bt td.cell{position:relative;font-variant-numeric:tabular-nums}
+  .bt .mini{display:block;height:4px;border-radius:2px;background:var(--acc);opacity:.55;margin-top:4px}
+  .bt td.flag{color:#be123c;font-weight:900}
+  .bt td.flag::before{content:"▼ ";font-size:.7em}
+  .ask{display:flex;gap:8px;flex-wrap:wrap}
+  .ask input{flex:1;min-width:220px}
+  .sugq{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+  .sugq button{border:1.5px solid var(--kp-line);background:#fff;border-radius:20px;padding:6px 12px;font:800 .8rem var(--kp-fb);cursor:pointer;color:var(--kp-ink2)}
+  .sugq button:hover{border-color:var(--acc);color:var(--accd)}
+  .answer{margin-top:16px;border-radius:20px;background:var(--accl);padding:18px}
+  .answer p{font-weight:700;line-height:1.6}
+  .gov{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+  .gov div{background:var(--kp-soft);border-radius:16px;padding:14px}
+  .gov b{display:block;font-family:var(--kp-fh);font-weight:400;font-size:1.4rem}
+  .gov small{font-size:.78rem;font-weight:800;color:var(--kp-ink2)}
+  @media (max-width:1100px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+</style>
+</head>
+<body class="kp-body" data-role="director">
+<div class="kp-app">
+  <aside class="kp-side" id="kpSide"></aside>
+  <div class="kp-main">
+    <header class="kp-top">
+      <div><h1>Butun tarmoq · Noyabr</h1><div class="kp-sub"><span data-kp-today></span> · 3 filial · demo raqamlar</div></div>
+      <div class="kp-top-r"><span class="kp-chip">Faqat agregat — ismlarsiz</span><div class="kp-user" id="me"></div></div>
+    </header>
+    <div class="kp-content">
+      <section class="kp-anchor" id="kpi"><div class="kpis" id="kpis"></div></section>
+
+      <div class="kp-grid kp-g-wide">
+        <section class="kp-panel kp-anchor" id="north">
+          <div class="kp-ph"><div><h2>Asosiy ko‘rsatkich</h2><p>Oyni to‘lov bilan yopgan va kamida bitta yangi mavzuni o‘zlashtirgan o‘quvchilar (barcha sinflar)</p></div><div class="kp-ph-r"><span class="kp-chip ok">+4,6% oyiga</span></div></div>
+          <div class="chart" id="ns"></div>
+        </section>
+        <section class="kp-panel kp-anchor" id="voronka">
+          <div class="kp-ph"><div><h3>Qabul voronkasi</h3><p>Noyabr · barcha filiallar</p></div></div>
+          <div class="funnel" id="funnel"></div>
+          <div class="kp-note" style="margin-top:14px">Arizadan qabulgacha: <b>38%</b> (maqsad ≥ 35%). Arizaga birinchi javob, median: <b>11 daqiqa</b>. Maktab va to‘garaklar birga.</div>
+        </section>
+      </div>
+
+      <section class="kp-panel kp-anchor" id="filiallar">
+        <div class="kp-ph"><div><h2>Filiallar taqqoslovi</h2><p>Qizil — maqsaddan past. Har ustunda chiziq — tarmoqdagi eng yuqoriga nisbatan.</p></div></div>
+        <div class="kp-scroll"><table class="kp-table bt" id="br"></table></div>
+      </section>
+
+      <section class="kp-panel kp-anchor" id="savol">
+        <div class="kp-ph"><div><h2>AI dan so‘rang</h2><p>Oddiy tilda savol — agregat ma’lumotdan javob va grafik. Faqat o‘qish huquqi, ismlar ko‘rsatilmaydi.</p></div><div class="kp-ph-r"><span class="kp-lvl A1">A1</span><span class="kp-chip">2-bosqich</span></div></div>
+        <form class="ask" id="askF"><label class="kp-sr" for="askI">Savol</label><input class="kp-input" id="askI" placeholder="Masalan: qaysi filialda ketish oshdi?"><button class="kp-btn kp-btn-acc" type="submit">So‘rash</button></form>
+        <div class="sugq" id="sugq"></div>
+        <div id="ans"></div>
+      </section>
+
+      <div class="kp-grid kp-g2">
+        <section class="kp-panel kp-anchor" id="oqituvchilar">
+          <div class="kp-ph"><div><h3>O‘qituvchi sifati</h3><p>Davomat, o‘sish va ota-ona fikri — mukofot qarori insonda</p></div><div class="kp-ph-r"><span class="kp-chip">2-bosqich</span></div></div>
+          <div class="kp-scroll"><table class="kp-table" id="tq"></table></div>
+        </section>
+        <section class="kp-panel kp-anchor" id="ai">
+          <div class="kp-ph"><div><h3>AI nazorati</h3><p>Har AI natijasi model versiyasi va tasdiqlovchi bilan jurnalda</p></div></div>
+          <div class="gov">
+            <div><b>1 240</b><small>AI takliflari bu hafta</small></div>
+            <div><b>72%</b><small>o‘zgarishsiz qabul (maqsad ≥ 70%)</small></div>
+            <div><b>3</b><small>xavfli kontent yashirildi va moderatorga yuborildi</small></div>
+            <div><b>0</b><small>bola ma’lumoti tashqi LLM ga chiqdi</small></div>
+          </div>
+          <div class="kp-note ai" style="margin-top:12px">Reliz darvozasi: hisobot modeli <b>v1.3</b> o‘zbek va rus test to‘plamida eski versiyadan yomon emas → 10% foydalanuvchida 7 kunlik sinovda (4/7 kun).</div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="static/js/kt-data.js"></script>
+<script src="static/js/kt-platform.js"></script>
+<script>
+(function(){
+  const {esc, avatar, num} = KT; const D = KTD;
+  document.getElementById('me').innerHTML = avatar('Rahbar','#4c1d95') + '<span>Direktor<small>Barcha filiallar</small></span>';
+  KT.mountSide({role:'director', active:'#kpi', nav:[
+    {href:'#kpi', icon:'🎯', label:'KPI'}, {href:'#north', icon:'⭐', label:'Asosiy ko‘rsatkich'}, {href:'#voronka', icon:'🔻', label:'Qabul voronkasi'},
+    {href:'#filiallar', icon:'🏢', label:'Filiallar'}, {href:'#savol', icon:'✦', label:'AI dan so‘rang'}, {href:'#oqituvchilar', icon:'🧑‍🏫', label:'O‘qituvchilar'}, {href:'#ai', icon:'🛡️', label:'AI nazorati'}
+  ]});
+  const ACC='#4c1d95';
+
+  /* KPI kartalari: holat — belgi + so‘z, faqat rang emas */
+  document.getElementById('kpis').innerHTML = D.KPIS.map(k=>{ const ok = k.inv ? k.now<=k.goal : k.now>=k.goal;
+    return `<div class="kc"><div class="kp-kpi"><span class="kp-kpi-l">${esc(k.k)}</span><span class="kp-kpi-v">${String(k.now).replace('.',',')}${esc(k.unit)}</span></div><div class="st ${ok?'ok':'no'}">${ok?'✓ maqsadda':'✕ maqsaddan past'} · ${esc(k.t)}</div></div>`; }).join('');
+
+  /* yagona maslahat (tooltip) */
+  function tipFor(host){ let t=host.querySelector('.tip'); if(!t){ t=document.createElement('div'); t.className='tip'; host.appendChild(t); } return t; }
+
+  /* chiziqli grafik: crosshair + tooltip */
+  function lineChart(host, labels, vals, fmt){
+    const W=640,H=240,P={l:44,r:14,t:16,b:28}; const min=Math.floor(Math.min(...vals)*.95/100)*100, max=Math.ceil(Math.max(...vals)*1.03/100)*100;
+    const x=i=>P.l+i*(W-P.l-P.r)/(vals.length-1), y=v=>P.t+(1-(v-min)/(max-min))*(H-P.t-P.b);
+    const ticks=4; let g=''; for(let i=0;i<=ticks;i++){ const v=min+(max-min)*i/ticks; g+=`<line class="grid" x1="${P.l}" x2="${W-P.r}" y1="${y(v)}" y2="${y(v)}"/><text class="ax" x="${P.l-8}" y="${y(v)+4}" text-anchor="end">${num(v)}</text>`; }
+    const pts=vals.map((v,i)=>`${x(i)},${y(v)}`).join(' ');
+    const area=`M${x(0)},${y(min)} L`+vals.map((v,i)=>`${x(i)},${y(v)}`).join(' L')+` L${x(vals.length-1)},${y(min)} Z`;
+    host.innerHTML=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(labels[0])}–${esc(labels[labels.length-1])}: ${vals.map(num).join(', ')}">${g}
+      <path d="${area}" fill="${ACC}" opacity=".07"/><polyline points="${pts}" fill="none" stroke="${ACC}" stroke-width="2" stroke-linejoin="round"/>
+      ${labels.map((l,i)=>`<text class="ax" x="${x(i)}" y="${H-8}" text-anchor="middle">${esc(l)}</text>`).join('')}
+      <line id="cx" x1="0" x2="0" y1="${P.t}" y2="${H-P.b}" stroke="#2a1248" stroke-opacity=".25" stroke-dasharray="3 3" style="display:none"/>
+      ${vals.map((v,i)=>`<circle cx="${x(i)}" cy="${y(v)}" r="${i===vals.length-1?5:4}" fill="${i===vals.length-1?ACC:'#fff'}" stroke="${ACC}" stroke-width="2"/>`).join('')}
+      <text x="${x(vals.length-1)-8}" y="${y(vals[vals.length-1])-12}" text-anchor="end" style="font:900 12px var(--kp-fb);fill:#2a1248">${fmt(vals[vals.length-1])}</text>
+      <rect x="${P.l}" y="0" width="${W-P.l-P.r}" height="${H}" fill="transparent" id="hit"/></svg>`;
+    const svg=host.querySelector('svg'), cx=svg.querySelector('#cx'), tip=tipFor(host);
+    svg.querySelector('#hit').addEventListener('mousemove',e=>{ const r=svg.getBoundingClientRect(); const sx=(e.clientX-r.left)/r.width*W; let i=Math.round((sx-P.l)/((W-P.l-P.r)/(vals.length-1))); i=Math.max(0,Math.min(vals.length-1,i));
+      cx.setAttribute('x1',x(i)); cx.setAttribute('x2',x(i)); cx.style.display=''; tip.innerHTML=`${fmt(vals[i])}<small>${esc(labels[i])}${i?` · ${vals[i]>=vals[i-1]?'+':''}${num(vals[i]-vals[i-1])}`:''}</small>`; tip.style.left=(x(i)/W*100)+'%'; tip.style.top=(y(vals[i])/H*r.height)+'px'; tip.classList.add('on'); });
+    svg.querySelector('#hit').addEventListener('mouseleave',()=>{ cx.style.display='none'; tip.classList.remove('on'); });
+  }
+  lineChart(document.getElementById('ns'), ['Iyun','Iyul','Avg','Sen','Okt','Noy'], [2210,2280,2050,2390,2560,2680], v=>num(v)+' o‘quvchi');
+
+  /* voronka: gorizontal ustunlar, bitta rang */
+  const F=[['Ariza',612],['Aloqa qilindi',548],['Diagnostika va suhbat',331],['Hujjatlar',268],['Qabul qilindi',233]];
+  document.getElementById('funnel').innerHTML = F.map((f,i)=>`<div class="fr"><span>${esc(f[0])}${i?`<small>${Math.round(f[1]/F[i-1][1]*100)}% oldingidan</small>`:''}</span><div><div class="fb" style="width:${f[1]/F[0][1]*100}%;opacity:${1-i*.12}" title="${esc(f[0])}: ${f[1]}"></div></div><span class="num">${num(f[1])}</span></div>`).join('');
+
+  /* filiallar jadvali */
+  const BR=[['Yunusobod',650,41,94.1,93,91,81],['Novza',500,38,93.4,91,90,79],['Samarqand',380,33,91.8,88,87,71]];
+  const COLS=[['O‘quvchi',null,''],['Konversiya',35,'%'],['Qolish',92,'%'],['O‘z vaqtida to‘lov',90,'%'],['Davomat',90,'%'],['Hisobot ochilishi',70,'%']];
+  const maxs=COLS.map((c,j)=>Math.max(...BR.map(b=>b[j+1])));
+  document.getElementById('br').innerHTML = `<thead><tr><th>Filial</th>${COLS.map(c=>`<th class="num">${esc(c[0])}${c[1]?`<div style="font-weight:700">maqsad ${c[1]}${c[2]}</div>`:''}</th>`).join('')}</tr></thead><tbody>`+BR.map(b=>`<tr><td>${esc(b[0])}</td>${COLS.map((c,j)=>{ const v=b[j+1]; const bad=c[1]&&v<c[1]; return `<td class="num cell ${bad?'flag':''}">${j===0?num(v):String(v).replace('.',',')}${c[2]}<span class="mini" style="width:${Math.round(v/maxs[j]*90)}px;margin-left:auto"></span></td>`; }).join('')}</tr>`).join('')+`<tr><td><b>Jami</b></td><td class="num"><b>${num(BR.reduce((s,b)=>s+b[1],0))}</b></td><td class="num">37%</td><td class="num">93,1%</td><td class="num">90,7%</td><td class="num">89,3%</td><td class="num">77%</td></tr></tbody>`;
+
+  /* AI savol-javob (demo: tayyor agregat ko‘rinishlar) */
+  function barChart(host, rows, fmt){
+    const max=Math.max(...rows.map(r=>r[1]));
+    host.innerHTML = `<div class="funnel">${rows.map((r,i)=>`<div class="fr" data-i="${i}"><span>${esc(r[0])}</span><div><div class="fb" style="width:${r[1]/max*100}%;${r[2]?'background:#be123c':''}"></div></div><span class="num">${fmt(r[1])}</span></div>`).join('')}</div>`;
+  }
+  const QA = [
+    {k:/ketish|qolish|chiq/, q:'Qaysi filialda ketish oshdi?', a:'<b>Samarqand</b>: noyabrda oylik ketish 8,2% (oktabrda 5,4%). Qabul bo‘limi belgilagan sabablar: ko‘chish — 38%, narx — 29%, transport — 19%. Taklif: maktab avtobusi yo‘nalishini ko‘rib chiqish va erta ogohlantirish vazifalarini tekshirish.', rows:[['Samarqand',8.2,1],['Novza',6.6],['Yunusobod',5.9]], fmt:v=>String(v).replace('.',',')+'%'},
+    {k:/kurs|sinf|ariza|lead|talab|to‘garak/, q:'Qaysi sinflarga eng ko‘p ariza keldi?', a:'Noyabrda eng ko‘p ariza — <b>1-sinfga</b> (31%), keyin 5-sinf va to‘garaklar. Taekwondo arizalari oktabrga nisbatan +18%. 1-sinflarda bo‘sh o‘rin 7 ta — “ochiq eshiklar kuni” foydali bo‘ladi.', rows:[['1-sinf',190],['5-sinf',97],['Taekwondo',88],['2–4-sinflar',84],['Gimnastika',71],['6–11-sinflar',82]], fmt:num},
+    {k:/hisobot|och/, q:'Haftalik hisobotni kim kam ochyapti?', a:'Hisobot ochilishi tarmoq bo‘yicha <b>77%</b> (maqsad ≥ 70%). Eng past — Samarqand (71%). Samarqandda SMS orqali qisqa versiyani sinab ko‘rish tavsiya etiladi.', rows:[['Yunusobod',81],['Novza',79],['Samarqand',71,1]], fmt:v=>v+'%'},
+    {k:/vaqt|tejad|o‘qituvchi/, q:'AI o‘qituvchilarga qancha vaqt tejadi?', a:'O‘qituvchi boshiga haftasiga o‘rtacha <b>3,1 soat</b> tejaldi (maqsad −3 soat). Eng ko‘p — test tayyorlash va jurnal.', rows:[['Test tayyorlash',1.0],['Jurnal va baho',0.9],['Davomat',0.6],['Ota-ona hisoboti',0.6]], fmt:v=>String(v).replace('.',',')+' soat'}
+  ];
+  document.getElementById('sugq').innerHTML = QA.map((x,i)=>`<button type="button" data-q="${i}">${esc(x.q)}</button>`).join('');
+  function answer(text){
+    const t=text.toLowerCase().replace(/[ʻ'`’]/g,'‘'); const hit=QA.find(x=>x.k.test(t));
+    const box=document.getElementById('ans');
+    if(/ism|kim .*(bola|o‘quvchi)|telefon|manzil/.test(t)){ box.innerHTML=`<div class="answer"><p>Bu panel faqat agregat raqamlarni ko‘rsatadi — o‘quvchi ismi, telefoni va manzili bu yerda chiqmaydi. Filial bo‘yicha batafsil ma’lumot qabul bo‘limida.</p></div>`; return; }
+    if(!hit){ box.innerHTML=`<div class="answer"><p>Bu savolga mos ko‘rinish hozircha yo‘q. Quyidagilardan birini so‘rab ko‘ring: ketish, sinflar bo‘yicha arizalar, hisobot ochilishi, o‘qituvchi vaqti.</p></div>`; return; }
+    box.innerHTML=`<div class="answer"><div class="kp-small kp-strong" style="color:var(--accd);margin-bottom:6px">✦ ${esc(hit.q)}</div><p>${hit.a}</p><div style="margin-top:14px" id="ansChart"></div><div class="kp-small kp-muted kp-strong" style="margin-top:10px">Manba: agregat ko‘rinishlar (o‘qish huquqi) · so‘rov jurnalga yozildi</div></div>`;
+    barChart(document.getElementById("ansChart"), hit.rows.slice().sort((a,b)=>b[1]-a[1]), hit.fmt);
+  }
+  document.getElementById('sugq').addEventListener('click',e=>{ const b=e.target.closest('[data-q]'); if(b){ document.getElementById('askI').value=b.textContent; answer(b.textContent); } });
+  document.getElementById('askF').onsubmit=e=>{ e.preventDefault(); const v=document.getElementById('askI').value.trim(); if(v) answer(v); };
+  answer(QA[0].q); document.getElementById('askI').value=QA[0].q;
+
+  /* o‘qituvchi sifati */
+  const TQ=[['Dilnoza Karimova',3,92,18,4.8,74],['Alisher Nishonov',5,90,15,4.7,69],['Gulnora Xasanova',4,93,21,4.9,77],['Jahongir Murodov',3,95,12,4.9,null],['Sarvar Toshpulatov',6,88,14,4.6,66]];
+  document.getElementById('tq').innerHTML = `<thead><tr><th>O‘qituvchi</th><th class="num">Sinf</th><th class="num">Davomat</th><th class="num">O‘sish</th><th class="num">Ota-ona</th><th class="num">AI qabul</th></tr></thead><tbody>`+TQ.map(r=>`<tr><td>${esc(r[0])}</td><td class="num">${r[1]}</td><td class="num">${r[2]}%</td><td class="num">+${r[3]} p.p.</td><td class="num">${String(r[4]).replace('.',',')}</td><td class="num">${r[5]==null?'—':r[5]+'%'}</td></tr>`).join('')+'</tbody>';
+})();
+</script>
+</body>
+</html>

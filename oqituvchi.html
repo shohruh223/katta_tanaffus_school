@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>O‘qituvchi kabineti — Katta Tanaffus</title>
+<link rel="stylesheet" href="static/css/platform.css">
+<style>
+  .lessons{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+  .lc{border:1.5px solid var(--kp-line);border-radius:20px;padding:16px;display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;background:#fff}
+  .lc.now{border-color:var(--acc);background:var(--accl)}
+  .lc time{font-family:var(--kp-fh);font-size:1.7rem;color:var(--accd);line-height:1}
+  .lc b{display:block}
+  .lc small{color:var(--kp-ink2);font-weight:700;font-size:.8rem}
+  .att-top{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:14px}
+  .timer{font-family:var(--kp-fh);font-size:1.6rem;font-variant-numeric:tabular-nums;color:var(--accd);min-width:70px}
+  .att{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .att-row{display:flex;align-items:center;gap:10px;padding:10px;border-radius:16px;background:var(--kp-soft)}
+  .att-row b{flex:1;font-size:.9rem;line-height:1.2}
+  .att-row b small{display:block;font-size:.74rem;color:#9a5a05;font-weight:800}
+  .att-seg{display:flex;gap:3px}
+  .att-seg button{border:0;width:34px;height:34px;border-radius:10px;background:#fff;cursor:pointer;font-size:.95rem;font-weight:900;color:var(--kp-ink3)}
+  .att-seg button[aria-pressed=true][data-s=present]{background:#0f9f6e;color:#fff}
+  .att-seg button[aria-pressed=true][data-s=late]{background:#e8890c;color:#fff}
+  .att-seg button[aria-pressed=true][data-s=excused]{background:#a78bfa;color:#fff}
+  .att-seg button[aria-pressed=true][data-s=absent]{background:#e11d48;color:#fff}
+  .sent{display:flex;flex-direction:column;gap:6px;margin-top:14px}
+  .sent div{font-size:.84rem;font-weight:800;background:#e3f3fc;color:#0f6f9e;border-radius:12px;padding:9px 12px}
+  .sug{border:1px solid var(--kp-line);border-radius:20px;padding:16px;display:grid;grid-template-columns:1fr auto;gap:12px;background:#fff}
+  .sug + .sug{margin-top:10px}
+  .sug.done{opacity:.6}
+  .errs{display:flex;flex-direction:column;gap:4px;margin-top:8px}
+  .errs span{font-size:.82rem;font-weight:700}
+  .errs s{color:#be123c;text-decoration-thickness:2px}
+  .errs ins{text-decoration:none;color:#08704d;font-weight:900}
+  .score{font-family:var(--kp-fh);font-size:1.9rem;line-height:1;text-align:right}
+  .score small{display:block;font-family:var(--kp-fb);font-size:.72rem;font-weight:900;color:var(--kp-ink3)}
+  .sug-acts{grid-column:1/-1;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .rubric{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+  .heat{display:grid;gap:3px;font-size:.74rem;font-weight:800}
+  .heat .hc{height:30px;border-radius:7px;display:grid;place-items:center;color:#fff;font-weight:900}
+  .heat .hh{color:var(--kp-ink2);display:flex;align-items:flex-end;justify-content:center;text-align:center;padding:0 2px 4px;line-height:1.1;min-height:42px}
+  .heat .hn{display:flex;align-items:center;font-weight:800;color:var(--kp-ink);white-space:nowrap;padding-right:6px}
+  .q{border:1px dashed #c9b8e6;border-radius:16px;padding:12px 14px}
+  .q + .q{margin-top:8px}
+  .q ol{margin:6px 0 0 18px;padding:0;font-size:.85rem;font-weight:700;color:var(--kp-ink2)}
+  .q .ok{color:#08704d;font-weight:900}
+  .gin{width:64px;text-align:center;padding:8px}
+  @media (max-width:860px){.lessons,.att{grid-template-columns:1fr}.lc{grid-template-columns:auto 1fr}.lc>:last-child{grid-column:1/-1;justify-self:start}.att-row{flex-wrap:wrap}}
+</style>
+</head>
+<body class="kp-body" data-role="teacher">
+<div class="kp-app">
+  <aside class="kp-side" id="kpSide"></aside>
+  <div class="kp-main">
+    <header class="kp-top">
+      <div><h1>Bugungi darslar</h1><div class="kp-sub"><span data-kp-today></span> · Yunusobod filiali</div></div>
+      <div class="kp-top-r"><span class="kp-live">Jonli</span><div class="kp-user" id="me"></div></div>
+    </header>
+    <div class="kp-content">
+
+      <section class="kp-panel kp-anchor" id="bugun">
+        <div class="kp-ph"><div><h2>Jadval</h2><p>Xona va sinf ro‘yxati shu yerda — qog‘oz kerak emas</p></div><div class="kp-ph-r"><span class="kp-chip ok">Bu hafta: 14 dars o‘tildi</span></div></div>
+        <div class="lessons">
+          <div class="lc"><time>09:20</time><div><b>2-dars · 3-B sinf · 108-xona</b><small>Ingliz tili, 20 o‘quvchi · davomat 20/20 · baholar kiritildi</small></div><span class="kp-chip ok">O‘tdi</span></div>
+          <div class="lc now"><time>11:05</time><div><b>4-dars · 5-A sinf · 204-xona</b><small>Ingliz tili, 18 o‘quvchi · siz sinf rahbarisiz · Mavzu: Past Simple → Past Continuous</small></div><a class="kp-btn kp-btn-acc kp-btn-sm" href="#davomat">Darsni ochish</a></div>
+          <div class="lc"><time>13:00</time><div><b>6-dars · 7-A sinf · 301-xona</b><small>Ingliz tili, 17 o‘quvchi · Mavzu: Comparatives</small></div><span class="kp-chip">Keyingi</span></div>
+        </div>
+      </section>
+
+      <section class="kp-panel kp-anchor" id="davomat">
+        <div class="kp-ph"><div><h2>Davomat · 5-A, 4-dars (11:05)</h2><p>Bir bosishda “hammasi keldi”, keyin faqat istisnolarni belgilang. Kelmaganlarning ota-onasiga 15 daqiqa ichida xabar ketadi.</p></div></div>
+        <div class="att-top">
+          <button class="kp-btn kp-btn-acc kp-btn-lg" id="allIn">✓ Hammasi keldi</button>
+          <div><div class="timer" id="timer">0 s</div><div class="kp-small kp-muted kp-strong">dars ochilgandan beri</div></div>
+          <div style="margin-left:auto;display:flex;gap:8px;flex-wrap:wrap"><span class="kp-chip ok">✓ keldi</span><span class="kp-chip warn">⏱ kechikdi</span><span class="kp-chip vio">S sababli</span><span class="kp-chip bad">✕ kelmadi</span></div>
+        </div>
+        <div class="att" id="att"></div>
+        <div style="display:flex;gap:10px;align-items:center;margin-top:14px;flex-wrap:wrap">
+          <button class="kp-btn kp-btn-acc" id="saveAtt">Davomatni saqlash</button>
+          <span class="kp-small kp-muted kp-strong" id="attMsg">Kelgan har bola +2 coin oladi (kechikmasdan). Sababli qoldirish coin ayirmaydi.</span>
+        </div>
+        <div class="sent" id="sent"></div>
+      </section>
+
+      <div class="kp-grid kp-g-wide">
+        <section class="kp-panel kp-anchor" id="ai">
+          <div class="kp-ph"><div><h2>AI takliflari navbati</h2><p>AI uy vazifasini tekshirib, mezon bo‘yicha ball taklif qiladi. Jurnalga baho faqat siz tasdiqlagandan keyin yoziladi.</p></div><div class="kp-ph-r"><span class="kp-chip ai" id="aiStat"></span></div></div>
+          <div id="sugs"></div>
+        </section>
+        <section class="kp-panel kp-anchor" id="insayt">
+          <div class="kp-ph"><div><h3>Sinf insayti · ingliz tili</h3><p>Kim qaysi mavzuda qiynalmoqda</p></div><div class="kp-ph-r"><span class="kp-chip">2-bosqich</span></div></div>
+          <div class="heat" id="heat"></div>
+          <div class="kp-note ai" style="margin-top:12px" id="insight"></div>
+          <button class="kp-btn kp-btn-soft kp-btn-sm" style="margin-top:10px" id="sheet">Differensial varaqa qoralamasi</button>
+        </section>
+      </div>
+
+      <section class="kp-panel kp-anchor" id="jurnal">
+        <div class="kp-ph"><div><h2>Jurnal · 5-A · Ingliz tili · Past Simple</h2><p>Mezon, 5 ballik baho va izoh. Kiritilgan bahoni o‘zgartirish — faqat sabab bilan, tarix saqlanadi.</p></div>
+          <div class="kp-ph-r"><select class="kp-select" id="crit" style="width:auto" aria-label="Mezon"><option>Grammatika</option><option>Speaking</option><option>Uy vazifasi</option></select><button class="kp-btn kp-btn-ghost kp-btn-sm" id="csv">⬇ Excel (CSV)</button></div></div>
+        <div class="kp-scroll"><table class="kp-table" id="journal"></table></div>
+        <div style="display:flex;gap:10px;margin-top:12px;align-items:center;flex-wrap:wrap"><button class="kp-btn kp-btn-acc" id="saveJ">Baholarni saqlash</button><span class="kp-small kp-muted kp-strong" id="jMsg"></span></div>
+      </section>
+
+      <section class="kp-panel kp-anchor" id="test">
+        <div class="kp-ph"><div><h2>AI test generatori</h2><p>Savollar qoralama holatida yaratiladi. Siz tasdiqlamaguncha o‘quvchilar ularni ko‘rmaydi.</p></div><div class="kp-ph-r"><span class="kp-chip">2-bosqich</span></div></div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:flex-end">
+          <div class="kp-field"><label for="gTopic">Mavzu</label><select class="kp-select" id="gTopic"><option>Past Continuous</option><option>Past Simple</option><option>Comparatives</option></select></div>
+          <div class="kp-field"><label for="gLvl">Daraja</label><select class="kp-select" id="gLvl"><option>A2</option><option>A1</option><option>B1</option></select></div>
+          <button class="kp-btn kp-btn-brand" id="gen">✦ 5 ta savol yaratish</button>
+        </div>
+        <div id="genOut" style="margin-top:14px"></div>
+      </section>
+    </div>
+  </div>
+</div>
+
+<script src="static/js/kt-data.js"></script>
+<script src="static/js/kt-platform.js"></script>
+<script>
+(function(){
+  const {esc, store, avatar} = KT; const D = KTD;
+  document.getElementById('me').innerHTML = avatar('Dilnoza Karimova','#0f9f6e') + '<span>Dilnoza Karimova<small>Ingliz tili · 5-A sinf rahbari</small></span>';
+  KT.mountSide({role:'teacher', active:'#bugun', nav:[
+    {href:'#bugun', icon:'📅', label:'Bugun'}, {href:'#davomat', icon:'✅', label:'Davomat'}, {href:'#ai', icon:'✦', label:'AI takliflari'},
+    {href:'#insayt', icon:'🔍', label:'Sinf insayti'}, {href:'#jurnal', icon:'📒', label:'Jurnal'}, {href:'#test', icon:'🧪', label:'Test generatori'}
+  ]});
+
+  const students = D.STUDENTS.filter(s=>s.cls==='5a');
+  const key = KT.dayKey()+':5a';
+  const t0 = Date.now(); let saved=false;
+  setInterval(()=>{ if(!saved) document.getElementById('timer').textContent = Math.round((Date.now()-t0)/1000)+' s'; }, 1000);
+
+  /* ---- Davomat ---- */
+  let marks = Object.assign({}, store.get('attendance',{})[key]||{});
+  const ICON={present:'✓',late:'⏱',excused:'S',absent:'✕'}, NAME={present:'Keldi',late:'Kechikdi',excused:'Sababli',absent:'Kelmadi'};
+  function excuses(){ return store.get('excuses',{})[KT.dayKey()]||{}; }
+  function renderAtt(){
+    const ex=excuses();
+    students.forEach(s=>{ if(ex[s.id] && !marks[s.id]) marks[s.id]='excused'; });
+    document.getElementById('att').innerHTML = students.map(s=>`<div class="att-row">${avatar(s.name, s.id==='sardor'?'#229ED9':'#0f9f6e',34)}<b>${esc(s.name)}${ex[s.id]?`<small>Ota-ona: ${esc(ex[s.id].reason.toLowerCase())}</small>`:''}</b>
+      <div class="att-seg" role="group" aria-label="${esc(s.name)} davomati">${['present','late','excused','absent'].map(k=>`<button data-id="${s.id}" data-s="${k}" aria-pressed="${marks[s.id]===k}" title="${NAME[k]}" aria-label="${NAME[k]}">${ICON[k]}</button>`).join('')}</div></div>`).join('');
+  }
+  document.getElementById('att').addEventListener('click',e=>{ const b=e.target.closest('button[data-s]'); if(!b) return; marks[b.dataset.id]=b.dataset.s; renderAtt(); });
+  document.getElementById('allIn').onclick=()=>{ const ex=excuses(); students.forEach(s=>{ marks[s.id]= ex[s.id]?'excused':'present'; }); renderAtt(); KT.toast('Hammasi “keldi” — endi faqat istisnolarni belgilang'); };
+  document.getElementById('saveAtt').onclick=()=>{
+    const missing=students.filter(s=>!marks[s.id]);
+    if(missing.length){ KT.toast(`${missing.length} ta o‘quvchi belgilanmagan — “Hammasi keldi” ni bosing yoki har birini tanlang`); return; }
+    const prev = store.get('attendance',{})[key]||{};
+    store.update('attendance', a=>({...a,[key]:{...marks}}), {});
+    saved=true; const sec=Math.round((Date.now()-t0)/1000);
+    document.getElementById('attMsg').innerHTML = `<b style="color:var(--accd)">Saqlandi — ${sec} soniyada.</b> Ota-onalarga xabarlar navbatga qo‘yildi.`;
+    const log=[]; const t=KT.hm(new Date());
+    students.forEach(s=>{
+      if(prev[s.id]===marks[s.id]) return;
+      const first=s.name.split(' ')[0];
+      if(marks[s.id]==='absent'){ KT.notifyParent({child:s.id, kind:'attendance', title:'Kelmadi', text:`${first} bugun 4-darsga (ingliz tili, 11:05, 5-A) kelmadi. Sababini yozib qo‘ysangiz, sinf rahbari biladi.`}); log.push(`📨 ${t} · ${s.name} ota-onasiga: “darsga kelmadi”`); }
+      if(marks[s.id]==='present'||marks[s.id]==='late'){
+        if(marks[s.id]==='present'){ store.update('coins',c=>({...c,[s.id]:(c[s.id]||0)+2}),{}); store.push('ledger',{child:s.id,delta:2,reason:'Darsga keldi',ts:Date.now()}); }
+        if(s.id==='sardor') KT.notifyParent({child:s.id, kind:'attendance', title:'Darsda', text:`${first} darsda ${marks[s.id]==='late'?'(kechikib keldi) ':'✓ '}— 4-dars, ingliz tili, 5-A.${marks[s.id]==='present'?' +2 coin':''}`});
+      }
+    });
+    document.getElementById('sent').innerHTML = log.join('')? log.map(x=>`<div>${esc(x)}</div>`).join('') : '';
+    if(log.length) KT.toast(`${log.length} ta ota-onaga xabar yuborildi`); else KT.toast('Davomat saqlandi');
+  };
+  store.on(['excuses'], renderAtt);
+
+  /* ---- AI takliflari ---- */
+  const SUG0 = [
+    {id:'s1', st:'sardor', task:'Past Simple: 8 ta gap', ai:8, conf:'yuqori', errs:[['He go to school yesterday','He went to school yesterday'],['I seen a big dog','I saw a big dog']], rub:[['Grammatika','4/5'],['Lug‘at','2/3'],['Imlo','2/2']]},
+    {id:'s2', st:'jasur', task:'Past Simple: 8 ta gap', ai:6, conf:'yuqori', errs:[['goed','went'],['buyed','bought'],['Did you went?','Did you go?']], rub:[['Grammatika','2/5'],['Lug‘at','2/3'],['Imlo','2/2']]},
+    {id:'s3', st:'nilufar', task:'Daily routines: 60 so‘zli matn', ai:9, conf:'yuqori', errs:[['at the morning','in the morning']], rub:[['Mazmun','4/4'],['Grammatika','3/4'],['Imlo','2/2']]},
+    {id:'s4', st:'doniyor', task:'Past Simple: 8 ta gap (rasm)', ai:5, conf:'past — rasm xira', errs:[['…(o‘qib bo‘lmadi)','qayta yuklash so‘ralsin']], rub:[['Grammatika','?'],['Lug‘at','?']]}
+  ];
+  if(!store.get('suggestions')) store.set('suggestions', SUG0.map(s=>({...s,status:'pending'})));
+  function renderSugs(){
+    const list=store.get('suggestions',[]);
+    const done=list.filter(s=>s.status!=='pending'); const same=done.filter(s=>s.status==='approved').length;
+    document.getElementById('aiStat').textContent = done.length?`O‘zgarishsiz qabul: ${Math.round(same/done.length*100)}%`:`${list.length} ta taklif`;
+    document.getElementById('sugs').innerHTML = list.map(s=>{ const st=D.student(s.st);
+      return `<div class="sug ${s.status!=='pending'?'done':''}"><div><div style="display:flex;gap:10px;align-items:center">${avatar(st.name,'#0f9f6e',32)}<div><b>${esc(st.name)}</b><div class="kp-small kp-muted kp-strong">${esc(s.task)} · ishonch: ${esc(s.conf)}</div></div></div>
+        <div class="errs">${s.errs.map(e=>`<span><s>${esc(e[0])}</s> → <ins>${esc(e[1])}</ins></span>`).join('')}</div>
+        <div class="rubric">${s.rub.map(r=>`<span class="kp-chip">${esc(r[0])}: ${esc(r[1])}</span>`).join('')}</div></div>
+        <div class="score">${s.final||s.ai}<span style="font-size:.9rem">/10</span><small>${s.status==='pending'?'AI taklifi':s.status==='approved'?'tasdiqlandi':'o‘zgartirildi'}</small></div>
+        ${s.status==='pending'?`<div class="sug-acts"><button class="kp-btn kp-btn-acc kp-btn-sm" data-ap="${s.id}" ${s.conf.startsWith('past')?'disabled title="Ishonch past — o‘zingiz tekshiring"':''}>✓ Tasdiqlash</button><label class="kp-sr" for="ch-${s.id}">Boshqa ball</label><input class="kp-input gin" id="ch-${s.id}" type="number" min="0" max="10" placeholder="${s.ai}"><button class="kp-btn kp-btn-ghost kp-btn-sm" data-ch="${s.id}">O‘zgartirib qo‘yish</button>${s.conf.startsWith('past')?'<span class="kp-chip warn">AI o‘zi baho taklif qilmaydi — rasmni qayta so‘rang</span>':''}</div>`:''}
+      </div>`; }).join('');
+  }
+  document.getElementById('sugs').addEventListener('click',e=>{
+    const ap=e.target.closest('[data-ap]'), ch=e.target.closest('[data-ch]'); if(!ap&&!ch) return;
+    const id=(ap||ch).dataset.ap||(ap||ch).dataset.ch; const s=store.get('suggestions',[]).find(x=>x.id===id);
+    let final=s.ai, status='approved';
+    if(ch){ const v=document.getElementById('ch-'+id).value; if(v===''||+v<0||+v>10){ KT.toast('0 dan 10 gacha ball kiriting'); return; } final=+v; status=final===s.ai?'approved':'changed'; }
+    store.update('suggestions', arr=>arr.map(x=>x.id===id?{...x,status,final}:x), []);
+    store.update('coins',c=>({...c,[s.st]:(c[s.st]||0)+3}),{}); store.push('ledger',{child:s.st,delta:3,reason:'Uy vazifasi o‘z vaqtida',ts:Date.now()});
+    if(s.st==='sardor') KT.notifyParent({child:'sardor', kind:'grade', title:'Uy vazifasi baholandi', text:`Sardor: “${s.task}” — ${final}/10. O‘qituvchi tasdiqladi. Asosiy xato: ${s.errs[0][0]} → ${s.errs[0][1]}.`});
+    KT.toast(`Jurnalga yozildi: ${final}/10`);
+  });
+  store.on(['suggestions'], renderSugs);
+
+  /* ---- Guruh insayti ---- */
+  const TOP = ['Present Simple','Daily routines','Past Simple','Vocabulary: School','Reading: short stories'];
+  function pm(s,t){ if(s.id==='sardor'){ const f=D.MASTERY.sardor.find(x=>x.topic===t); return f?f.p:0; } let h=0; for(const ch of s.id+t) h=(h*31+ch.charCodeAt(0))%997; const base={'Present Simple':.85,'Daily routines':.78,'Past Simple':.55,'Vocabulary: School':.5,'Reading: short stories':.6}[t]; return Math.max(.15,Math.min(.97, base+((h%40)-20)/100)); }
+  function renderHeat(){
+    const cols=`grid-template-columns:110px repeat(${TOP.length},1fr)`;
+    let html=`<div class="heat" id="heat" style="${cols}"><div></div>${TOP.map(t=>`<div class="hh">${esc(t.replace(': ',':\n'))}</div>`).join('')}`;
+    const weak={}, sum={};
+    students.forEach(s=>{ html+=`<div class="hn">${esc(s.name.split(' ')[0])}</div>`+TOP.map(t=>{ const p=pm(s,t); const L=D.levelOf(p); sum[t]=(sum[t]||0)+p; if(p<.5){ weak[t]=(weak[t]||0)+1; } return `<div class="hc" style="background:${L.color}" title="${esc(s.name)} · ${esc(t)} · ${Math.round(p*100)}%">${Math.round(p*100)}</div>`; }).join(''); });
+    document.getElementById('heat').outerHTML = html+'</div>';
+    const t0w=Object.entries(sum).sort((a,b)=>a[1]-b[1])[0]; const top=t0w?[t0w[0], weak[t0w[0]]||0]:null;
+    document.getElementById('insight').innerHTML = top?`✦ Eng qiyin mavzu — <b>${esc(top[0])}</b> (sinf o‘rtachasi ${Math.round(t0w[1]/students.length*100)}%): ${top[1]} o‘quvchi “Tanishuv” yoki “O‘rganmoqda” boshida. Taklif: 10 daqiqalik takror va ikki darajali varaqa. AI har biriga 5 daqiqalik mashq bergan.`:'Sinf barqaror.';
+  }
+  document.getElementById('sheet').onclick=()=>KT.toast('Qoralama tayyor: 2 darajali varaqa (A — tayanch, B — murakkab). Tahrirlab chop eting.');
+
+  /* ---- Jurnal ---- */
+  let journal = store.get('journal5') || students.map(s=>({id:s.id, v: s.id==='sardor'?5:'', note: s.id==='sardor'?'Mashqdan keyin ancha yaxshi':'', hist:[]}));
+  function renderJ(){
+    document.getElementById('journal').innerHTML = `<thead><tr><th>O‘quvchi</th><th>Baho (2–5)</th><th>Izoh</th><th>Tarix</th></tr></thead><tbody>`+journal.map(r=>{ const s=D.student(r.id);
+      return `<tr><td>${avatar(s.name,'#0f9f6e',28)} ${esc(s.name)}</td><td><input class="kp-input gin" type="number" min="2" max="5" data-v="${r.id}" value="${esc(r.v)}" aria-label="${esc(s.name)} bahosi"></td><td><input class="kp-input" data-n="${r.id}" value="${esc(r.note)}" placeholder="Qisqa izoh" aria-label="${esc(s.name)} izohi"></td><td class="kp-small kp-muted">${r.hist.length?esc(r.hist[r.hist.length-1]):'—'}</td></tr>`; }).join('')+'</tbody>';
+  }
+  document.getElementById('saveJ').onclick=()=>{
+    let changed=[]; const prev=store.get('journal5');
+    const bad=journal.find(r=>{ const v=document.querySelector(`[data-v="${r.id}"]`).value; return v!=='' && (+v<2||+v>5); }); if(bad){ KT.toast('Baho 2 dan 5 gacha bo‘lishi kerak'); return; }
+    const next=journal.map(r=>{ const v=document.querySelector(`[data-v="${r.id}"]`).value; const n=document.querySelector(`[data-n="${r.id}"]`).value; const old=prev?(prev.find(x=>x.id===r.id)||{}).v:'';
+      const row={...r, v, note:n}; if(prev && old!=='' && old!==undefined && String(old)!==String(v)) changed.push(row); return row; });
+    if(changed.length){
+      const why=prompt(`${changed.length} ta baho o‘zgardi. Sababini yozing (tarixga saqlanadi):`);
+      if(!why){ KT.toast('O‘zgartirish sababsiz saqlanmaydi'); return; }
+      changed.forEach(c=>{ const o=prev.find(x=>x.id===c.id); c.hist=c.hist.concat([`${o.v} → ${c.v}: ${why} (${KT.hm(new Date())})`]); });
+      journal=next.map(r=>changed.find(c=>c.id===r.id)||r);
+    } else journal=next;
+    store.set('journal5', journal); renderJ();
+    document.getElementById('jMsg').textContent=`Saqlandi ${KT.hm(new Date())} · mezon: ${document.getElementById('crit').value}`;
+    KT.toast('Baholar jurnalga yozildi');
+  };
+  document.getElementById('csv').onclick=()=>{
+    const rows=[['O‘quvchi','Mavzu','Mezon','Baho','Izoh']].concat(journal.map(r=>[D.student(r.id).name,'Past Simple',document.getElementById('crit').value,r.v,r.note]));
+    const csv='﻿'+rows.map(r=>r.map(x=>`"${String(x).replace(/"/g,'""')}"`).join(';')).join('\n');
+    const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'})); a.download='5-A_ingliz-tili_jurnal_'+KT.dayKey()+'.csv'; a.click(); KT.toast('Jurnal yuklab olindi');
+  };
+
+  /* ---- AI test generatori ---- */
+  const BANK = {
+    'Past Continuous':[['I ___ dinner when the phone rang.',['was cooking','cooked','am cooking'],0],['They ___ football at 5 pm yesterday.',['were playing','played','are playing'],0],['What ___ you doing at 8 o‘clock?',['were','did','was'],0],['She ___ not sleeping when I came.',['was','were','did'],0],['While we ___ TV, the lights went out.',['were watching','watched','watch'],0]],
+    'Past Simple':[['We ___ to the zoo last Sunday.',['went','go','gone'],0],['___ you see Ali yesterday?',['Did','Do','Were'],0],['She ___ a new bag.',['bought','buyed','buy'],0],['I didn‘t ___ my homework.',['do','did','done'],0],['They ___ happy.',['were','was','are'],0]],
+    'Comparatives':[['A car is ___ than a bike.',['faster','fast','fastest'],0],['This book is ___ than that one.',['more interesting','interestinger','most interesting'],0],['My sister is ___ than me.',['taller','more tall','tallest'],0],['Today is ___ than yesterday.',['hotter','hoter','more hot'],0],['English is ___ than Maths for me.',['easier','more easy','easyer'],0]]
+  };
+  let draft=[];
+  document.getElementById('gen').onclick=()=>{
+    const t=document.getElementById('gTopic').value; const out=document.getElementById('genOut');
+    out.innerHTML='<div class="kp-note ai">✦ Mavzu xaritasi va A2 darajasi bo‘yicha savollar tuzilmoqda…</div>';
+    setTimeout(()=>{ draft=BANK[t].map((q,i)=>({i,q,ok:false})); renderDraft(t); }, 900);
+  };
+  function renderDraft(t){
+    const out=document.getElementById('genOut'); const approved=draft.filter(d=>d.ok).length;
+    out.innerHTML = `<div style="display:flex;gap:8px;align-items:center;margin-bottom:10px;flex-wrap:wrap"><span class="kp-chip ${approved===draft.length?'ok':'warn'}">${approved===draft.length?'Tasdiqlandi — mavzu ochilganda o‘quvchilar ko‘radi':`Qoralama — o‘quvchilar ko‘rmaydi (${approved}/${draft.length})`}</span><button class="kp-btn kp-btn-acc kp-btn-sm" id="okAll" ${approved===draft.length?'disabled':''}>Hammasini tasdiqlash</button></div>`
+      + draft.map(d=>`<div class="q"><div style="display:flex;gap:8px;align-items:center"><b style="flex:1">${d.i+1}. ${esc(d.q[0])}</b>${d.ok?'<span class="kp-chip ok">✓</span>':`<button class="kp-btn kp-btn-ghost kp-btn-sm" data-q="${d.i}">Tasdiqlash</button>`}</div><ol type="a">${d.q[1].map((o,k)=>`<li class="${k===d.q[2]?'ok':''}">${esc(o)}${k===d.q[2]?' ✓':''}</li>`).join('')}</ol></div>`).join('');
+    out.querySelectorAll('[data-q]').forEach(b=>b.onclick=()=>{ draft[+b.dataset.q].ok=true; renderDraft(t); });
+    const all=out.querySelector('#okAll'); if(all) all.onclick=()=>{ draft.forEach(d=>d.ok=true); renderDraft(t); KT.toast('5 ta savol savollar bankiga qo‘shildi'); };
+  }
+
+  renderAtt(); renderSugs(); renderHeat(); renderJ();
+})();
+</script>
+</body>
+</html>

@@ -3,233 +3,177 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>O'qituvchilar — KATTA TANAFFUS SCHOOL</title>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="static/css/main.css">
+<title>O‘qituvchilar — Katta Tanaffus School</title>
+<meta name="description" content="Ingliz tili, matematika, informatika va robotika, mental arifmetika, boshlang‘ich sinflar va jismoniy tarbiya o‘qituvchilari.">
+<meta property="og:title" content="O‘qituvchilar — Katta Tanaffus School">
+<meta property="og:description" content="Ingliz tili, matematika, informatika va robotika, mental arifmetika, boshlang‘ich sinflar va jismoniy tarbiya o‘qituvchilari.">
+<meta property="og:image" content="static/img/logo-brand.png">
+<link rel="icon" href="static/img/logo-brand.png">
+<link rel="stylesheet" href="static/css/platform.css">
+<link rel="stylesheet" href="static/css/site.css">
+<style>
+  .tgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px}
+  .flip{perspective:1400px;min-height:500px}
+  .flip[hidden]{display:none}
+  .flip-in{position:relative;width:100%;height:100%;min-height:500px;transition:transform .6s cubic-bezier(.3,1.3,.5,1);transform-style:preserve-3d}
+  .flip.is-flipped .flip-in{transform:rotateY(180deg)}
+  .face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:#fff;border:var(--bw) solid var(--ink);border-radius:var(--r1);box-shadow:var(--sh);overflow:hidden;display:flex;flex-direction:column}
+  .back{transform:rotateY(180deg);padding:24px;gap:12px;background:var(--paper)}
+  .f-top{background:var(--c);border-bottom:var(--bw) solid var(--ink);height:170px;position:relative;overflow:hidden}
+  .f-top::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(-45deg,rgba(255,255,255,.18) 0 14px,transparent 14px 28px)}
+  .f-subj{position:absolute;top:16px;left:16px}
+  .f-av{position:absolute;left:50%;top:112px;z-index:2;transform:translateX(-50%);width:120px;height:120px;border-radius:50%;background:#fff;border:var(--bw) solid var(--ink);display:grid;place-items:center;font-family:var(--fh);font-size:2.4rem;box-shadow:var(--sh-s)}
+  .f-body{padding:68px 22px 22px;text-align:center;display:flex;flex-direction:column;gap:6px;flex:1}
+  .f-body h3{font-size:1.55rem}
+  .f-body p{font-weight:700;color:var(--ink2);line-height:1.5}
+  .f-stats{display:grid;grid-template-columns:repeat(3,1fr);border:2px solid var(--ink);border-radius:16px;margin-top:auto;overflow:hidden}
+  .f-stats div{padding:10px 4px;border-left:2px solid var(--ink)}
+  .f-stats div:first-child{border-left:0}
+  .f-stats b{display:block;font-family:var(--fh);font-weight:400;font-size:1.3rem;line-height:1.1}
+  .f-stats small{font-weight:800;font-size:.74rem;color:var(--ink2)}
+  .flip-btn{margin-top:14px;align-self:center}
+  .back h3{font-size:1.4rem}
+  .back p{font-weight:700;color:var(--ink2);line-height:1.6}
+  .certs{display:flex;flex-direction:column;gap:8px}
+  .certs span{display:flex;gap:8px;align-items:center;font-weight:800;font-size:.9rem;background:#fff;border:2px solid var(--ink);border-radius:12px;padding:8px 10px}
+  .back .acts{margin-top:auto;display:flex;gap:10px;flex-wrap:wrap}
+  .join{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:40px;align-items:center}
+  .join ul{list-style:none;margin:20px 0 0;padding:0;display:flex;flex-direction:column;gap:12px}
+  .join li{display:flex;gap:12px;align-items:flex-start;font-weight:700;color:#e4d8f8;line-height:1.5}
+  .join li b{color:#fff}
+  .join li::before{content:"✦";color:var(--sun);font-size:1.1rem;line-height:1.3}
+  @media (max-width:1040px){.tgrid{grid-template-columns:1fr 1fr}.join{grid-template-columns:1fr}}
+  @media (max-width:680px){.tgrid{grid-template-columns:1fr}}
+  @media (prefers-reduced-motion:reduce){.flip-in{transition:none}}
+</style>
 </head>
-<body>
-
-<div id="loading"><div class="llgo"><img src="static/img/logo-brand.png" alt="Katta Tanaffus logotipi"><span>Yuklanmoqda...</span></div><div class="ldots"><div class="ldot"></div><div class="ldot"></div><div class="ldot"></div></div></div>
-<div class="toast" id="toast"></div>
-
-<!-- MOBILE NAV -->
-<div class="mnav" id="mnav">
-  <a href="index.html" onclick="closemob()">🏠 Bosh sahifa</a>
-  <a href="courses.html" onclick="closemob()">📚 Kurslar</a>
-  <a href="about.html" onclick="closemob()">ℹ️ Biz haqimizda</a>
-  <a href="teachers.html" onclick="closemob()">👨‍🏫 O'qituvchilar</a>
-  <a href="gallery.html" onclick="closemob()">🖼️ Galereya</a>
-  <a href="branches.html" onclick="closemob()">📍 Filiallar</a>
-  <a href="contact.html" onclick="closemob()">📞 Aloqa</a>
-  <button class="btn btn-f" onclick="openAriza();closemob()" style="margin-top:10px">📝 Ariza qoldirish</button>
-  <div class="mnav-auth">
-    <a class="mnav-login" href="login.html" onclick="closemob()">🔐 Kirish</a>
-    <a class="mnav-register" href="register.html" onclick="closemob()">✨ Ro'yxatdan o'tish</a>
-  </div>
-</div>
-
-<!-- NAV -->
-<nav>
-  <a href="index.html" class="logo">
-    <img src="static/img/logo-brand.png" alt="Katta Tanaffus logotipi" class="logo-img">
-    <div class="logo-text">
-      <strong>Katta Tanaffus</strong>
-      <span>School</span>
-    </div>
-  </a>
-  <div class="nav-links">
-    <a href="index.html">Bosh sahifa</a>
-    <a href="courses.html">Kurslar</a>
+<body class="ks" data-role="guest">
+<a class="ks-skip" href="#main">Asosiy mazmunga o‘tish</a>
+<header class="ks-head">
+  <div class="ks-head-in">
+    <a class="ks-logo" href="index.html" aria-label="Katta Tanaffus — bosh sahifa"><img src="static/img/logo-brand.png" alt="" width="48" height="48"><span><b>Katta Tanaffus</b><small>SCHOOL</small></span></a>
+    <nav class="ks-links" aria-label="Asosiy menyu">
+    <a href="platforma.html">Platforma ✨</a>
+    <a href="courses.html">Fanlar</a>
     <a href="about.html">Biz haqimizda</a>
-    <a href="teachers.html" class="active">O'qituvchilar</a>
+    <a href="teachers.html" aria-current="page">O‘qituvchilar</a>
     <a href="gallery.html">Galereya</a>
     <a href="branches.html">Filiallar</a>
     <a href="contact.html">Aloqa</a>
+    </nav>
+    <div class="ks-acts">
+      <div class="ks-acc"><a href="login.html">Kirish</a><a href="register.html">Ro‘yxatdan o‘tish</a></div>
+      <a class="ks-btn ks-btn-sm" href="yozilish.html">Qabulga ariza</a>
+      <button class="ks-burger" type="button" aria-expanded="false" aria-controls="ksMenu" aria-label="Menyu"><i></i><i></i><i></i></button>
+    </div>
   </div>
-  <div class="nav-acts">
-    <a class="btn btn-o" href="login.html" style="text-decoration:none">Kirish</a>
-    <a class="btn btn-f" href="register.html" style="text-decoration:none">Ro'yxatdan o'tish</a>
-    <button class="burger" onclick="togglemob()"><span></span><span></span><span></span></button>
-  </div>
-</nav>
-
-<section id="teachers">
-  <div class="shdr c aos"><span class="stag bl">👨‍🏫 Jamoa</span><h2 class="stitle">Bizning o'qituvchilar 🌟</h2><p class="ssub">Har biri o'z sohasida 5+ yil tajribaga ega professional mutaxassislar</p></div>
-  <div class="tgrid">
-    <div class="tcard aos" onclick="openTeacher('alisher')"><div class="tphoto-wrap"><div class="tphoto" style="background:linear-gradient(135deg,#3b82f6,#1d4ed8)" id="photo-alisher"><span>AN</span></div><div class="tring" style="border-color:#3b82f6"></div></div><h3 class="tname">Alisher Nishonov</h3><div class="tsubj" style="color:#1d4ed8">English & IELTS</div><p class="tbio">Cambridge sertifikatlangan. 8 yillik tajriba. 200+ o'quvchisi IELTS 7+ ball olgan.</p><div class="tstars">⭐⭐⭐⭐⭐</div><div class="tstats"><span>👨‍🎓 250 o'q</span><span>⏱ 8 yil</span></div><div class="tview">Batafsil ko'rish →</div></div>
-    <div class="tcard aos" style="transition-delay:.1s" onclick="openTeacher('gulnora')"><div class="tphoto-wrap"><div class="tphoto" style="background:linear-gradient(135deg,#10b981,#065f46)" id="photo-gulnora"><span>GX</span></div><div class="tring" style="border-color:#10b981"></div></div><h3 class="tname">Gulnora Xasanova</h3><div class="tsubj" style="color:#065f46">Matematika</div><p class="tbio">NUUz matematika fakulteti bitiruvchisi. Olimpiada g'oliblari tayyorlagan.</p><div class="tstars">⭐⭐⭐⭐⭐</div><div class="tstats"><span>👨‍🎓 180 o'q</span><span>⏱ 6 yil</span></div><div class="tview">Batafsil ko'rish →</div></div>
-    <div class="tcard aos" style="transition-delay:.2s" onclick="openTeacher('sarvar')"><div class="tphoto-wrap"><div class="tphoto" style="background:linear-gradient(135deg,#f43f5e,#be123c)" id="photo-sarvar"><span>ST</span></div><div class="tring" style="border-color:#f43f5e"></div></div><h3 class="tname">Sarvar Toshpulatov</h3><div class="tsubj" style="color:#be123c">IT & Robotika</div><p class="tbio">Ex-Google engineer. Python, AI va robotika bo'yicha O'zbekiston eksperti.</p><div class="tstars">⭐⭐⭐⭐⭐</div><div class="tstats"><span>👨‍🎓 300 o'q</span><span>⏱ 10 yil</span></div><div class="tview">Batafsil ko'rish →</div></div>
-    <div class="tcard aos" style="transition-delay:.3s" onclick="openTeacher('zulfiya')"><div class="tphoto-wrap"><div class="tphoto" style="background:linear-gradient(135deg,#8b5cf6,#6d28d9)" id="photo-zulfiya"><span>ZR</span></div><div class="tring" style="border-color:#8b5cf6"></div></div><h3 class="tname">Zulfiya Rahimova</h3><div class="tsubj" style="color:#6d28d9">Maktabgacha ta'lim</div><p class="tbio">Montessori sertifikatlangan. Bolalar psixologiyasi bo'yicha PhD.</p><div class="tstars">⭐⭐⭐⭐⭐</div><div class="tstats"><span>👨‍🎓 120 o'q</span><span>⏱ 7 yil</span></div><div class="tview">Batafsil ko'rish →</div></div>
-    <div class="tcard aos" style="transition-delay:.4s" onclick="openTeacher('jahongir')"><div class="tphoto-wrap"><div class="tphoto" style="background:linear-gradient(135deg,#f59e0b,#92400e)" id="photo-jahongir"><span>JM</span></div><div class="tring" style="border-color:#f59e0b"></div></div><h3 class="tname">Jahongir Murodov</h3><div class="tsubj" style="color:#92400e">Mental Arifmetika</div><p class="tbio">Yaponiya abakus chempioni. O'zbekistonda mental arifmetika asoschisi.</p><div class="tstars">⭐⭐⭐⭐⭐</div><div class="tstats"><span>👨‍🎓 400 o'q</span><span>⏱ 12 yil</span></div><div class="tview">Batafsil ko'rish →</div></div>
-    <div class="tcard aos" style="transition-delay:.5s" onclick="openTeacher('bahodir')"><div class="tphoto-wrap"><div class="tphoto" style="background:linear-gradient(135deg,#fb923c,#c2410c)" id="photo-bahodir"><span>BE</span></div><div class="tring" style="border-color:#fb923c"></div></div><h3 class="tname">Bahodir Ergashev</h3><div class="tsubj" style="color:#c2410c">Sport</div><p class="tbio">Milliy jamoa sobiq a'zosi. 15 yillik murabbiylik tajribasi.</p><div class="tstars">⭐⭐⭐⭐⭐</div><div class="tstats"><span>👨‍🎓 200 o'q</span><span>⏱ 15 yil</span></div><div class="tview">Batafsil ko'rish →</div></div>
+</header>
+<div class="ks-menu" id="ksMenu">
+  <a href="index.html"><span aria-hidden="true">🏠</span>Bosh sahifa</a>
+  <a href="platforma.html"><span aria-hidden="true">✨</span>Platforma</a>
+  <a href="courses.html"><span aria-hidden="true">📚</span>Fanlar</a>
+  <a href="about.html"><span aria-hidden="true">💛</span>Biz haqimizda</a>
+  <a href="teachers.html" aria-current="page"><span aria-hidden="true">🧑‍🏫</span>O‘qituvchilar</a>
+  <a href="gallery.html"><span aria-hidden="true">📸</span>Galereya</a>
+  <a href="branches.html"><span aria-hidden="true">📍</span>Filiallar</a>
+  <a href="contact.html"><span aria-hidden="true">📞</span>Aloqa</a>
+  <a href="diagnostika.html"><span aria-hidden="true">🧭</span>Bepul diagnostika</a>
+  <div class="ks-menu-acc"><a href="login.html">🔑 Kirish</a><a href="register.html">✨ Ro‘yxatdan o‘tish</a></div>
+  <a class="ks-btn" href="yozilish.html">Qabulga ariza</a>
+</div>
+<main id="main">
+<section class="ks-hero" aria-labelledby="tT">
+  <div class="ks-dots"></div>
+  <div class="ks-wrap">
+    <span class="ks-stk mint ks-pop" style="--rot:3deg">Jamoa</span>
+    <h1 class="ks-h1 ks-rise" id="tT" style="margin-top:22px;max-width:15ch;--d:.1s">O‘qituvchilar — markazning yuragi</h1>
+    <p class="ks-lead ks-rise" style="--d:.2s">Har biri o‘z sohasida 6–15 yillik tajriba bilan. Kartani bosing — orqa tomonida tajriba va sertifikatlar.</p>
+    <div class="ks-chips ks-rise" role="group" aria-label="Fan bo‘yicha" id="subj" style="margin-top:28px;--d:.3s"></div>
   </div>
 </section>
 
-<!-- FOOTER -->
-<footer>
-  <div class="fgrid">
-    <div class="fbrand"><a href="index.html" class="footer-logo"><img src="static/img/logo-brand.png" alt="Katta Tanaffus logotipi"><div><h3>Katta Tanaffus School</h3><span>Bolalar ta'lim markazi</span></div></a><p>O'zbekistondagi eng zamonaviy ta'lim markazi. 5,000+ o'quvchi, 50+ o'qituvchi, 8 ta filial.</p><div class="fsocials"><a href="#" class="sbtn">📱</a><a href="#" class="sbtn">💬</a><a href="#" class="sbtn">📸</a><a href="#" class="sbtn">▶️</a></div></div>
-    <div class="fcol"><h4>Kurslar</h4><ul>
-      <li><a href="courses.html">English</a></li><li><a href="courses.html">IELTS</a></li>
-      <li><a href="courses.html">Matematika</a></li><li><a href="courses.html">IT & Dasturlash</a></li>
-      <li><a href="courses.html">Robotika</a></li><li><a href="courses.html">Mental Arifmetika</a></li>
-    </ul></div>
-    <div class="fcol"><h4>Kompaniya</h4><ul>
-      <li><a href="about.html">Biz haqimizda</a></li><li><a href="teachers.html">O'qituvchilar</a></li>
-      <li><a href="gallery.html">Galereya</a></li><li><a href="branches.html">Filiallar</a></li>
-      <li><a href="contact.html">Bog'lanish</a></li>
-    </ul></div>
-    <div class="fcol"><h4>Aloqa</h4><ul>
-      <li><a href="tel:+998712345678">+998 71 234-56-78</a></li>
-      <li><a href="mailto:info@kattatanaffus.uz">info@kattatanaffus.uz</a></li>
-      <li><a href="contact.html">Xabar yuborish</a></li>
-    </ul></div>
+<section class="ks-sec" style="padding-top:24px" aria-label="O‘qituvchilar kartalari">
+  <div class="ks-wrap"><div class="tgrid" id="tgrid"></div></div>
+</section>
+
+<section class="ks-sec ks-dark" aria-labelledby="jT">
+  <div class="ks-wrap join">
+    <div>
+      <h2 class="ks-h2" id="jT">O‘qituvchi uchun ham qulay</h2>
+      <ul>
+        <li><span><b>Davomat — 30 soniyada.</b> “Hammasi keldi” va faqat istisnolar. Ota-onaga xabarni tizim o‘zi yuboradi.</span></li>
+        <li><span><b>AI uy vazifasini tekshiradi.</b> Xatolar va mezon bo‘yicha ball taklif qiladi — tasdiqlash sizda.</span></li>
+        <li><span><b>Test bir bosishda.</b> Mavzu bo‘yicha savollar qoralamasi, tasdiqlanmaguncha bolaga bormaydi.</span></li>
+      </ul>
+      <div class="ks-hero-ctas"><a class="ks-btn ks-btn-lg" href="oqituvchi.html">O‘qituvchi kabinetini ko‘rish</a></div>
+    </div>
+    <div class="ks-card" style="background:var(--sun);color:var(--ink);border-color:#fff;box-shadow:8px 8px 0 #fff">
+      <h3 class="ks-h3" style="font-size:1.8rem">Jamoamizga qo‘shiling</h3>
+      <p style="font-weight:800;margin-top:10px;line-height:1.6">Ingliz tili, matematika, informatika va boshlang‘ich sinf o‘qituvchilarini, Taekwondo va Gimnastika murabbiylarini kutamiz. Rezyumeni yuboring.</p>
+      <a class="ks-btn ks-btn-ink" href="contact.html?mavzu=ish" style="margin-top:18px">Rezyume yuborish</a>
+    </div>
   </div>
-  <div class="fbot"><p>© 2024 KATTA TANAFFUS SCHOOL. Barcha huquqlar himoyalangan. 💛</p><p>Privacy Policy · Foydalanish shartlari</p></div>
+</section>
+</main>
+<div class="ks-cta">
+  <div class="ks-wrap ks-cta-in">
+    <div><h2>Qabul ochiq: 1–11-sinflar</h2><p>Avval 15 daqiqalik bepul diagnostika, keyin qabul suhbati. Bo‘sh o‘rinlar soni — filial va sinfga qarab.</p></div>
+    <div class="ks-cta-acts"><a class="ks-btn ks-btn-ink ks-btn-lg" href="yozilish.html">Qabulga ariza</a><a class="ks-btn ks-btn-lg" href="diagnostika.html">Bepul diagnostika</a></div>
+  </div>
+</div>
+<footer class="ks-foot">
+  <div class="ks-wrap">
+    <div class="ks-foot-grid">
+      <div>
+        <a class="ks-logo" href="index.html"><img src="static/img/logo-brand.png" alt="" width="48" height="48"><span><b>Katta Tanaffus</b><small style="color:var(--sun)">SCHOOL</small></span></a>
+        <p>Xususiy maktab: 1–11-sinflar, 3 filial, Taekwondo va Gimnastika to‘garaklari. Ota-ona, o‘qituvchi va AI — bitta jamoada.</p>
+        <div class="ks-soc"><a href="https://t.me/kattatanaffus" aria-label="Telegram" rel="noopener">✈️</a><a href="https://instagram.com/kattatanaffus" aria-label="Instagram" rel="noopener">📸</a><a href="https://youtube.com/@kattatanaffus" aria-label="YouTube" rel="noopener">▶️</a></div>
+      </div>
+      <div><h4>Ta’lim</h4><ul><li><a href="courses.html">Fanlar</a></li><li><a href="courses.html#taekwondo">Taekwondo</a></li><li><a href="courses.html#gymnastics">Gimnastika</a></li><li><a href="yozilish.html">Qabulga ariza</a></li><li><a href="diagnostika.html">Bepul diagnostika</a></li></ul></div>
+      <div><h4>Maktab</h4><ul><li><a href="about.html">Biz haqimizda</a></li><li><a href="teachers.html">O‘qituvchilar</a></li><li><a href="gallery.html">Galereya</a></li><li><a href="branches.html">Filiallar</a></li><li><a href="platforma.html">Platforma</a></li><li><a href="ota-ona.html">Ota-ona kabineti</a></li><li><a href="register.html">Ro‘yxatdan o‘tish</a></li><li><a href="login.html">Kirish</a></li></ul></div>
+      <div><h4>Aloqa</h4><ul><li><a href="tel:+998712345678">+998 71 234-56-78</a></li><li><a href="mailto:info@kattatanaffus.uz">info@kattatanaffus.uz</a></li><li><a href="https://t.me/kattatanaffus" rel="noopener">Telegram: @kattatanaffus</a></li><li><a href="contact.html">Xabar yuborish</a></li></ul><p style="margin-top:14px">Qabul bo‘limi: har kuni 09:00–21:00</p></div>
+    </div>
+    <div class="ks-word" aria-hidden="true">Katta Tanaffus</div>
+    <div class="ks-foot-bot"><span>© <span data-year>2026</span> Katta Tanaffus School</span><span>Bola rasmlari va ismlari faqat ota-ona roziligi bilan e’lon qilinadi</span></div>
+  </div>
 </footer>
-
-<!-- AI FAB -->
-<button id="fab" onclick="toggleChat()" aria-label="AI yordamchi"><img src="static/img/ai-bot.png" alt="AI yordamchi"></button>
-<div id="chatwin">
-  <div class="chdr"><div class="chdri"><div class="chav">🤖</div><div><div class="cname">KATTA TANAFFUS AI</div><div class="cst"><span class="stdot"></span>Online</div></div></div><button class="cx" onclick="toggleChat()">✕</button></div>
-  <div class="cmsgs" id="chat-msgs"><div class="cmsg bot"><div class="mav">🤖</div><div class="mbub">Assalomu alaykum! 👋 Kurslar, narxlar yoki manzil haqida savollaringizga javob beraman!</div></div></div>
-  <div class="qrps" id="qrps">
-    <button class="qr" onclick="sendQuick(this.textContent)">📚 Kurslar</button>
-    <button class="qr" onclick="sendQuick(this.textContent)">💰 Narxlar</button>
-    <button class="qr" onclick="sendQuick(this.textContent)">📍 Manzil</button>
-    <button class="qr" onclick="sendQuick(this.textContent)">✍️ Yozilish</button>
-  </div>
-  <div class="cinp"><button class="cmic">🎤</button><input type="text" id="chat-input" placeholder="Xabar yozing... 💬" onkeydown="if(event.key==='Enter')sendChat()"><button class="csend" onclick="sendChat()">➤</button></div>
-</div>
-
-<!-- ARIZA MODAL -->
-<div class="mov" id="ariza-modal" style="display:none">
-  <div class="modal" style="max-width:460px">
-    <button class="mx" onclick="closeAriza()">✕</button>
-    <div id="ariza-content">
-      <!-- Ariza shakli -->
-      <div id="ariza-form-block">
-        <div style="font-size:2.5rem;text-align:center;margin-bottom:8px">📝</div>
-        <h2 style="font-family:var(--fh);font-size:1.5rem;margin-bottom:5px;text-align:center">Ariza qoldirish</h2>
-        <p style="color:var(--txd);font-size:.875rem;font-weight:600;margin-bottom:22px;text-align:center">Ma'lumotlaringizni qoldiring — biz siz bilan bog'lanamiz!</p>
-        <div class="fg"><label style="display:block;font-size:.85rem;font-weight:800;margin-bottom:7px;color:var(--txd)">Ismingiz *</label>
-          <input type="text" id="ariza-ism" class="form-inp" placeholder="Ism va familiya" oninput="clearArizaErr()"></div>
-        <div class="fg"><label style="display:block;font-size:.85rem;font-weight:800;margin-bottom:7px;color:var(--txd)">Telefon *</label>
-          <input type="tel" id="ariza-tel" class="form-inp" placeholder="+998 90 123 45 67" oninput="clearArizaErr()"></div>
-        <div class="fg"><label style="display:block;font-size:.85rem;font-weight:800;margin-bottom:7px;color:var(--txd)">Qiziqadigan kurs</label>
-          <select id="ariza-kurs" class="form-inp">
-            <option value="">— Kursni tanlang —</option>
-            <option>General English</option><option>IELTS Tayyorlov</option>
-            <option>Matematika</option><option>IT & Dasturlash</option>
-            <option>Robotika & Arduino</option><option>Mental Arifmetika</option>
-            <option>Maktabgacha ta'lim</option><option>Sport</option>
-          </select>
-        </div>
-        <div id="ariza-err" style="display:none;color:#be123c;font-size:.82rem;font-weight:700;margin-bottom:10px;background:var(--pkl);padding:8px 12px;border-radius:8px">⚠️ Xatolik</div>
-        <button class="btn btn-f" id="ariza-btn" style="width:100%;padding:14px;font-size:1rem;border-radius:50px" onclick="submitAriza()">📨 Ariza yuborish</button>
-        <p style="text-align:center;margin-top:14px;font-size:.8rem;color:var(--txm);font-weight:600">Biz 10:30 dan 20:00 gacha bog'lanamiz 📞</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- RAHMAT MODAL -->
-<div class="mov" id="rahmat-modal" style="display:none">
-  <div class="modal" style="max-width:440px;text-align:center">
-    <button class="mx" onclick="closeRahmat()">✕</button>
-    <div style="font-size:3.5rem;margin-bottom:10px">🎉</div>
-    <div style="display:flex;justify-content:center;gap:6px;font-size:1.5rem;margin-bottom:16px">⭐⭐⭐</div>
-    <h2 style="font-family:var(--fh);font-size:1.6rem;margin-bottom:10px;color:var(--tx)">Rahmat, <span id="rahmat-ism" style="color:var(--yd)">do'stim</span>!</h2>
-    <p style="color:var(--txd);font-size:.95rem;font-weight:600;line-height:1.7;margin-bottom:20px">Arizangiz muvaffaqiyatli qabul qilindi! 🎓<br>Tez orada siz bilan bog'lanamiz.</p>
-    <!-- Kutish kartochkasi -->
-    <div style="background:linear-gradient(135deg,var(--y),var(--or));border-radius:20px;padding:22px 20px;margin-bottom:20px;box-shadow:0 8px 28px rgba(251,191,36,.4)">
-      <div style="font-size:1.4rem;margin-bottom:8px">📅</div>
-      <div style="font-family:var(--fh);font-size:1.2rem;color:#fff;margin-bottom:8px">Sizni kutamiz!</div>
-      <div style="color:rgba(255,255,255,.95);font-size:.95rem;font-weight:700;line-height:1.7">
-        ⏰ Ertaga <strong>soat 10:30</strong> dan<br>
-        <strong>kechki 20:00</strong> gacha<br>
-        farzandingiz bilan keling! 👨‍👩‍👧
-      </div>
-      <div style="background:rgba(255,255,255,.2);border-radius:12px;padding:10px 14px;margin-top:12px;font-size:.84rem;color:#fff;font-weight:700">
-        📍 Eng yaqin filialni tanlang
-      </div>
-    </div>
-    <div style="display:flex;gap:8px;justify-content:center;margin-bottom:16px;flex-wrap:wrap">
-      <div style="background:var(--grl);border:2px solid var(--gr);border-radius:50px;padding:6px 14px;font-size:.76rem;font-weight:800;color:#065f46">✅ Bepul konsultatsiya</div>
-      <div style="background:var(--bll);border:2px solid var(--bl);border-radius:50px;padding:6px 14px;font-size:.76rem;font-weight:800;color:#0369a1">📚 Sinov darsi</div>
-      <div style="background:var(--pul);border:2px solid var(--pu);border-radius:50px;padding:6px 14px;font-size:.76rem;font-weight:800;color:#7c3aed">🎁 Sovg'a</div>
-    </div>
-    <p style="font-size:.88rem;font-weight:700;color:var(--txd)">Kuniz xayrli o'tsin! ☀️</p>
-    <button class="btn btn-f" style="margin-top:16px;width:100%;padding:13px;font-size:.95rem;border-radius:50px" onclick="closeRahmat()">🏠 Bosh sahifaga qaytish</button>
-    <p id="rahmat-cd" style="font-size:.76rem;color:var(--txm);margin-top:10px;font-weight:600">Bu oyna <span id="cd-sec" style="color:var(--yd);font-weight:800">10</span> soniyadan keyin yopiladi</p>
-  </div>
-</div>
-
-<!-- TEACHER MODAL -->
-<div class="mov" id="tmod"><div class="modal tmod"><button class="mx" onclick="document.getElementById('tmod').classList.remove('open')">✕</button><div id="tmod-content"></div></div></div>
-<div class="mov" id="cmod"><div class="modal" style="max-width:520px"><button class="mx" onclick="document.getElementById('cmod').classList.remove('open')">✕</button><div id="cmod-content"></div></div></div>
-
-<script src="static/js/main.js"></script>
+<script src="static/js/kt-data.js"></script>
+<script src="static/js/kt-platform.js"></script>
+<script src="static/js/kt-assistant.js"></script>
+<script src="static/js/ks.js"></script>
 <script>
-// ── ARIZA MODAL ──
-function openAriza(){
-  document.getElementById('ariza-modal').classList.add('open');
-  document.getElementById('ariza-modal').style.display='flex';
-  document.getElementById('ariza-form-block').style.display='block';
-}
-function closeAriza(){
-  document.getElementById('ariza-modal').classList.remove('open');
-  document.getElementById('ariza-modal').style.display='none';
-}
-document.getElementById('ariza-modal').addEventListener('click',function(e){if(e.target===this)closeAriza();});
-
-function clearArizaErr(){document.getElementById('ariza-err').style.display='none';}
-
-function submitAriza(){
-  var ism = document.getElementById('ariza-ism').value.trim();
-  var tel = document.getElementById('ariza-tel').value.trim();
-  var err = document.getElementById('ariza-err');
-  if(!ism){err.textContent='⚠️ Ismingizni kiriting!';err.style.display='block';return;}
-  if(!tel){err.textContent='⚠️ Telefon raqamingizni kiriting!';err.style.display='block';return;}
-  closeAriza();
-  document.getElementById('rahmat-ism').textContent = ism.split(' ')[0];
-  document.getElementById('rahmat-modal').classList.add('open');
-  document.getElementById('rahmat-modal').style.display='flex';
-  startCountdown();
-}
-
-// ── RAHMAT MODAL ──
-var cdTimer=null;
-function startCountdown(){
-  var sec=10;
-  var el=document.getElementById('cd-sec');
-  if(cdTimer)clearInterval(cdTimer);
-  cdTimer=setInterval(function(){
-    sec--;
-    if(el)el.textContent=sec;
-    if(sec<=0){clearInterval(cdTimer);closeRahmat();}
-  },1000);
-}
-function closeRahmat(){
-  if(cdTimer)clearInterval(cdTimer);
-  document.getElementById('rahmat-modal').classList.remove('open');
-  document.getElementById('rahmat-modal').style.display='none';
-}
-document.getElementById('rahmat-modal').addEventListener('click',function(e){if(e.target===this)closeRahmat();});
-
-// Kurs kartochkasidan ariza ochish
-function openCourseAriza(kursNomi){
-  openAriza();
-  setTimeout(function(){
-    var sel=document.getElementById('ariza-kurs');
-    if(sel){for(var i=0;i<sel.options.length;i++){if(sel.options[i].text===kursNomi){sel.selectedIndex=i;break;}}}
-  },100);
-}
-
-// "Yozilish" tugmasi barcha joylarda
-function openMod(type){openAriza();}
-
+(function(){
+  const esc=KS.esc;
+  const T=[
+    {id:'alisher',name:'Alisher Nishonov',subj:'Ingliz tili',grp:'til',course:'english',c:'#41b6ff',stk:'sky',exp:'8 yil',st:'250+',r:'5.0',quote:'Cambridge sertifikatlangan. 200+ o‘quvchisi IELTS da 7+ ball olgan.',cert:['Cambridge CELTA','British Council','IELTS 8.5 band'],bio:'Cambridge CELTA sertifikatlangan ingliz tili o‘qituvchisi. 8 yil davomida 250+ o‘quvchiga dars bergan, ko‘pchiligi IELTS da 7.0 dan yuqori ball olgan. Britaniyada malaka oshirgan.'},
+    {id:'gulnora',name:'Gulnora Xasanova',subj:'Matematika',grp:'fan',course:'math',c:'#2fd39a',stk:'mint',exp:'6 yil',st:'180+',r:'4.9',quote:'NUUz matematika fakulteti bitiruvchisi. Olimpiada g‘oliblarini tayyorlagan.',cert:['NUUz matematika magistri','Olimpiada murabbiyi sertifikati'],bio:'NUUz matematika fakultetini a’lo baho bilan tamomlagan. 6 yil davomida 180+ o‘quvchiga chuqurlashtirilgan matematika o‘rgatgan. O‘quvchilari respublika olimpiadalarida ko‘p marta g‘olib bo‘lgan.'},
+    {id:'sarvar',name:'Sarvar Toshpulatov',subj:'Informatika va robotika',grp:'tex',course:'it',c:'#ff6b3d',stk:'flame',exp:'10 yil',st:'300+',r:'5.0',quote:'Ex-Google muhandisi. Python, AI va robotika bo‘yicha mutaxassis.',cert:['Google sertifikati','AWS Cloud Practitioner','Python Institute'],bio:'Ex-Google dasturchi, 10 yil IT sohasida ishlagan. Hozir Katta Tanaffus da informatika va robotika kafedrasini boshqaradi. O‘quvchilaridan 50+ kishi IT sohasida ishlamoqda.'},
+    {id:'zulfiya',name:'Zulfiya Rahimova',subj:'Boshlang‘ich sinflar',grp:'bola',course:'fanlar',c:'#c59bff',stk:'vio',exp:'7 yil',st:'120+',r:'5.0',quote:'Montessori sertifikatlangan. Bolalar psixologiyasi bo‘yicha PhD.',cert:['Montessori International','Bolalar psixologiyasi PhD','Early Childhood Education'],bio:'Montessori metodikasi bo‘yicha xalqaro sertifikatga ega, bolalar psixologiyasi bo‘yicha PhD. 7 yil davomida 120+ bolaga maktabgacha ta’lim bergan.'},
+    {id:'jahongir',name:'Jahongir Murodov',subj:'Mental arifmetika',grp:'fan',course:'mental',c:'#ffc933',stk:'sun',exp:'12 yil',st:'400+',r:'5.0',quote:'Yaponiya abakus chempioni. Mental arifmetikani O‘zbekistonda birinchilardan targ‘ib qilgan.',cert:['Yaponiya abakus chempioni','UCMAS International','Mental Math Master'],bio:'O‘zbekistonda mental arifmetikani birinchilardan bo‘lib targ‘ib qilgan. Yaponiyada abakus bo‘yicha chempion bo‘lgan. 12 yilda 400+ o‘quvchiga dars bergan.'},
+    {id:'bahodir',name:'Bahodir Ergashev',subj:'Jismoniy tarbiya',grp:'sport',course:'pe',c:'#ff2fd5',stk:'mag',exp:'15 yil',st:'200+',r:'4.8',quote:'Milliy jamoa sobiq a’zosi. 15 yillik murabbiylik tajribasi.',cert:['O‘zbekiston milliy jamoasi','UEFA C litsenziyasi','Sport murabbiyligi magistri'],bio:'O‘zbekiston milliy futbol jamoasining sobiq a’zosi, UEFA C murabbiylik litsenziyasi egasi. 15 yil davomida 200+ o‘quvchiga sport o‘rgatgan.'}
+  ];
+  const G=[['all','Hammasi'],['til','Ingliz tili'],['fan','Matematika'],['tex','Informatika'],['bola','Boshlang‘ich sinflar'],['sport','Jismoniy tarbiya']];
+  const subj=document.getElementById('subj');
+  subj.innerHTML=G.map(g=>`<button class="ks-chip" type="button" data-g="${g[0]}" aria-pressed="${g[0]==='all'}">${g[1]}</button>`).join('');
+  document.getElementById('tgrid').innerHTML=T.map(t=>`<article class="flip" data-g="${t.grp}" id="${t.id}">
+    <div class="flip-in">
+      <div class="face front" style="--c:${t.c}"><div class="f-top"><span class="ks-stk ${t.stk} f-subj" style="--rot:-4deg">${esc(t.subj)}</span></div><span class="f-av" aria-hidden="true">${esc(KT.initials(t.name))}</span>
+        <div class="f-body"><h3 class="ks-h3">${esc(t.name)}</h3><p>${esc(t.quote)}</p>
+          <div class="f-stats"><div><b>${t.exp}</b><small>tajriba</small></div><div><b>${t.st}</b><small>o‘quvchi</small></div><div><b>⭐ ${t.r}</b><small>reyting</small></div></div>
+          <button class="ks-btn ks-btn-sm flip-btn" type="button" aria-expanded="false" aria-controls="b-${t.id}">Batafsil ↻</button></div></div>
+      <div class="face back" id="b-${t.id}" aria-hidden="true"><h3 class="ks-h3">${esc(t.name)}</h3><p>${esc(t.bio)}</p><div class="certs">${t.cert.map(c=>`<span>🏅 ${esc(c)}</span>`).join('')}</div>
+        <div class="acts"><a class="ks-btn ks-btn-mag ks-btn-sm" href="courses.html#${t.course}" tabindex="-1">Fan haqida</a><button class="ks-btn ks-btn-white ks-btn-sm back-btn" type="button" tabindex="-1">↺ Orqaga</button></div></div>
+    </div></article>`).join('');
+  function flip(card,on){ card.classList.toggle('is-flipped',on); const fb=card.querySelector('.flip-btn'), back=card.querySelector('.back'), front=card.querySelector('.front');
+    fb.setAttribute('aria-expanded',String(on)); back.setAttribute('aria-hidden',String(!on)); front.setAttribute('aria-hidden',String(on));
+    back.querySelectorAll('a,button').forEach(x=>x.tabIndex=on?0:-1); fb.tabIndex=on?-1:0;
+    setTimeout(()=>{ (on?back.querySelector('.back-btn'):fb).focus(); },on?80:80); }
+  document.getElementById('tgrid').addEventListener('click',e=>{ const card=e.target.closest('.flip'); if(!card) return;
+    if(e.target.closest('.flip-btn')) flip(card,true); else if(e.target.closest('.back-btn')) flip(card,false); });
+  subj.addEventListener('click',e=>{ const b=e.target.closest('[data-g]'); if(!b) return; subj.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));
+    document.querySelectorAll('.flip').forEach(c=>c.hidden=!(b.dataset.g==='all'||c.dataset.g===b.dataset.g)); });
+  const h=location.hash.slice(1); if(h){ const c=document.getElementById(h); if(c&&c.classList.contains('flip')) flip(c,true); }
+})();
 </script>
-
 </body>
 </html>
